@@ -8,4 +8,4 @@
 
 (def nia-1-parens (get-in raw-data [:canto 0 :parens]))
 
-nia-1-parens
+(nth nia-1-parens 3)
