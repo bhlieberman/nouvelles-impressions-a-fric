@@ -1,0 +1,58 @@
+(ns nia.views.cantos.one.parens-four
+  (:require [re-com.core :refer [hyperlink v-box]]))
+
+(defn parens-four [{:keys [navigate]}]
+  [:div {:style {:display :flex
+                 :flex-direction :column}}
+   [v-box
+    :align-self :center
+    :children
+    [[:span "((((Wondering thus:- if perhaps he's a thief,"]
+     [:span "That fop who with"]
+     [hyperlink {:on-click #(navigate :parens-five)
+                 :label "one snooty glance"}]
+     [:span ""]
+     [:span "Enrages a poor uniformed"]
+     [:span "Hotel flunkey who has just,"]
+     [:span "Red-faced, brought his car to the main entrance;"]
+     [:a {:name "fn1ret"} "- The new arrival in Nice"]
+     [:span ", his eye on the thermometer,"]
+     [:span "Whether he should wear"]
+     [:a {:href "#nia1par4.fn1"} " a mackintosh"]
+     [:span "to keep out the cold;"]
+     [:span "Horace, alone, with what speed to make flight;"]
+     [:span "- The hare sauntering through the heather"]
+     [:span "If finding an old piece of gruyere is out of the question;"]
+     [:span "- If the bottles of Clicquot are dancing,"]
+     [:span "The diner whose nose is turning bright red;"]
+     [:span "- The Yankee, if it's true that ground is more slippery"]
+     [:span "Than banana peel, when climbing in the Alleghany Range;"]
+     [:span "- The stranger, if there is not something of the vice-amoral"]
+     [:span "In the names &quot;vice-president&quot; or &quot;vice-admiral&quot;;"]
+     [:span "- Cerberus, if he should be methodical and, before sprinkling,"]
+     [:span "Sniff the street-lamp with all three nostrils;"]
+     [:span "- The stroller on the pavement, cursing his luck,"]
+     [:span "Whether he can get home without catching cold, his umbrella having lost its webbing;"]
+     [:span "- Having become sticky and begun to pong, the sole of a shoe"]
+     [:span "If its twin is jealous of its good fortune;"]
+     [:span "- The farmer at dawn, putting on his smock,"]
+     [:span "Which of his cockerels has begun to crow;"]
+     [:span "- A conscript's shirt, when he breaks wind in the morning,"]
+     [:span "What purgative he has consumed;"]
+     [:span "- The baby kicking in the cot,"]
+     [:span "If in being born he caused his mother's death;"]
+     [:span "- The flower, if its reviving perfume, smelt"]
+     [:span "Under a spreading tree, will improve a stream that stinks of asparagus;"]
+     [:span "- A Jew at church, looking for a corner in the nave,"]
+     [:span "Why in God's house one must keep on one's headgear;"]
+     [:span "- The newspaper, which dirties its back page more,"]
+     [:span "Toothpaste, pills or pawned goods;"]
+     [:span "- In retrospect, Count Janot,"]
+     [:span "Whether he looks old or young;"]
+     [:span "- The wall, what sinful thought is his,"]
+     [:span "That makes the shutter beat him in the high wind;"]
+     [:span "- The bow whose hairs were slack before it was played,"]
+     [:span "How much longer it must make the dud violin sound;"]
+     [:span "- The thermometer placed somewhere other than the armpit"]
+     [:span "If the next backside can be far away;"]
+     [:span "- When wet, the knee"]]]])
