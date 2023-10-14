@@ -1,10 +1,11 @@
 (ns nia.views.home
   (:require [clojure.string :as str]
             [re-com.core :refer [at box v-box p]]
+            [nia.views.parens-scroll :refer [parens-scroll]]
             [shadow.resource :refer [inline]]))
 
 (defn preface []
-  (let [preface-text (inline "preface.txt")]
+  (let [preface-text (inline "preface.txt")] 
     [v-box
      :src (at)
      :children [[box :child
@@ -12,4 +13,5 @@
                 [box :child
                  (into [:div]
                        (for [line (str/split-lines preface-text)]
-                         [p line]))]]]))
+                         [p line]))]]]
+    [parens-scroll]))
