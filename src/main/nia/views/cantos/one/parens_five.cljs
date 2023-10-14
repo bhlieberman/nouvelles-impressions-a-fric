@@ -1,31 +1,44 @@
 (ns nia.views.cantos.one.parens-five
-  (:require [re-com.core :refer [box h-box hyperlink]]))
+  (:require [reagent.core :as r]
+            [re-com.core :refer [box h-box hyperlink popover-anchor-wrapper
+                                 popover-content-wrapper]]))
 
 (defn parens-five [{:keys [navigate]}]
-  [:div {:style {:display :flex
-                 :flex-direction :column}}
-   [h-box
-    :style {:display :flex}
-    :align-self :center
-    :children [[box 
-                :style {:display :flex
-                        :align-items :center}
-                :child [:b.text-primary.display-4.m-3 "((((("]]
-               [box :child [:div
-                            [:a {:name "fn1ret"} "sometimes"]
-                            [:p "a mere spark"]
-                            [:p "Can, firemen climbing ladders all over it,"]
-                            [:a {:href "#nia1par5.fn1"} "Reduce a peaceful building to a crater"]
-                            [:hr]
-                            [:a {:name "nia1par5.fn1"} "1. "]
-                            [:p "What one needs, when one has to put out a building on fire,"]
-                            [:p "Is a swift giant - when a building is burning,"]
-                            [:p "Could a confirmed life-saver, dragging his feet,"]
-                            [:p "Stand back and coyly watch the frantic activity from a distance? -"]
-                            [:p "Who is prepared like Gulliver to overcome his prudishness,"]
-                            [:p "Relishing the opportunity"
-                             [hyperlink {:label "to relieve himself"}] "."]]]
-               [box 
-                :style {:display :flex
-                        :align-items :center}
-                :child [:b.text-primary.display-4.m-3 ")))))"]]]]])
+  (let [popover-showing? (r/atom false)]
+    (fn [navigate]
+      [:div {:style {:display :flex
+                    :flex-direction :column}}
+      [h-box
+       :style {:display :flex}
+       :align-self :center
+       :children [[box
+                   :style {:display :flex
+                           :align-items :center}
+                   :child [:b.text-primary.display-4.m-3 "((((("]]
+                  [box :child [:div
+                               [:a {:name "fn1ret"} "sometimes"]
+                               [:p "a mere spark"]
+                               [:p "Can, firemen climbing ladders all over it,"]
+                               [popover-anchor-wrapper
+                                :showing? popover-showing? 
+                                :position :below-center 
+                                :popover [popover-content-wrapper 
+                                          :title "Footnote 1"
+                                          :width "750px"
+                                          :backdrop-opacity 0.5
+                                          :close-button? false
+                                          :tooltip-style? true
+                                          :arrow-gap 20
+                                          :body "What one needs, when one has to put out a building on fire,
+                                                 Is a swift giant - when a building is burning,
+                                                 Could a confirmed life-saver, dragging his feet,
+                                                 Stand back and coyly watch the frantic activity from a distance?
+                                                 - Who is prepared like Gulliver to overcome his prudishness,
+                                                 Relishing the opportunity to relieve himself."]
+                                :anchor
+                                [hyperlink {:on-click (fn [] (swap! popover-showing? not) nil) 
+                                            :label "Reduce a peaceful building to a crater"}]]]]
+                  [box
+                   :style {:display :flex
+                           :align-items :center}
+                   :child [:b.text-primary.display-4.m-3 ")))))"]]]]])))
