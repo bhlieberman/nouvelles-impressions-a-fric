@@ -1,4 +1,4 @@
-(ns portfolio.nia.scenes.scroll-scene
+(ns nia.scenes.scroll-scene
   (:require [portfolio.reagent-18 :refer-macros [defscene]]
             [nia.views.parens-scroll :refer [parens-scroll]]))
 

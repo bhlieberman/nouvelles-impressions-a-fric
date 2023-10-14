@@ -1,6 +1,6 @@
 (ns nia.portfolio
   (:require [portfolio.ui :as ui]
-            [portfolio.nia.scenes.scroll-scene]))
+            [nia.scenes.scroll-scene]))
 
 (defn init []
   (ui/start!
@@ -25,3 +25,5 @@
                              :grid/group-size 8}}
                     {:title "No grid"
                      :value {:grid/size 0}}]}}))
+
+(init)
