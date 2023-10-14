@@ -5,7 +5,8 @@
   "dev-resources"
   "portfolio"]
 
- :dev-http {8080 ["public" "classpath:public"]}
+ :dev-http {8080 ["public" "classpath:public"]
+            8081 ["dev-resources" "classpath:public"]}
 
  :dependencies
  [[reagent "1.2.0"]
