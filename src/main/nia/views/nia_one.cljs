@@ -11,7 +11,10 @@
   (let [current-view (r/atom :thesis)
         navigate {:navigate (fn [level] (reset! current-view level))}]
     (fn []
-      [:div (condp = @current-view
+      [:div {:style {:display :flex
+                     :align-items :center
+                     :justify-content :center}}
+       (condp = @current-view
               :thesis [thesis navigate]
               :parens [parens navigate]
               :parens-two [parens-two navigate]
