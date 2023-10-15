@@ -6,7 +6,10 @@
   (ui/start!
    {:config
     {:css-paths
-     ["/assets/css/material-design-iconic-font.min.css"
+     ["https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic"
+      "http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300"
+      "/assets/css/material-design-iconic-font.min.css" 
       "/assets/css/re-com.css"]
      :background/options [{:id :light
                            :title "Light"
