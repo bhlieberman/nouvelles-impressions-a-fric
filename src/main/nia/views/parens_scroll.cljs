@@ -1,6 +1,5 @@
 (ns nia.views.parens-scroll
-  (:require [reagent.core :as r]
-            [goog.dom.classlist :as cl]))
+  (:require [reagent.core :as r]))
 
 (def colors {1 :danger
              2 :warning
@@ -16,21 +15,21 @@
         {:class "m-3 display-4 border"
          :on-click (fn [] 
                      (when (>= @depth 1) (swap! depth dec)))}
-        (for [i (reverse (range 1 6))
-              :let [classname (if (> i @depth)
-                                "text-muted "
-                                "")]]
-          [:b {:class (some->> (get colors i :muted)
-                               name
-                               (str classname "text-"))} "("])]
+        (doall (for [i (reverse (range 1 6))
+               :let [classname (if (> i @depth)
+                                 "text-muted "
+                                 "")]]
+           [:b {:class (some->> (get colors i :muted)
+                                name
+                                (str classname "text-"))} "("]))]
        [:div
         {:class "m-3 display-4 border"
          :on-click (fn []
                      (when (< @depth 5) (swap! depth inc)))}
-        (for [i (range 1 6)
-              :let [classname (if (> i @depth)
-                                "text-muted "
-                                "")]]
-          [:b {:class (some->> (get colors i)
-                               name
-                               (str classname "text-"))} ")"])]])))
+        (doall (for [i (range 1 6)
+               :let [classname (if (> i @depth)
+                                 "text-muted "
+                                 "")]]
+           [:b {:class (some->> (get colors i)
+                                name
+                                (str classname "text-"))} ")"]))]])))
