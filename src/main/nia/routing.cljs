@@ -2,8 +2,8 @@
   (:require [reagent.core :as r]
             [reitit.frontend :as rf]
             [reitit.frontend.easy :as rfe]
-            [reitit.frontend.controllers :as rfc]
-            [nia.views.home :refer [preface]]
+            [reitit.frontend.controllers :as rfc] 
+            [nia.views.home :refer [preface introduction]]
             [nia.views.cantos.one.thesis :refer [thesis]]
             [nia.views.cantos.one.parens-one :refer [parens]]
             [nia.views.cantos.one.parens-two :refer [parens-two]]
@@ -15,13 +15,11 @@
   ["/"
    ["" {:name ::home
         :view preface
-        :controllers [{:start (fn [_] (js/console.log "home page"))
-                       :stop (fn [_] (js/console.log "leaving home"))}]}]
+        :controllers []}]
    ["nia"
     ["/intro" {:name ::intro
-               :view [:div "Intro here, soon"]
-               :controllers [{:start (fn [_] (js/console.log "intro page"))
-                              :stop (fn [_] (js/console.log "leaving intro"))}]}]
+               :view introduction
+               :controllers []}]
     ["/canto"
      ["/:id"
       [""

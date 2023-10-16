@@ -2,6 +2,8 @@
   (:require [portfolio.reagent-18 :refer-macros [defscene]]
             [reagent.core :as r]
             [nia.views.cantos.one.parens-one :refer [parens]]
+            [nia.views.cantos.one.parens-two :refer [parens-two]]
+            [nia.views.cantos.one.parens-three :refer [parens-three]]
             [nia.views.parens-scroll :refer [parens-scroll]]))
 
 (def current-view (r/atom :thesis))
@@ -14,5 +16,5 @@
 (defscene scroll-w-child
   :params current-view
   [store]
-  [parens-scroll {:depth (r/atom 0)
-                  :children [parens {:navigate navigate}]}])
+  [parens-scroll {:depth (r/atom 3)
+                  :children [parens-three {:navigate navigate}]}])
