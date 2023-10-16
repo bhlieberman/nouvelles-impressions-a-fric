@@ -18,7 +18,8 @@
  {:app {:target :esm
         :output-dir "public/js"
         :asset-path "/js"
-        :modules {:main {:init-fn nia.app/init}}}
+        :modules {:main {:init-fn nia.app/init}}
+        :release {:compiler-options {:optimizations :advanced}}}
   :dev {:target :esm
         :output-dir "dev-resources/js"
         :asset-path "/js"
