@@ -8,8 +8,11 @@
 
 (defn parens-scroll [{:keys [children depth]}]
   [:div.d-flex
-   [:div
-    {:class "m-3 display-4"
+   [:div 
+    {:style {:display :flex
+             :justify-content :center
+             :align-items :center}
+     :class "m-3 display-4"
      :on-click (fn [] 
                  (when (>= @depth 1) (swap! depth dec))
                  (js/history.back))}
@@ -23,7 +26,10 @@
                                   (str classname "text-"))} "("]))]
    children
    [:div
-    {:class "m-3 display-4"
+    {:style {:display :flex
+             :justify-content :center
+             :align-items :center}
+     :class "m-3 display-4"
      :on-click (fn []
                  (when (< @depth 5) (swap! depth inc))
                  (js/history.forward))}

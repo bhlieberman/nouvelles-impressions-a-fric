@@ -1,6 +1,7 @@
 (ns nia.portfolio
   (:require [portfolio.ui :as ui]
-            [nia.scenes.scroll-scene]))
+            [nia.scenes.scroll-scene]
+            [nia.scenes.preface-scene]))
 
 (defn init []
   (ui/start!

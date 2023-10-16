@@ -5,7 +5,7 @@
 (defn parens []
   [h-box
    :src (at)
-   :width "750px"
+   :width "400px"
    :align-self :center
    :style {:display :flex
            :flex-direction :row}
@@ -16,5 +16,6 @@
                             [hyperlink {:on-click #(rfe/navigate :nia.routing.canto.one/two {:path-params {:id 1}})
                                         :class "block m-2"
                                         :style {:display :inline-block}
-                                        :label " painting out\nSpots and wrinkles by subtle means "}]]
+                                        :label " painting out"}]]
+                           [:p "Spots and wrinkles by subtle means"]
                            [:p "- Which buttons to press to make the lift ascend;"]]]]])

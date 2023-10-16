@@ -3,13 +3,13 @@
             [re-com.core :refer [at hyperlink]]
             [reitit.frontend.easy :as rfe]))
 
-(defn navbar [{:keys [_depth _children _navigate]}]
+(defn navbar [{:keys [_children _navigate]}]
   (let [current-route? (r/atom nil)
         classname (fn [name]
                     (if (= name @current-route?)
                       "nav-item nav-link active"
                       "nav-item nav-link"))]
-    (fn [{:keys [depth children navigate]}]
+    (fn [{:keys [children navigate]}]
       [:div
        [:nav {:class "navbar navbar-expand-lg navbar-light bg-light"}
         [hyperlink {:class "navbar-brand m-3 display-4"
@@ -25,6 +25,12 @@
          [:span {:class "navbar-toggler-icon"}]]
         [:div {:class "collapse navbar-collapse", :id "navbarNavAltMarkup"}
          [:div {:class "navbar-nav"}
+          [hyperlink {:src (at)
+                      :class (classname :intro)
+                      :label "Introduction"
+                      :on-click (fn []
+                                  (reset! current-route? :intro)
+                                  (rfe/navigate :nia.routing/intro))}]
           [hyperlink {:src (at)
                       :class (classname :preface)
                       :label "Preface"
@@ -44,15 +50,5 @@
           [hyperlink {:src (at)
                       :class "nav nav-link disabled"
                       :disabled? true
-                      :label "Canto IV"}]
-          #_(doall (for [i (range (inc depth))]
-                   ^{:key i}
-                   [hyperlink
-                    {:class (classname :parens)
-                     :label (apply str (repeat i "("))
-                     :on-click #(navigate (get {1 :parens
-                                                2 :parens-two
-                                                3 :parens-three
-                                                4 :parens-four
-                                                5 :parens-five} i))}]))]]]
+                      :label "Canto IV"}]]]]
        children])))
