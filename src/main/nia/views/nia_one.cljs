@@ -2,6 +2,7 @@
   (:require [reagent.core :as r]
             [nia.views.navbar :refer [navbar]]
             [nia.views.home :refer [preface]]
+            [nia.views.parens-scroll :refer [parens-scroll]]
             [nia.views.cantos.one.thesis :refer [thesis]]
             [nia.views.cantos.one.parens-one :refer [parens]]
             [nia.views.cantos.one.parens-two :refer [parens-two]]
@@ -23,7 +24,8 @@
          (condp = @current-view
            :home [preface]
            :thesis [thesis navigate]
-           :parens [parens navigate]
+           :parens [parens-scroll {:depth (r/atom 0)
+                                   :children [parens navigate]}]
            :parens-two [parens-two navigate]
            :parens-three [parens-three navigate]
            :parens-four [parens-four navigate]
