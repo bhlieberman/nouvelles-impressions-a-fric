@@ -2,14 +2,7 @@
   (:require [reagent.core :as r]
             [nia.routing :refer [current-route]]
             [nia.views.navbar :refer [navbar]]
-            [nia.views.home :refer [preface]]
-            [nia.views.parens-scroll :refer [parens-scroll]]
-            [nia.views.cantos.one.thesis :refer [thesis]]
-            [nia.views.cantos.one.parens-one :refer [parens]]
-            [nia.views.cantos.one.parens-two :refer [parens-two]]
-            [nia.views.cantos.one.parens-three :refer [parens-three]]
-            [nia.views.cantos.one.parens-four :refer [parens-four]]
-            [nia.views.cantos.one.parens-five :refer [parens-five]]))
+            [nia.views.parens-scroll :refer [parens-scroll]]))
 
 (defn nia-one []
   (let [current-view (r/atom :thesis)
@@ -24,19 +17,14 @@
                            :justify-content :center}}
          ;; new routing
          (when @current-route
-           (let [view (-> current-route deref :data :view)
-                 name (-> current-route deref :data :name)]
-             (if (= name :parens)
-               [parens-scroll {:children [view]
-                               :depth (r/atom 1)}]
-               [view])))
-         ;; old routing
-         #_(condp = @current-view
-             :home [preface]
-             :thesis [thesis navigate]
-             :parens [parens-scroll {:depth (r/atom 0)
-                                     :children [parens navigate]}]
-             :parens-two [parens-two navigate]
-             :parens-three [parens-three navigate]
-             :parens-four [parens-four navigate]
-             :parens-five [parens-five navigate])]}])))
+           (let [{view :view
+                  route-name :name} (:data @current-route)]
+             (if-let [parens (some #{(name route-name)} #{"one" "two" "three" "four" "five"})]
+               (let [depth (get {"one" 1
+                                 "two" 2
+                                 "three" 3
+                                 "four" 4
+                                 "five" 5} parens)]
+                 [parens-scroll {:children [view]
+                                 :depth (r/atom depth)}])
+               [view])))]}])))

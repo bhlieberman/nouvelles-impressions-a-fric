@@ -3,7 +3,13 @@
             [reitit.frontend :as rf]
             [reitit.frontend.easy :as rfe]
             [reitit.frontend.controllers :as rfc]
-            [nia.views.home :refer [preface]]))
+            [nia.views.home :refer [preface]]
+            [nia.views.cantos.one.thesis :refer [thesis]]
+            [nia.views.cantos.one.parens-one :refer [parens]]
+            [nia.views.cantos.one.parens-two :refer [parens-two]]
+            [nia.views.cantos.one.parens-three :refer [parens-three]]
+            [nia.views.cantos.one.parens-four :refer [parens-four]]
+            [nia.views.cantos.one.parens-five :refer [parens-five]]))
 
 (def routes
   ["/"
@@ -17,11 +23,32 @@
                :controllers [{:start (fn [_] (js/console.log "intro page"))
                               :stop (fn [_] (js/console.log "leaving intro"))}]}]
     ["/canto"
-     ["/:id" {:name (keyword 'nia.views.routing "one")
-              :view [:div "a canto"]
-              :parameters {:path {:id 1}}
-              :controllers [{:start (fn [{:keys [path]}] (js/console.log (:id path)))
-                             :stop (fn [{:keys [path]}] (js/console.log (:id path)))}]}]]]])
+     ["/:id"
+      [""
+       {:name ::one
+        :view thesis
+        :controllers [{:parameters {:path [:id]}}]}]
+      ["/parens"
+       ["/1"
+        {:name :nia.routing.canto.one/one
+         :view parens
+         :controllers []}]
+       ["/2"
+        {:name :nia.routing.canto.one/two
+         :view parens-two
+         :controllers []}]
+       ["/3"
+        {:name :nia.routing.canto.one/three
+         :view parens-three
+         :controllers []}]
+       ["/4"
+        {:name :nia.routing.canto.one/four
+         :view parens-four
+         :controllers []}]
+       ["/5"
+        {:name :nia.routing.canto.one/five
+         :view parens-five
+         :controllers []}]]]]]])
 
 (def router (rf/router routes))
 

@@ -1,5 +1,6 @@
 (ns nia.views.cantos.one.thesis
-  (:require [re-com.core :refer [hyperlink v-box]]))
+  (:require [re-com.core :refer [hyperlink-href v-box]]
+            [reitit.frontend.easy :as rfe]))
 
 (defn thesis [{:keys [navigate]}]
   [:div {:style {:display :flex
@@ -28,8 +29,8 @@
       [:br]
       "That name whose bearer, though crushed, is so proud of"
       [:br]
-      [hyperlink {:on-click #(navigate :parens)
-                  :label "That he knows by heart, faultlessly,"}]
+      [:a {:href (rfe/href :nia.routing.canto.one/one {:id 1})}
+       "That he knows by heart, faultlessly,"]
       "- Roots, trunks, boughs, connecting branches -"
       [:br]
       "His family tree; the cathedrals eroded by time;"
@@ -38,6 +39,4 @@
       [:br]
       "The dolmen beneath which the soil is always dry."
       [:br]]
-     [:hr]
-     [:p "Click " [:a {:href "preface.html"} "here"] " to return to Preface"]
-     [:p "Click " [:a {:href "introduction.html"} "here"] " to return to Introduction"]]]])
+]]])

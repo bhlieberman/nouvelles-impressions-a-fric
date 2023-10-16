@@ -1,16 +1,13 @@
 (ns nia.views.cantos.one.parens-four
-  (:require [re-com.core :refer [box h-box hyperlink scroller v-box]]))
+  (:require [re-com.core :refer [box h-box hyperlink scroller v-box]]
+            [reitit.frontend.easy :as rfe]))
 
-(defn parens-four [{:keys [navigate]}]
+(defn parens-four []
   [h-box
    :align-self :center
    :style {:display :flex}
    :children
    [[box
-     :style {:display :flex
-             :align-items :center}
-     :child [:b.text-success.display-4.m-3 "(((("]]
-    [box
      :child
      [scroller
       :class "m-3"
@@ -20,7 +17,7 @@
        [:p "Wondering thus:- if perhaps he's a thief,"]
 
        [:p "That fop who with"]
-       [hyperlink {:on-click #(navigate :parens-five)
+       [hyperlink {:on-click #(rfe/navigate :nia.routing.canto.one/five {:path-params {:id 1}})
                    :label "one snooty glance"}]
        [:p ""]
        [:p "Enrages a poor uniformed"]
@@ -206,8 +203,4 @@
        [:p
         [:a {:name "nia1par4.fn3"} "3."]
         [:a {:href "#fn3ret"} " Ignoramuses believe that the earth is flat."]]
-       [:hr]]]]
-    [box 
-     :style {:display :flex
-             :align-items :center}
-     :child [:b.text-success.display-4 "))))"]]]])
+       [:hr]]]]]])

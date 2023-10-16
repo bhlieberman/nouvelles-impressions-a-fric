@@ -8,6 +8,7 @@
 (defonce root (create-root (gdom/getElement "root")))
 
 (defn ^:dev/after-load render! []
+  (init-routes!)
   (.render root (r/as-element [nia-one])))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}

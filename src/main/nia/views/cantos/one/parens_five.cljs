@@ -3,19 +3,15 @@
             [re-com.core :refer [box h-box hyperlink popover-anchor-wrapper
                                  popover-content-wrapper]]))
 
-(defn parens-five [{:keys [navigate]}]
+(defn parens-five []
   (let [popover-showing? (r/atom false)]
-    (fn [navigate]
+    (fn []
       [:div {:style {:display :flex
                     :flex-direction :column}}
       [h-box
        :style {:display :flex}
        :align-self :center
-       :children [[box
-                   :style {:display :flex
-                           :align-items :center}
-                   :child [:b.text-primary.display-4.m-3 "((((("]]
-                  [box :child [:div
+       :children [[box :child [:div
                                [:a {:name "fn1ret"} "sometimes"]
                                [:p "a mere spark"]
                                [:p "Can, firemen climbing ladders all over it,"]
@@ -37,8 +33,4 @@
                                                  Relishing the opportunity to relieve himself."]
                                 :anchor
                                 [hyperlink {:on-click (fn [] (swap! popover-showing? not) nil) 
-                                            :label "Reduce a peaceful building to a crater"}]]]]
-                  [box
-                   :style {:display :flex
-                           :align-items :center}
-                   :child [:b.text-primary.display-4.m-3 ")))))"]]]]])))
+                                            :label "Reduce a peaceful building to a crater"}]]]]]]])))
