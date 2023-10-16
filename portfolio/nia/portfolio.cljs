@@ -1,7 +1,8 @@
 (ns nia.portfolio
   (:require [portfolio.ui :as ui]
             [nia.scenes.scroll-scene]
-            [nia.scenes.preface-scene]))
+            [nia.scenes.preface-scene]
+            [nia.scenes.thesis-scene]))
 
 (defn init []
   (ui/start!

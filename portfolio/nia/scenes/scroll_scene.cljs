@@ -1,4 +1,5 @@
 (ns nia.scenes.scroll-scene
+  #_{:clj-kondo/ignore [:unused-referred-var :unused-namespace]}
   (:require [portfolio.reagent-18 :refer-macros [defscene]]
             [reagent.core :as r]
             [nia.views.cantos.one.parens-one :refer [parens]]
