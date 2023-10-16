@@ -5,6 +5,7 @@
             [nia.views.cantos.one.parens-one :refer [parens]]
             [nia.views.cantos.one.parens-two :refer [parens-two]]
             [nia.views.cantos.one.parens-three :refer [parens-three]]
+            [nia.views.cantos.one.parens-four :refer [parens-four]]
             [nia.views.parens-scroll :refer [parens-scroll]]))
 
 (def current-view (r/atom :thesis))
@@ -18,4 +19,4 @@
   :params current-view
   [store]
   [parens-scroll {:depth (r/atom 3)
-                  :children [parens-three {:navigate navigate}]}])
+                  :children [parens-four]}])
