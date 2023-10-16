@@ -36,7 +36,7 @@
                       :label "Canto I"
                       :on-click (fn []
                                   (reset! current-route? :canto-i)
-                                  (rfe/navigate :nia.routing/one {:path-params {:id 1}}))}] 
+                                  (rfe/navigate :nia.routing.canto.one/thesis {:path-params {:id 1}}))}] 
           [hyperlink {:src (at)
                       :class "nav nav-link disabled"
                       :disabled? true

@@ -25,7 +25,7 @@
     ["/canto"
      ["/:id"
       [""
-       {:name ::one
+       {:name :nia.routing.canto.one/thesis
         :view thesis
         :controllers [{:parameters {:path [:id]}}]}]
       ["/parens"
