@@ -1,5 +1,6 @@
 (ns nia.views.navbar
-  (:require [re-com.core :refer [hyperlink]]))
+  (:require [re-com.core :refer [hyperlink]]
+            [reitit.frontend.easy :as rfe]))
 
 (defn navbar [{:keys [depth children navigate]}]
   [:div
@@ -8,9 +9,12 @@
                 :label "NIA"
                 :on-click #(navigate :home)}]
     [:button {:class "navbar-toggler", :type "button", :data-toggle "collapse", :data-target "#navbarNavAltMarkup", :aria-controls "navbarNavAltMarkup", :aria-expanded "false", :aria-label "Toggle navigation"}
-     [:span {:class "navbar-toggler-icon"}]]
+     [:span {:class "navbar-toggler-icon"}]] 
     [:div {:class "collapse navbar-collapse", :id "navbarNavAltMarkup"}
      [:div {:class "navbar-nav"}
+      [hyperlink {:class "nav-item nav-link"
+                  :label "test router"
+                  :on-click #(rfe/navigate :nia.views.routing/home)}]
       [hyperlink
        {:class "nav-item nav-link active"
         :label [:span {:class "sr-only"} "Thesis"]
