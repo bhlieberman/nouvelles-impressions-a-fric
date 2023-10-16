@@ -1,5 +1,6 @@
 (ns nia.views.nia-one
   (:require [reagent.core :as r]
+            [nia.routing :refer [current-route]]
             [nia.views.navbar :refer [navbar]]
             [nia.views.home :refer [preface]]
             [nia.views.parens-scroll :refer [parens-scroll]]
@@ -19,14 +20,23 @@
         :navigate (:navigate navigate)
         :children
         [:div.m-3 {:style {:display :flex
-                       :align-items :center
-                       :justify-content :center}}
-         (condp = @current-view
-           :home [preface]
-           :thesis [thesis navigate]
-           :parens [parens-scroll {:depth (r/atom 0)
-                                   :children [parens navigate]}]
-           :parens-two [parens-two navigate]
-           :parens-three [parens-three navigate]
-           :parens-four [parens-four navigate]
-           :parens-five [parens-five navigate])]}])))
+                           :align-items :center
+                           :justify-content :center}}
+         ;; new routing
+         (when @current-route
+           (let [view (-> current-route deref :data :view)
+                 name (-> current-route deref :data :name)]
+             (if (= name :parens)
+               [parens-scroll {:children [view]
+                               :depth (r/atom 1)}]
+               [view])))
+         ;; old routing
+         #_(condp = @current-view
+             :home [preface]
+             :thesis [thesis navigate]
+             :parens [parens-scroll {:depth (r/atom 0)
+                                     :children [parens navigate]}]
+             :parens-two [parens-two navigate]
+             :parens-three [parens-three navigate]
+             :parens-four [parens-four navigate]
+             :parens-five [parens-five navigate])]}])))

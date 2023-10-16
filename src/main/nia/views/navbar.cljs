@@ -13,8 +13,8 @@
     [:div {:class "collapse navbar-collapse", :id "navbarNavAltMarkup"}
      [:div {:class "navbar-nav"}
       [hyperlink {:class "nav-item nav-link"
-                  :label "test router"
-                  :on-click #(rfe/navigate :nia.views.routing/home)}]
+                  :label "Preface"
+                  :on-click #(rfe/navigate :nia.routing/home)}]
       [hyperlink
        {:class "nav-item nav-link active"
         :label [:span {:class "sr-only"} "Thesis"]
