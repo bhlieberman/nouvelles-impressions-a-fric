@@ -1,5 +1,4 @@
-(ns nia.views.parens-scroll
-  (:require [reagent.core :as r]))
+(ns nia.views.parens-scroll)
 
 (def colors {1 :danger
              2 :warning
@@ -18,7 +17,7 @@
                                    "text-muted "
                                    "")]]
              [:b {:key (str i "-left")
-                  :class (some->> (get colors i :muted)
+                  :class (some->> (get colors i)
                                   name
                                   (str classname "text-"))} "("]))]
    children
