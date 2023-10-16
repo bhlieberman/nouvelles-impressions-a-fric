@@ -1,5 +1,5 @@
 (ns nia.views.cantos.one.parens-four
-  (:require [re-com.core :refer [box h-box hyperlink scroller v-box]]
+  (:require [re-com.core :refer [box h-box hyperlink scroller]]
             [reitit.frontend.easy :as rfe]))
 
 (defn parens-four []
