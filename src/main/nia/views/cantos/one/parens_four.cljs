@@ -5,14 +5,19 @@
                                  popover-anchor-wrapper
                                  popover-content-wrapper
                                  scroller v-box]]
-            [reitit.frontend.easy :as rfe]))
+            [reitit.frontend.easy :as rfe]
+            ["react" :refer [createRef]]))
 
 (defn parens-four []
   (let [popover-showing? (r/atom false)
         popover-two-showing? (r/atom false)
         footnote-one-showing? (r/atom false)
         footnote-two-showing? (r/atom false)
-        footnote-three-showing? (r/atom false)]
+        footnote-three-showing? (r/atom false)
+        to-footnote1-ref (createRef)
+        from-footnote1-ref (createRef)
+        to-footnote3-ref (createRef)
+        from-footnote3-ref (createRef)]
     (fn []
       [h-box
        :align-self :center
@@ -38,15 +43,15 @@
            [p ", his eye on the thermometer,"]
            [p "Whether he should wear"]
            [hyperlink {:style {:margin "0px 0px 9.8px"}
-                        :label " a mackintosh"
-                        :on-click #(swap! footnote-one-showing? not)}]
+                       :label " a mackintosh"
+                       :on-click #(swap! footnote-one-showing? not)}]
            (when @footnote-one-showing?
              [modal-panel
               :backdrop-on-click #(reset! footnote-one-showing? false)
               :child [scroller
                       :class "m-3"
                       :height "300px"
-                      :child 
+                      :child
                       [v-box
                        :children
                        [[p "To give an overcoat to the new arrival in Nice"]
@@ -198,8 +203,10 @@
            [p "- The explorer, far from what he holds dear,"]
            [p "Whether he'll be eaten by cannibals one day;"]
            [p "- If her baby will be bonny, the new mother who"]
-           [p "Has yet to hold it in " [hyperlink #_{:name "fn2ret"} {:label "her arms"}] ";"]
-           [p "- " [hyperlink #_{:href "#nia1par4.fn2"} {:label "The young author"}] ","]
+           [p "Has yet to hold it in " [hyperlink {:label "her arms"
+                                                   :attr {:ref from-footnote1-ref}}] ";"]
+           [p "- " [hyperlink {:label "The young author"
+                               :on-click #(.. to-footnote1-ref -current scrollIntoView)}] ","]
            [p "for how much longer his writings will appear at his own expense;"]
            [p "- The child, if when he puts on the ogre's big boots"]
            [p "Tom-Thumb will whistle a wish to make them dwarf-sized;"]
@@ -215,9 +222,12 @@
            [p "Would fetch, the heir of a hanged man;"]
            [p "- The hen, how the egg she just laid"]
            [p "Could possibly be confused with "
-            [hyperlink #_{:name "fn3ret"} {:label "a duck's"}] ";"]
+            [hyperlink {:label "a duck's"
+                        :attr {:ref from-footnote3-ref}}] ";"]
            [p "- "
-            [hyperlink #_{:href "#nia1par4.fn3"} {:label "The ignoramus"}] " who sees a boat heading for the open sea"]
+            [hyperlink {:label "The ignoramus"
+                        :attr {:ref from-footnote3-ref}
+                        :on-click #(.. to-footnote3-ref -current scrollIntoView)}] " who sees a boat heading for the open sea"]
            [p "Flying only a scrap of sail,"]
            [p "If she is already caught in a storm;"]
            [p "- Whose children these are, the girl whose bed,"]
@@ -236,12 +246,9 @@
            [p "-  The astronomer, whether when he points a telescope at the moon"]
            [p "He will see a man walking upside down,"]
            [p "Like a fly slowly crawling across the celing;"]
-           [p
-            ;; scrollIntoView API here?
-            [:a {:name "nia1par4.fn2"} "2."]
-            [:br]
-            [:a {:href "#fn2ret"} " Fame has a horror of the new."]
-            [:br]]
-           [p
-            [:a {:name "nia1par4.fn3"} "3."]
-            [:a {:href "#fn3ret"} " Ignoramuses believe that the earth is flat."]]]]]]])))
+           [hyperlink {:label " Fame has a horror of the new."
+                       :attr {:ref to-footnote1-ref}
+                       :on-click #(.. from-footnote1-ref -current scrollIntoView)}]
+           [hyperlink {:label " Ignoramuses believe that the earth is flat."
+                       :attr {:ref to-footnote3-ref}
+                       :on-click #(.. from-footnote3-ref -current scrollIntoView)}]]]]]])))
