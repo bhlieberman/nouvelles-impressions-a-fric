@@ -11,9 +11,7 @@
 (defn parens-four []
   (let [popover-showing? (r/atom false)
         popover-two-showing? (r/atom false)
-        footnote-one-showing? (r/atom false)
-        footnote-two-showing? (r/atom false)
-        footnote-three-showing? (r/atom false)
+        footnote-one-showing? (r/atom false) 
         to-footnote1-ref (createRef)
         from-footnote1-ref (createRef)
         to-footnote3-ref (createRef)
