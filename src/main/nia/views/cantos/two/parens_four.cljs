@@ -1,8 +1,7 @@
 (ns nia.views.cantos.two.parens-four
   (:require [reagent.core :as r]
             [re-com.core :refer [h-box hyperlink p popover-anchor-wrapper popover-content-wrapper scroller v-box]]
-            [reitit.frontend.easy :as rfe]
-            ["react" :refer [createRef]]))
+            [reitit.frontend.easy :as rfe]))
 
 (defn parens-four []
   (let [heidelberg-showing? (r/atom false)

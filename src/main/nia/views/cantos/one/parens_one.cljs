@@ -1,5 +1,5 @@
 (ns nia.views.cantos.one.parens-one
-  (:require [re-com.core :refer [at h-box box hyperlink p v-box]]
+  (:require [re-com.core :refer [at h-box hyperlink p v-box]]
             [reitit.frontend.easy :as rfe]))
 
 (defn parens []
