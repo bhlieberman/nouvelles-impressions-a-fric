@@ -7,12 +7,17 @@
              4 :success
              5 :primary})
 
-(def parens-route {0 :nia.routing.canto.one/thesis
-                   1 :nia.routing.canto.one/one
-                   2 :nia.routing.canto.one/two
-                   3 :nia.routing.canto.one/three
-                   4 :nia.routing.canto.one/four
-                   5 :nia.routing.canto.one/five})
+(def parens-route {[1 0] :nia.routing.canto.one/thesis
+                   [1 1] :nia.routing.canto.one/one
+                   [1 2] :nia.routing.canto.one/two
+                   [1 3] :nia.routing.canto.one/three
+                   [1 4] :nia.routing.canto.one/four
+                   [1 5] :nia.routing.canto.one/five
+                   [2 0] :nia.routing.canto.two/thesis
+                   [2 1] :nia.routing.canto.two/one
+                   [2 2] :nia.routing.canto.two/two
+                   [2 3] :nia.routing.canto.two/three
+                   [2 4] :nia.routing.canto.two/four})
 
 (defn parens-scroll [{:keys [children depth canto]}]
   [:div.d-flex
@@ -25,7 +30,8 @@
                  (when (>= @depth 1)
                    (swap! depth dec)
                    ;; eventually :id will be canto
-                   (rfe/push-state (get parens-route @depth) {:id 1})))}
+                   (js/console.log "depth:" @depth "canto:" canto)
+                   (rfe/push-state (get parens-route [canto @depth]) {:id canto})))}
     (doall (for [i (reverse (range 1 6))
                  :let [classname (if (> i @depth)
                                    "text-muted "
@@ -44,7 +50,8 @@
                  (when (<= 1 @depth 5)
                    (swap! depth inc)
                    ;; eventually :id will be canto
-                   (rfe/push-state (get parens-route @depth) {:id 1})))}
+                   (js/console.log "depth:" @depth "canto:" canto)
+                   (rfe/push-state (get parens-route [canto @depth]) {:id canto})))}
     (doall (for [i (range 1 6)
                  :let [classname (if (> i @depth)
                                    "text-muted "
@@ -53,13 +60,3 @@
                   :class (some->> (get colors i)
                                   name
                                   (str classname "text-"))} ")"]))]])
-
-(comment
-  ;; figure out how to make this dynamically
-  ;; match so it works on all cantos
-  (rfe/push-state :nia.routing.canto.one/four {:id 1})
-  (rfe/push-state :nia.routing.canto.one/test {:par-num 3
-                                               :id 1})
-  ;; pure JS tings
-  (js/history.pushState #js {:parens 3} nil "")
-  (.-state js/history))

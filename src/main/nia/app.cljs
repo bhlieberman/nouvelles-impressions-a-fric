@@ -2,8 +2,8 @@
   (:require [goog.dom :as gdom]
             [reagent.core :as r]
             [reagent.dom.client :refer [create-root]]
-            [reitit.frontend.history :as rfh]
-            [nia.views.nia-one :refer [nia-one]]
+            [reitit.frontend.history :as rfh] 
+            [nia.views.router :refer [router]]
             [nia.routing :refer [init-routes!]]))
 
 (defonce root (create-root (gdom/getElement "root")))
@@ -11,7 +11,7 @@
 (def history (atom (init-routes!)))
 
 (defn ^:dev/after-load render! []
-  (.render root (r/as-element [nia-one]))
+  (.render root (r/as-element [router]))
   (swap! history rfh/stop!)
   (reset! history (init-routes!)))
 
