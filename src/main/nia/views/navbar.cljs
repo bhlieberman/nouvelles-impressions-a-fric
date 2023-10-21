@@ -3,18 +3,18 @@
             [re-com.core :refer [at hyperlink]]
             [reitit.frontend.easy :as rfe]))
 
-(defn navbar [{:keys [_children _navigate]}]
+(defn navbar [{:keys [_children]}]
   (let [current-route? (r/atom nil)
         classname (fn [name]
                     (if (= name @current-route?)
                       "nav-item nav-link active"
                       "nav-item nav-link"))]
-    (fn [{:keys [children navigate]}]
+    (fn [{:keys [children]}]
       [:div
        [:nav {:class "navbar navbar-expand-lg navbar-light bg-light"}
         [hyperlink {:class "navbar-brand m-3 display-4"
                     :label "NIA"
-                    :on-click #(navigate :home)}]
+                    :on-click #(rfe/navigate :nia.routing/home)}]
         [:button {:class "navbar-toggler"
                   :type "button"
                   :data-toggle "collapse"

@@ -7,8 +7,7 @@
     [v-box 
      :children
      [[h-box
-       :align-self :center
-       :style {:display :flex}
+       :align-self :center 
        :children [[scroller
                    :height "300px"
                    :class "m-3"

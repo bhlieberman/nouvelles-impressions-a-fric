@@ -18,8 +18,7 @@
         from-footnote3-ref (createRef)]
     (fn []
       [h-box
-       :align-self :center
-       :style {:display :flex}
+       :align-self :center 
        :children
        [[scroller
          :class "m-3"

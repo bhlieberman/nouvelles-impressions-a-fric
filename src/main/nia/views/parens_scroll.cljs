@@ -7,7 +7,8 @@
              4 :success
              5 :primary})
 
-(def parens-route {1 :nia.routing.canto.one/one
+(def parens-route {0 :nia.routing.canto.one/thesis
+                   1 :nia.routing.canto.one/one
                    2 :nia.routing.canto.one/two
                    3 :nia.routing.canto.one/three
                    4 :nia.routing.canto.one/four
@@ -21,7 +22,7 @@
              :align-items :center}
      :class "m-3 display-4"
      :on-click (fn []
-                 (when (> @depth 1)
+                 (when (>= @depth 1)
                    (swap! depth dec)
                    ;; eventually :id will be canto
                    (rfe/push-state (get parens-route @depth) {:id 1})))}
