@@ -2,14 +2,19 @@
   (:require [reagent.core :as r]
             [reitit.frontend :as rf]
             [reitit.frontend.easy :as rfe]
-            [reitit.frontend.controllers :as rfc] 
+            [reitit.frontend.controllers :as rfc]
             [nia.views.home :refer [preface introduction]]
-            [nia.views.cantos.one.thesis :refer [thesis]]
+            [nia.views.cantos.one.thesis :as one-thesis :refer [thesis]]
             [nia.views.cantos.one.parens-one :refer [parens]]
             [nia.views.cantos.one.parens-two :refer [parens-two]]
             [nia.views.cantos.one.parens-three :refer [parens-three]]
             [nia.views.cantos.one.parens-four :refer [parens-four]]
-            [nia.views.cantos.one.parens-five :refer [parens-five]]))
+            [nia.views.cantos.one.parens-five :refer [parens-five]]
+            [nia.views.cantos.two.thesis :as two-thesis]
+            [nia.views.cantos.two.parens-one :as two-one]
+            [nia.views.cantos.two.parens-two :as two-two]
+            [nia.views.cantos.two.parens-three :as two-three]
+            [nia.views.cantos.two.parens-four :as two-four]))
 
 (def routes
   ["/"
@@ -20,13 +25,13 @@
     ["/intro" {:name ::intro
                :view introduction
                :controllers []}]
-    ["/canto"
-     ["/:id"
+    ["/canto" 
+     ["/1"
       [""
        {:name :nia.routing.canto.one/thesis
         :view thesis
-        :controllers [{:parameters {:path [:id]}}]}] 
-      ["/parens" 
+        :controllers [{:parameters {:path [:id]}}]}]
+      ["/parens"
        ["/1"
         {:name :nia.routing.canto.one/one
          :view parens
@@ -46,7 +51,24 @@
        ["/5"
         {:name :nia.routing.canto.one/five
          :view parens-five
-         :controllers []}]]]]]])
+         :controllers []}]]]
+     ["/2"
+      ["" {:name :nia.routing.canto.two/thesis
+           :view two-thesis/thesis
+           :controllers []}]
+      ["/parens"
+       ["/1" {:name :nia.routing.canto.two/one
+              :view two-one/parens
+              :controllers []}]
+       ["/2" {:name :nia.routing.canto.two/two
+              :view two-two/parens-two
+              :controllers []}]
+       ["/3" {:name :nia.routing.canto.two/three
+              :view two-three/parens-three
+              :controllers []}]
+       ["/4" {:name :nia.routing.canto.two/four
+              :view two-four/parens-four
+              :controllers []}]]]]]])
 
 (def router (rf/router routes))
 
