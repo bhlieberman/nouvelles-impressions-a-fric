@@ -16,8 +16,7 @@
   (let [canto (-> @current-route 
                   :path
                   (str/split #"/")
-                  (nth 3)
-                  (or "")
+                  (nth 3 "") 
                   parse-long)] 
     [navbar
      {:children 
