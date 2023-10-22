@@ -7,20 +7,26 @@
             [nia.views.cantos.four.parens-four :as four-four]
             [nia.views.cantos.four.parens-five :as four-five]))
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene thesis-scene
   [four-thesis/thesis])
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene parens-one
   [four-one/parens])
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene parens-two
   [four-two/parens-two])
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene parens-three
   [four-three/parens-three])
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene parens-four
   [four-four/parens-four])
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene parens-five
   [four-five/parens-five])

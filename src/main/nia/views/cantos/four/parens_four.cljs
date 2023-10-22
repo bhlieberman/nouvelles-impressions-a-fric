@@ -1,6 +1,5 @@
 (ns nia.views.cantos.four.parens-four
-  (:require [clojure.string :as str]
-            [re-com.core :refer [hyperlink p v-box]]
+  (:require [re-com.core :refer [hyperlink p v-box]]
             [reitit.frontend.easy :as rfe]))
 
 (defn parens-four []
@@ -27,7 +26,7 @@
     [p "Makes a fire which goes out, either when the patient dies"]
     [p "Or when, the fever at its peak and looking dangerous,"]
     [p "One's shining eyes and "
-     [:a {:href "#fn1"} "deep blisters"] ","] 
+     [:a {:href "#fn1"} "deep blisters"] ","]
     [p "- Fever makes even adults grow, it's a well-known fact -"]
     [p "Gradually transform into blooming convalesence,"]
     [p "And ravenous hunger drives one to eat like a hundred men,"]
@@ -35,10 +34,10 @@
     [p "The fire which patiently diminishes a candle"]
     [p "Goes out; - like the hammer that falls when one sells"]
     [p "A building at an auction; -"
-     [:a {:name "fn2ret"} "as"] " under a gust of wind,"] 
+     [:a {:name "fn2ret"} "as"] " under a gust of wind,"]
     [p "When a king is saved from a burning building,"]
-    [p [:a {:name "fn3ret"} "A fire "] "which the heir " 
-     [:a {:href "#fn2"} "who would benefit from his death"]] 
+    [p [:a {:name "fn3ret"} "A fire "] "which the heir "
+     [:a {:href "#fn2"} "who would benefit from his death"]]
     [p "Started secretly "
      [:a {:href "#fn3"} " to see who was on his side;"]]
     [p "- As when noisily leaving a distant pistol"]
@@ -51,13 +50,13 @@
      "who everybody thinks is well-behaved"]
     [p "As long as her affair remains a secret" [:b.text-primary ")))))"]]
     [p [:a {:name "fn4ret"} "Who "] [:b.text-primary "((((("]
-     "ready to join with hers his plenteous destiny" [:b.text-primary ")))))"]] 
+     "ready to join with hers his plenteous destiny" [:b.text-primary ")))))"]]
     [p "Is loved by a high-level financier,"]
     [p "A young employee of whom, a year after "
      [:a {:href "#fn4"} "the sin was committed,"]]
     [p "Takes his child for a secret baptism,"]
     [p "Which will not allow him to sleep, is alas! frustrated"]
-    [p [:a {:name "fn5ret"} "Because"] ", for a laugh, someone has planted in the candlestick"] 
+    [p [:a {:name "fn5ret"} "Because"] ", for a laugh, someone has planted in the candlestick"]
     [p "A trick candle invisibly rigged"]
     [p [:a {:href "#fn5"} "So as not to burn any more than its tip"] ";"]
     [p "- As when he has let fly a quick sneeze"]
@@ -66,7 +65,7 @@
      [hyperlink {:label "the sacred flame of genius"
                  :on-click #(rfe/navigate :nia.routing.canto.four/five {:id 4})}]]
     [p "Dies when its possessor grows senile"]
-    [p [:b.text-primary "((((("] 
+    [p [:b.text-primary "((((("]
      "A flame which, however big this name or that pseudonym,"]
     [p "Is not held in the same regard by everybody;"]
     [p "- In the same way that a man has only one puppet in the bazaar"]
@@ -111,7 +110,7 @@
       [p "For the thunder, when the crash comes heavily"]
       [p "Only one minute after a feeble flash of " [hyperlink {:label "lightning"}] "!"]
       [:hr]]]
-    [v-box 
+    [v-box
      :children
      [[p " Nobody is without an ambitious dream;"]
       [p "The worker sees himself dictating, during a strike,"]
@@ -143,7 +142,7 @@
       [p "To see in his hands the amethyst and the crook"]
       [p "Is a dream dear to every young " [hyperlink {:label "priest"}] "?"]
       [:hr]]]
-    [v-box 
+    [v-box
      :children
      [[p " How the significance of words change depending upon their context!"]
       [p "Eclair means \"a flash in the sky accompanied by a bang\""]
@@ -186,7 +185,7 @@
       [p "Because a grammatical error has appeared in that person's " [hyperlink {:label "translation"}] "?"]
       [:hr]]]
     [v-box
-     :children 
+     :children
      [[p "A trick which is worth as much as these, for novelty value:"]
       [p "To induce a hen to sit on an egg"]
       [p "Which was actually laid by a duck,"]

@@ -9,12 +9,15 @@
             [nia.views.parens-scroll :refer [parens-scroll]]))
 
 (def current-view (r/atom :thesis))
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn navigate [level] (reset! current-view level))
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene scroll
   [parens-scroll {:children [:div "hello"]
                   :depth (r/atom 1)}])
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene scroll-w-child
   :params current-view
   [store]
