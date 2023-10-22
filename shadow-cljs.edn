@@ -9,7 +9,8 @@
             8081 ["dev-resources" "classpath:public"]}
 
  :dependencies
- [[reagent "1.2.0"]
+ [[cljs-ajax "0.8.4"]
+  [reagent "1.2.0"]
   [re-com "2.13.2"]
   [metosin/reitit-frontend "0.7.0-alpha7"]
   [no.cjohansen/portfolio "2023.07.15"]]
