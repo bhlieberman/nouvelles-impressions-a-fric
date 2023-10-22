@@ -50,7 +50,9 @@
                                   (reset! current-route? :canto-ii)
                                   (rfe/navigate :nia.routing.canto.two/thesis {:path-params {:id 2}}))}]
           [hyperlink {:src (at)
-                      :class "nav nav-link disabled"
-                      :disabled? true
-                      :label "Canto IV"}]]]]
+                      :class (classname :canto-iv)  
+                      :label "Canto IV"
+                      :on-click (fn []
+                                  (reset! current-route? :canto-iv)
+                                  (rfe/navigate :nia.routing.canto.four/thesis {:path-params {:id 4}}))}]]]]
        children])))

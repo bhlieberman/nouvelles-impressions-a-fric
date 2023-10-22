@@ -18,7 +18,13 @@
                       :nia.routing.canto.two/two
                       :nia.routing.canto.two/three
                       :nia.routing.canto.two/four
-                      :nia.routing.canto.two/five]})
+                      :nia.routing.canto.two/five]
+                   4 [:nia.routing.canto.four/thesis
+                      :nia.routing.canto.four/one
+                      :nia.routing.canto.four/two
+                      :nia.routing.canto.four/three
+                      :nia.routing.canto.four/four
+                      :nia.routing.canto.four/five]})
 
 (defn parens-scroll [{:keys [children depth canto]}]
   [:div.d-flex

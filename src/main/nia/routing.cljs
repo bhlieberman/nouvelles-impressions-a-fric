@@ -15,7 +15,13 @@
             [nia.views.cantos.two.parens-two :as two-two]
             [nia.views.cantos.two.parens-three :as two-three]
             [nia.views.cantos.two.parens-four :as two-four]
-            [nia.views.cantos.two.parens-five :as two-five]))
+            [nia.views.cantos.two.parens-five :as two-five]
+            [nia.views.cantos.four.thesis :as four-thesis]
+            [nia.views.cantos.four.parens-one :as four-one]
+            [nia.views.cantos.four.parens-two :as four-two]
+            [nia.views.cantos.four.parens-three :as four-three]
+            [nia.views.cantos.four.parens-four :as four-four]
+            [nia.views.cantos.four.parens-five :as four-five]))
 
 (def routes
   ["/"
@@ -72,6 +78,26 @@
               :controllers []}]
        ["/5" {:name :nia.routing.canto.two/five
               :view two-five/parens-five
+              :controllers []}]]]
+     ["/4"
+      ["" {:name :nia.routing.canto.four/thesis
+           :view four-thesis/thesis
+           :controllers []}]
+      ["/parens"
+       ["/1" {:name :nia.routing.canto.four/one
+              :view four-one/parens
+              :controllers []}]
+       ["/2" {:name :nia.routing.canto.four/two
+              :view four-two/parens-two
+              :controllers []}]
+       ["/3" {:name :nia.routing.canto.four/three
+              :view four-three/parens-three
+              :controllers []}]
+       ["/4" {:name :nia.routing.canto.four/four
+              :view four-four/parens-four
+              :controllers []}]
+       ["/5" {:name :nia.routing.canto.four/five
+              :view four-five/parens-five
               :controllers []}]]]]]])
 
 (def router (rf/router routes))
