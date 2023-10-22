@@ -3,7 +3,8 @@
             [nia.scenes.scroll-scene]
             [nia.scenes.preface-scene]
             [nia.scenes.thesis-scene]
-            [nia.scenes.thesis2-scene]))
+            [nia.scenes.thesis2-scene]
+            [nia.scenes.canto4-scenes]))
 
 (defn init []
   (ui/start!

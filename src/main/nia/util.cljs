@@ -14,7 +14,9 @@
 
 (def nia-2-parens (:parens nia-2))
 
-nia-2-parens
+(def nia-4 (get-in raw-data [:canto 2]))
+
+nia-4
 
 (comment 
   ;; programmatic routes WIP
