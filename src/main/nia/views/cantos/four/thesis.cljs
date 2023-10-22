@@ -1,0 +1,27 @@
+(ns nia.views.cantos.four.thesis
+  (:require [re-com.core :refer [hyperlink p title v-box]]
+            [reitit.frontend.easy :as rfe]))
+
+(defn thesis []
+  [v-box
+   :children 
+   [[v-box 
+     :align-self :center
+     :children
+     [[title {:level :level2
+              :label "Canto IV"
+              :style {:align-self :center}}] 
+      [title {:level :level3 :style {:align-self :center} :label 
+              "The Gardens of Rosetta Seen from A Dahabiah"}] 
+      [title {:level :level3
+              :style {:align-self :center
+                      :margin "10px 0px 10px 0px"}
+              :label [:i "Outskirts of Cairo"]}]
+      
+      [p "Skimming along the Nile I see two banks going past covered"]
+      [p "With flowers, birds' wings, flashes of light, lush green plants,"]
+      [p "One of which would suffice for twenty of our "
+       [hyperlink {:label "salons"
+                   :on-click #(rfe/navigate :nia.routing.canto.four/one {:id 4})}]] 
+      [p "With its opaque foliage, lightly coloured stripes and fruits."]
+      [:hr]]]]])
