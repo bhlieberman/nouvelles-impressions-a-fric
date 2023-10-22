@@ -7,17 +7,17 @@
              4 :success
              5 :primary})
 
-(def parens-route {[1 0] :nia.routing.canto.one/thesis
-                   [1 1] :nia.routing.canto.one/one
-                   [1 2] :nia.routing.canto.one/two
-                   [1 3] :nia.routing.canto.one/three
-                   [1 4] :nia.routing.canto.one/four
-                   [1 5] :nia.routing.canto.one/five
-                   [2 0] :nia.routing.canto.two/thesis
-                   [2 1] :nia.routing.canto.two/one
-                   [2 2] :nia.routing.canto.two/two
-                   [2 3] :nia.routing.canto.two/three
-                   [2 4] :nia.routing.canto.two/four})
+(def parens-route {1 [:nia.routing.canto.one/thesis
+                      :nia.routing.canto.one/one
+                      :nia.routing.canto.one/two
+                      :nia.routing.canto.one/three 
+                      :nia.routing.canto.one/four
+                      :nia.routing.canto.one/five]
+                   2 [:nia.routing.canto.two/thesis
+                      :nia.routing.canto.two/one
+                      :nia.routing.canto.two/two
+                      :nia.routing.canto.two/three
+                      :nia.routing.canto.two/four]})
 
 (defn parens-scroll [{:keys [children depth canto]}]
   [:div.d-flex
@@ -29,9 +29,7 @@
      :on-click (fn []
                  (when (>= @depth 1)
                    (swap! depth dec)
-                   ;; eventually :id will be canto
-                   (js/console.log "depth:" @depth "canto:" canto)
-                   (rfe/push-state (get parens-route [canto @depth]) {:id canto})))}
+                   (rfe/push-state (get-in parens-route [canto @depth]) {:id canto})))}
     (doall (for [i (reverse (range 1 6))
                  :let [classname (if (> i @depth)
                                    "text-muted "
@@ -49,9 +47,7 @@
      :on-click (fn []
                  (when (<= 1 @depth 5)
                    (swap! depth inc)
-                   ;; eventually :id will be canto
-                   (js/console.log "depth:" @depth "canto:" canto)
-                   (rfe/push-state (get parens-route [canto @depth]) {:id canto})))}
+                   (rfe/push-state (get-in parens-route [canto @depth]) {:id canto})))}
     (doall (for [i (range 1 6)
                  :let [classname (if (> i @depth)
                                    "text-muted "

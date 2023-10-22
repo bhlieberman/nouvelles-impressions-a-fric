@@ -13,23 +13,20 @@
                    "five" 5})
 
 (defn router []
-  (let [canto (-> @current-route 
-                  :path
-                  (str/split #"/")
-                  (nth 3 "") 
-                  parse-long)] 
-    [navbar
-     {:children 
-      [h-box
-       :align :center
-       :justify :center
-       :children 
-       [(when @current-route
-          (let [{view :view
-                 route-name :name} (:data @current-route)]
-            (if-let [parens (some #{(name route-name)} #{"one" "two" "three" "four" "five"})]
-              (let [depth (get parens-depth parens)]
-                [parens-scroll {:children [view]
-                                :canto canto
-                                :depth (r/atom depth)}])
-              [view])))]]}]))
+  [navbar
+   {:children 
+    [h-box
+     :align :center
+     :justify :center
+     :children 
+     [(when @current-route
+        (let [{view :view
+               route-name :name
+               path :path} (:data @current-route)
+              canto (some-> path (str/split #"/") (nth 3 "") parse-long)]
+          (if-let [parens (some #{(name route-name)} #{"one" "two" "three" "four" "five"})]
+            (let [depth (get parens-depth parens)]
+              [parens-scroll {:children [view]
+                              :canto canto
+                              :depth (r/atom depth)}])
+            [view])))]]}])
