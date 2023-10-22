@@ -1,15 +1,18 @@
 (ns nia.views.cantos.two.parens-three
   (:require [reagent.core :as r]
-            [re-com.core :refer [at h-box hyperlink p 
+            [re-com.core :refer [at h-box hyperlink 
+                                 modal-panel p 
                                  popover-anchor-wrapper
                                  popover-content-wrapper
                                  scroller v-box]]
             [reitit.frontend.easy :as rfe]
+            [nia.views.cantos.two.parens-four-ii :refer [parens-four-ii]]
             ["react" :refer [createRef]]))
 
 (defn parens-three []
   (let [popover-1-showing? (r/atom false)
         popover-2-showing? (r/atom false)
+        par-ii-modal (r/atom false)
         footnote-1-ref (createRef)
         return-ref (createRef)]
     (fn []
@@ -33,9 +36,13 @@
                                                           :label "Their personal faults upon their backs,"
                                                           :on-click #(rfe/navigate :nia.routing.canto.two/four {:id 2})}]
                    [p "Seeking the swing of the thurible to secure their salvation,"]
-                   [hyperlink #_{:href "nia2par4ii.html"} {:src (at) 
-                                                           :label "So that fortune will favour them,"
-                                                           :on-click #(rfe/navigate :nia.routing.canto.two/four {:id 2})}]
+                   [hyperlink  {:src (at) 
+                                :label "So that fortune will favour them,"
+                                :on-click #(swap! par-ii-modal not)}]
+                   (when @par-ii-modal
+                     [modal-panel
+                      :backdrop-on-click #(swap! par-ii-modal not)
+                      :child [parens-four-ii]])
                    [p "she whose wheel's"]
                    [p "Spokes move, turning without peace and without cease,"]
                    [p "- Like the hat of a simpleton before his superior -"]

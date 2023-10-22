@@ -21,8 +21,8 @@
      :children 
      [(when @current-route
         (let [{view :view
-               route-name :name
-               path :path} (:data @current-route)
+               route-name :name} (:data @current-route) 
+              path (:path @current-route)
               canto (some-> path (str/split #"/") (nth 3 "") parse-long)]
           (if-let [parens (some #{(name route-name)} #{"one" "two" "three" "four" "five"})]
             (let [depth (get parens-depth parens)]
