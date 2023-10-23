@@ -1,10 +1,8 @@
 (ns nia.routing
-  (:require [reagent.core :as r]
-            [re-frame.core :refer [dispatch]]
+  (:require [re-frame.core :refer [dispatch]]
             [reitit.frontend :as rf]
             [reitit.frontend.easy :as rfe]
-            [reitit.frontend.controllers :as rfc]
-            [nia.views.home :refer [preface introduction]]
+            [nia.views.home :refer [introduction]]
             [nia.views.cantos.one.thesis :as one-thesis :refer [thesis]]
             [nia.views.cantos.one.parens-one :refer [parens]]
             [nia.views.cantos.one.parens-two :refer [parens-two]]
@@ -29,8 +27,8 @@
    ["" {:name ::home
         :view introduction
         :controllers []}]
-   ["nia" 
-    ["/canto" 
+   ["nia"
+    ["/canto"
      ["/1"
       [""
        {:name :nia.routing.canto.one/thesis
