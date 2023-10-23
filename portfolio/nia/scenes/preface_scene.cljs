@@ -9,3 +9,6 @@
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defscene intro-scene
   [introduction])
+
+(defscene together
+  [introduction])

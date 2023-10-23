@@ -24,19 +24,7 @@
                   :aria-label "Toggle navigation"}
          [:span {:class "navbar-toggler-icon"}]]
         [:div {:class "collapse navbar-collapse", :id "navbarNavAltMarkup"}
-         [:div {:class "navbar-nav"}
-          [hyperlink {:src (at)
-                      :class (classname :intro)
-                      :label "Introduction"
-                      :on-click (fn []
-                                  (reset! active-route? :intro)
-                                  (dispatch [:routing/push-state :nia.routing/intro]))}]
-          [hyperlink {:src (at)
-                      :class (classname :preface)
-                      :label "Preface"
-                      :on-click (fn []
-                                  (reset! active-route? :preface)
-                                  (dispatch [:routing/push-state :nia.routing/home]))}]
+         [:div {:class "navbar-nav"} 
           [hyperlink {:src (at)
                       :class (classname :canto-i)
                       :label "Canto I"
