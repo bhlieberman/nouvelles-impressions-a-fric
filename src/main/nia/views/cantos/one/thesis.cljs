@@ -4,13 +4,22 @@
 
 (defn thesis []
   [v-box 
+   :margin "25px 0px"
    :children
    [[v-box
      :align-self :center
      :children
-     [[title :level :level2 :label "Canto I"]
-      [p "Damietta"]
-      [p [:i "The House in Which Saint Louis Was Imprisoned"]]
+     [[title {:level :level2
+              :label "Canto I"
+              :style {:align-self :center
+                      }}]
+      [title {:level :level3 
+              :label "Damietta"
+              :style {:align-self :center}}]
+      [title {:level :level3
+              :style {:align-self :center
+                      :margin "10px 0px"}
+              :label [:i "The House in Which Saint Louis Was Imprisoned"]}]
       [p "Serious reflection, weighing it up, brings the certain"]
       [p "Realisation that there, behind that door,"]
       [p "The Saint-King was imprisoned for three months! ...Louis IXth!"]
@@ -25,4 +34,5 @@
       [p "- Roots, trunks, boughs, connecting branches -"] 
       [p "His family tree; the cathedrals eroded by time;"]
       [p "Likewise the proud menhir, the first cromlech"]
-      [p "The dolmen beneath which the soil is always dry."]]]]])
+      [p "The dolmen beneath which the soil is always dry."]
+      [:hr]]]]])

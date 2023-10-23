@@ -4,6 +4,7 @@
 
 (defn thesis []
   [v-box
+   :margin "25px 0px"
    :children 
    [[v-box 
      :align-self :center
