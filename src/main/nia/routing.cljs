@@ -27,12 +27,9 @@
 (def routes
   ["/"
    ["" {:name ::home
-        :view preface
+        :view introduction
         :controllers []}]
-   ["nia"
-    ["/intro" {:name ::intro
-               :view introduction
-               :controllers []}]
+   ["nia" 
     ["/canto" 
      ["/1"
       [""
