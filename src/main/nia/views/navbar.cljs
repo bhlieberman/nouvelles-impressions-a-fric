@@ -1,12 +1,12 @@
 (ns nia.views.navbar
   (:require [reagent.core :as r]
             [re-com.core :refer [at hyperlink]]
-            [reitit.frontend.easy :as rfe]))
+            [re-frame.core :refer [dispatch]]))
 
 (defn navbar [{:keys [_children]}]
-  (let [current-route? (r/atom nil)
+  (let [active-route? (r/atom nil)
         classname (fn [name]
-                    (if (= name @current-route?)
+                    (if (= name @active-route?)
                       "nav-item nav-link active"
                       "nav-item nav-link"))]
     (fn [{:keys [children]}]
@@ -14,7 +14,7 @@
        [:nav {:class "navbar navbar-expand-lg navbar-light bg-light"}
         [hyperlink {:class "navbar-brand m-3 display-4"
                     :label "NIA"
-                    :on-click #(rfe/navigate :nia.routing/home)}]
+                    :on-click #(dispatch [:routing/push-state :nia.routing/home])}]
         [:button {:class "navbar-toggler"
                   :type "button"
                   :data-toggle "collapse"
@@ -29,30 +29,30 @@
                       :class (classname :intro)
                       :label "Introduction"
                       :on-click (fn []
-                                  (reset! current-route? :intro)
-                                  (rfe/navigate :nia.routing/intro))}]
+                                  (reset! active-route? :intro)
+                                  (dispatch [:routing/push-state :nia.routing/intro]))}]
           [hyperlink {:src (at)
                       :class (classname :preface)
                       :label "Preface"
                       :on-click (fn []
-                                  (reset! current-route? :preface)
-                                  (rfe/navigate :nia.routing/home))}]
+                                  (reset! active-route? :preface)
+                                  (dispatch [:routing/push-state :nia.routing/home]))}]
           [hyperlink {:src (at)
                       :class (classname :canto-i)
                       :label "Canto I"
                       :on-click (fn []
-                                  (reset! current-route? :canto-i)
-                                  (rfe/navigate :nia.routing.canto.one/thesis {:path-params {:id 1}}))}] 
+                                  (reset! active-route? :canto-i)
+                                  (dispatch [:routing/push-state :nia.routing.canto.one/thesis {:path-params {:id 1}}]))}] 
           [hyperlink {:src (at)
                       :class (classname :canto-ii)
                       :label "Canto II"
                       :on-click (fn []
-                                  (reset! current-route? :canto-ii)
-                                  (rfe/navigate :nia.routing.canto.two/thesis {:path-params {:id 2}}))}]
+                                  (reset! active-route? :canto-ii)
+                                  (dispatch [:routing/push-state :nia.routing.canto.two/thesis {:path-params {:id 2}}]))}]
           [hyperlink {:src (at)
                       :class (classname :canto-iv)  
                       :label "Canto IV"
                       :on-click (fn []
-                                  (reset! current-route? :canto-iv)
-                                  (rfe/navigate :nia.routing.canto.four/thesis {:path-params {:id 4}}))}]]]]
+                                  (reset! active-route? :canto-iv)
+                                  (dispatch [:routing/push-state :nia.routing.canto.four/thesis {:path-params {:id 4}}]))}]]]]
        children])))

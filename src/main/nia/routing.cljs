@@ -1,5 +1,6 @@
 (ns nia.routing
   (:require [reagent.core :as r]
+            [re-frame.core :refer [dispatch]]
             [reitit.frontend :as rf]
             [reitit.frontend.easy :as rfe]
             [reitit.frontend.controllers :as rfc]
@@ -102,15 +103,9 @@
 
 (def router (rf/router routes))
 
-(def current-route (r/atom nil))
-
 (defn on-navigate [new-match]
   (when new-match
-    (swap! current-route
-           (fn [old-match]
-             (assoc new-match
-                    :controllers
-                    (rfc/apply-controllers (:controllers old-match) new-match))))))
+    (dispatch [:routing/navigated new-match])))
 
 (defn init-routes! []
   (js/console.log "initializing routes")

@@ -1,5 +1,5 @@
-(ns nia.events
-  (:require [re-frame.core :as rf :refer [reg-event-fx]]))
+(ns nia.events.core
+  (:require [re-frame.core :as rf :refer [reg-event-fx reg-event-db reg-fx]]))
 
 (reg-event-fx
  :app/initialize
