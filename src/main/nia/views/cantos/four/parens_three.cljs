@@ -1,7 +1,6 @@
 (ns nia.views.cantos.four.parens-three
   (:require [re-com.core :refer [hyperlink p v-box]]
-            [re-frame.core :refer [dispatch]]
-            [reitit.frontend.easy :as rfe]))
+            [re-frame.core :refer [dispatch]]))
 
 (defn parens-three []
   [v-box 

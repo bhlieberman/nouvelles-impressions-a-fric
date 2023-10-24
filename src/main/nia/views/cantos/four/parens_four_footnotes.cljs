@@ -1,6 +1,6 @@
 (ns nia.views.cantos.four.parens-four-footnotes
   (:require [clojure.string :as str] 
-            [re-com.core :refer [hyperlink modal-panel p v-box]]
+            [re-com.core :refer [modal-panel p v-box]]
             [re-frame.core :refer [subscribe]]))
 
 

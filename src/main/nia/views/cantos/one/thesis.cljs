@@ -1,5 +1,6 @@
 (ns nia.views.cantos.one.thesis
-  (:require [re-com.core :refer [hyperlink p title v-box]]
+  (:require [nia.views.maps :refer [gmap-outer]]
+            [re-com.core :refer [hyperlink p title v-box]]
             [re-frame.core :refer [dispatch]]))
 
 (defn thesis []
@@ -35,4 +36,5 @@
       [p "His family tree; the cathedrals eroded by time;"]
       [p "Likewise the proud menhir, the first cromlech"]
       [p "The dolmen beneath which the soil is always dry."]
-      [:hr]]]]])
+      [:hr]
+      [gmap-outer]]]]])
