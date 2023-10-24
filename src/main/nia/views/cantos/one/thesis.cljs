@@ -1,6 +1,6 @@
 (ns nia.views.cantos.one.thesis
   (:require [re-com.core :refer [hyperlink p title v-box]]
-            [reitit.frontend.easy :as rfe]))
+            [re-frame.core :refer [dispatch]]))
 
 (defn thesis []
   [v-box 
@@ -30,7 +30,7 @@
       [p "That name whose bearer, though crushed, is so proud of"] 
       [hyperlink {:label "That he knows by heart, faultlessly,"
                   :style {:margin "0px 0px 9.8px"}
-                  :on-click #(rfe/navigate :nia.routing.canto.one/one {:path-params {:id 1}})}]
+                  :on-click #(dispatch [:routing/push-state :nia.routing.canto.one/one {:path-params {:id 1}}])}]
       [p "- Roots, trunks, boughs, connecting branches -"] 
       [p "His family tree; the cathedrals eroded by time;"]
       [p "Likewise the proud menhir, the first cromlech"]

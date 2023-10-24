@@ -5,7 +5,7 @@
                                  popover-anchor-wrapper
                                  popover-content-wrapper
                                  scroller v-box]]
-            [reitit.frontend.easy :as rfe]
+            [re-frame.core :refer [dispatch]]
             ["react" :refer [createRef]]))
 
 (defn parens-four []
@@ -30,7 +30,7 @@
 
            [p "That fop who with "]
            [hyperlink {:style {:margin "0px 0px 9.8px"}
-                       :on-click #(rfe/navigate :nia.routing.canto.one/five {:path-params {:id 1}})
+                       :on-click #(dispatch [:routing/push-state :nia.routing.canto.one/five {:path-params {:id 1}}])
                        :label "one snooty glance"}]
            [p "Enrages a poor uniformed"]
            [p "Hotel flunkey who has just,"]

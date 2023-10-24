@@ -1,5 +1,6 @@
 (ns nia.events.core
-  (:require [re-frame.core :as rf :refer [reg-event-fx reg-event-db reg-fx]]))
+  (:require [re-frame.core :as rf :refer [debug reg-event-db reg-event-fx]]
+            [shadow.resource :as rs]))
 
 (reg-event-fx
  :app/initialize
@@ -27,4 +28,26 @@
                         "two" 2
                         "three" 3
                         "four" 4
-                        "five" 5}}}))
+                        "five" 5}
+         :cantos/footnotes {1 []
+                            2 []
+                            4 [(rs/inline "four_four_one.txt")
+                               (rs/inline "four_four_two.txt")
+                               (rs/inline "four_four_three.txt")
+                               (rs/inline "four_four_four.txt")
+                               (rs/inline "four_four_five.txt")]}
+         :poem/traversal-type :depth
+         :routing/breadth-first {:theses [:nia.routing.canto.one/thesis
+                                          :nia.routing.canto.two/thesis
+                                          :nia.routing.canto.four/thesis]
+                                 :parens [:nia.routing.canto.one/one
+                                          :nia.routing.canto.two/one
+                                          :nia.routing.canto.three/one
+                                          :nia.routing.canto.four/one
+                                          :nia.routing.canto.five/one]}}}))
+
+(reg-event-db
+ :poem/change-current-footnote
+ [debug]
+ (fn [db [_ canto footnote]]
+   (assoc db :current-footnote (get-in db [:cantos/footnotes canto footnote]))))

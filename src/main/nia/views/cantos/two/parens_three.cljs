@@ -5,7 +5,7 @@
                                  popover-anchor-wrapper
                                  popover-content-wrapper
                                  scroller v-box]]
-            [reitit.frontend.easy :as rfe]
+            [re-frame.core :refer [dispatch]]
             [nia.views.cantos.two.parens-four-ii :refer [parens-four-ii]]
             ["react" :refer [createRef]]))
 
@@ -34,7 +34,7 @@
                    [p "In a bulging sack which they would rather believe was flat,"]
                    [hyperlink #_{:href "nia2par4i.html"} {:src (at) 
                                                           :label "Their personal faults upon their backs,"
-                                                          :on-click #(rfe/navigate :nia.routing.canto.two/four {:id 2})}]
+                                                          :on-click #(dispatch [:routing/push-state :nia.routing.canto.two/four {:id 2}])}]
                    [p "Seeking the swing of the thurible to secure their salvation,"]
                    [hyperlink  {:src (at) 
                                 :label "So that fortune will favour them,"
