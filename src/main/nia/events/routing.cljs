@@ -8,9 +8,9 @@
 (reg-event-db
  :routing/navigated
  (fn [db [_ new-match]]
-   (let [old-match (:current-route db)
+   (let [old-match (:app.routing/current-route db)
          controllers (rfc/apply-controllers (:controllers old-match) new-match)]
-     (assoc db :current-route (assoc new-match :controllers controllers)))))
+     (assoc db :app.routing/current-route (assoc new-match :controllers controllers)))))
 
 (reg-event-fx
  :routing/push-state
@@ -25,7 +25,7 @@
 (reg-event-fx
  :routing/parens-click
  (fn [{:keys [db]} [_ canto depth]]
-   (let [new-route (get-in db [:parens-routes canto depth])
+   (let [new-route (get-in db [:app.routing.impl/parens-routes canto depth])
          match (match-by-name router new-route)]
      {:fx [[:dispatch [:routing/navigated match]]
            [:dispatch [:routing/push-state new-route (:path-params match)]]]})))

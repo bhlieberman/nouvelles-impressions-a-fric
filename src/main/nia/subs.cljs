@@ -3,8 +3,12 @@
 
 (reg-sub
  :routing/current-route
- :-> :current-route)
+ :-> :app.routing/current-route)
 
 (reg-sub
  :poem/display-current-footnote
  :-> :current-footnote)
+
+(reg-sub
+ :maps/current-center
+ :-> :config.maps/current-center)
