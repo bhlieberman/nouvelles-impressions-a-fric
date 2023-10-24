@@ -35,7 +35,8 @@
         {:compiler-options {:optimizations :advanced}
          :build-options
          {:ns-aliases
-          {day8.re-frame.tracing day8.re-frame.tracing-stubs}}}}
+          {day8.re-frame.tracing day8.re-frame.tracing-stubs}}}
+        :closure-defines {:nia.config.maps/api-key #shadow/env "goog_maps_key"}}
   :dev {:target :esm
         :output-dir "dev-resources/js"
         :asset-path "/js"
