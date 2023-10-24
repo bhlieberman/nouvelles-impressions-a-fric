@@ -29,3 +29,8 @@
          match (match-by-name router new-route)]
      {:fx [[:dispatch [:routing/navigated match]]
            [:dispatch [:routing/push-state new-route (:path-params match)]]]})))
+
+(reg-event-db
+ :routing/traversal-type
+ (fn [db [_ breadth-or-depth?]]
+   (assoc db :poem/traversal-type breadth-or-depth?)))

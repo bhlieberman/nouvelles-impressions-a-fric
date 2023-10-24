@@ -35,7 +35,16 @@
                                (rs/inline "four_four_two.txt")
                                (rs/inline "four_four_three.txt")
                                (rs/inline "four_four_four.txt")
-                               (rs/inline "four_four_five.txt")]}}}))
+                               (rs/inline "four_four_five.txt")]}
+         :poem/traversal-type :depth
+         :routing/breadth-first {:theses [:nia.routing.canto.one/thesis
+                                          :nia.routing.canto.two/thesis
+                                          :nia.routing.canto.four/thesis]
+                                 :parens [:nia.routing.canto.one/one
+                                          :nia.routing.canto.two/one
+                                          :nia.routing.canto.three/one
+                                          :nia.routing.canto.four/one
+                                          :nia.routing.canto.five/one]}}}))
 
 (reg-event-db
  :poem/change-current-footnote
