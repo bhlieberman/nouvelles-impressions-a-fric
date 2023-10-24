@@ -1,6 +1,6 @@
 (ns nia.views.cantos.two.parens-one
   (:require [re-com.core :refer [at h-box hyperlink p v-box]]
-            [reitit.frontend.easy :as rfe]))
+            [re-frame.core :refer [dispatch]]))
 
 (defn parens []
   [h-box
@@ -16,7 +16,7 @@
                 [p "A law which will consecrate him to immortality;"]
                 [p "From a fable or tale, a moral;"]
                 [p "From a thin scarecrow,"]
-                [hyperlink {:on-click #(rfe/navigate :nia.routing.canto.two/two {:id 2})
+                [hyperlink {:on-click #(dispatch [:routing/push-state :nia.routing.canto.two/two {:id 2}])
                             :label " a simple cross"
                             :style {:display :inline-block}}]
                 [p "which stands"]

@@ -1,5 +1,6 @@
 (ns nia.views.cantos.four.parens-three
   (:require [re-com.core :refer [hyperlink p v-box]]
+            [re-frame.core :refer [dispatch]]
             [reitit.frontend.easy :as rfe]))
 
 (defn parens-three []
@@ -22,7 +23,7 @@
     [p "Gets used to the idea that others are being preferred;"]
     [p 
      [hyperlink {:label "The astronomer"
-                 :on-click #(rfe/navigate :nia.routing.canto.four/four {:id 4})}]]
+                 :on-click #(dispatch [:routing/push-state :nia.routing.canto.four/four {:id 4}])}]]
     [p "Gets used to the vastness of space"]
     [p "Where light always runs in a straight line;"]
     [p "The dumb man to his slate, irritating to whiten;"]]])

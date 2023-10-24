@@ -1,6 +1,6 @@
 (ns nia.views.cantos.four.thesis
   (:require [re-com.core :refer [hyperlink p title v-box]]
-            [reitit.frontend.easy :as rfe]))
+            [re-frame.core :refer [dispatch]]))
 
 (defn thesis []
   [v-box
@@ -23,6 +23,6 @@
       [p "With flowers, birds' wings, flashes of light, lush green plants,"]
       [p "One of which would suffice for twenty of our "
        [hyperlink {:label "salons"
-                   :on-click #(rfe/navigate :nia.routing.canto.four/one {:id 4})}]] 
+                   :on-click #(dispatch [:routing/push-state :nia.routing.canto.four/one {:id 4}])}]] 
       [p "With its opaque foliage, lightly coloured stripes and fruits."]
       [:hr]]]]])

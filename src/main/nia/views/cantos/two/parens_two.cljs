@@ -1,7 +1,7 @@
 (ns nia.views.cantos.two.parens-two
   (:require [reagent.core :as r]
             [re-com.core :refer [hyperlink h-box modal-panel p scroller v-box]]
-            [reitit.frontend.easy :as rfe]))
+            [re-frame.core :refer [dispatch]]))
 
 (defn parens-two []
   (let [footnote-one-showing? (r/atom false)]
@@ -36,7 +36,7 @@
                      [hyperlink {:label "glass"
                                  :on-click #(swap! footnote-one-showing? not)}]
                      " of the door, next to an oven,"]
-                    [hyperlink {:on-click #(rfe/navigate :nia.routing.canto.two/three {:id 2})
+                    [hyperlink {:on-click #(dispatch [:routing/push-state :nia.routing.canto.two/three {:id 2}])
                                 :label "One sees, forming the shape of a cross,"}]
                     [p "Two knives, clicking as they are sharpened by a carver;"]
                     [:hr]

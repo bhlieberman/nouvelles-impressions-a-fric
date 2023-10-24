@@ -1,5 +1,6 @@
 (ns nia.events.core
-  (:require [re-frame.core :as rf :refer [reg-event-fx reg-event-db reg-fx]]))
+  (:require [re-frame.core :as rf :refer [debug reg-event-db reg-event-fx]]
+            [shadow.resource :as rs]))
 
 (reg-event-fx
  :app/initialize
@@ -27,4 +28,17 @@
                         "two" 2
                         "three" 3
                         "four" 4
-                        "five" 5}}}))
+                        "five" 5}
+         :cantos/footnotes {1 []
+                            2 []
+                            4 [(rs/inline "four_four_one.txt")
+                               (rs/inline "four_four_two.txt")
+                               (rs/inline "four_four_three.txt")
+                               (rs/inline "four_four_four.txt")
+                               (rs/inline "four_four_five.txt")]}}}))
+
+(reg-event-db
+ :poem/change-current-footnote
+ [debug]
+ (fn [db [_ canto footnote]]
+   (assoc db :current-footnote (get-in db [:cantos/footnotes canto footnote]))))

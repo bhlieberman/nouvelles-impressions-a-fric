@@ -1,7 +1,7 @@
 (ns nia.views.cantos.two.parens-four
   (:require [reagent.core :as r]
             [re-com.core :refer [h-box hyperlink p popover-anchor-wrapper popover-content-wrapper scroller v-box]]
-            [reitit.frontend.easy :as rfe]))
+            [re-frame.core :refer [dispatch]]))
 
 (defn parens-four []
   (let [heidelberg-showing? (r/atom false)
@@ -39,7 +39,7 @@
              [p "Sees his faults naked before him, his habits, his tastes,"]
              [p "When to his complacent eyes they seem "
               [hyperlink {:label "diminished,"
-                          :on-click #(rfe/navigate :nia.routing.canto.two/five {:id 2})}]]
+                          :on-click #(dispatch [:routing/push-state :nia.routing.canto.two/five {:id 2}])}]]
              [p "As though, choosing an opportune moment,"]
              [p "A spell had been cast to make him liable"]
              [p "To mistake:- the apparatus invented by Franklin"]

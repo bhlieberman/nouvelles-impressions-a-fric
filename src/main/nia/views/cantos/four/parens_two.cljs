@@ -1,6 +1,6 @@
 (ns nia.views.cantos.four.parens-two
   (:require [re-com.core :refer [v-box p hyperlink]]
-            [reitit.frontend.easy :as rfe]))
+            [re-frame.core :refer [dispatch]]))
 
 (defn parens-two []
   [v-box
@@ -11,6 +11,6 @@
     [p "Which determine that retaliation is unwise,"]
     [p "And give a bow for an eye and a smile for a tooth;" [:b.text-info ")))"]]
     [p "That " [hyperlink {:label "- when shamefully and blatantly insulted -"
-                             :on-click #(rfe/navigate :nia.routing.canto.four/three {:id 4})}]]
+                             :on-click #(dispatch [:routing/push-state :nia.routing.canto.four/three {:id 4}])}]]
     [p "He habitually turns the other cheek to those who slap him in the face,"]
     [p "Or whether he is cleverly fooling them by appearing to play along;"]]])
