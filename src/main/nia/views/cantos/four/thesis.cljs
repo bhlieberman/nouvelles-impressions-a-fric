@@ -1,5 +1,6 @@
 (ns nia.views.cantos.four.thesis
-  (:require [re-com.core :refer [hyperlink p title v-box]]
+  (:require [nia.views.maps :refer [gmap-outer]]
+            [re-com.core :refer [hyperlink p title v-box]]
             [re-frame.core :refer [dispatch]]))
 
 (defn thesis []
@@ -25,4 +26,5 @@
        [hyperlink {:label "salons"
                    :on-click #(dispatch [:routing/push-state :nia.routing.canto.four/one {:id 4}])}]] 
       [p "With its opaque foliage, lightly coloured stripes and fruits."]
-      [:hr]]]]])
+      [:hr]
+      [gmap-outer :rosetta]]]]])

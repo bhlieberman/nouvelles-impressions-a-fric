@@ -37,4 +37,4 @@
       [p "Likewise the proud menhir, the first cromlech"]
       [p "The dolmen beneath which the soil is always dry."]
       [:hr]
-      [gmap-outer]]]]])
+      [gmap-outer :damietta]]]]])

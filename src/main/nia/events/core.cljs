@@ -5,7 +5,8 @@
 (reg-event-fx
  :app/initialize
  (fn [_ _]
-   {:db app-db}))
+   {:db app-db
+    :fx [[:dispatch [:config/load-google-maps]]]}))
 
 (reg-event-db
  :poem/change-current-footnote

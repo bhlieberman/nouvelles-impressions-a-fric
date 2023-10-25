@@ -1,22 +1,23 @@
 (ns nia.views.maps
-  (:require [goog.dom :as gdom]
-            [reagent.core :as r] 
-            [re-frame.core :refer [dispatch]]))
+  (:require [reagent.core :as r]
+            [re-frame.core :refer [dispatch subscribe]]
+            ["react" :refer [createRef]]))
 
-(defn gmap-inner []
-  (let [{:keys [lat lng]} (r/props (r/current-component))]
-    (r/create-class {:reagent-render
-                     (fn [] [:div#map 
-                             [:div#map-canvas {:style {:height "400px"}}]])
-                     :component-did-mount
-                     (fn [_]
-                       (let [canvas (gdom/getElement "map-canvas")]
-                         (dispatch [:config/load-google-maps {:canvas canvas
-                                                              :lat lat
-                                                              :lng lng
-                                                              :zoom 13}])))})))
+(defn gmap-inner [center coords]
+  (r/create-class
+   {:constructor (fn [this _props] 
+                   (set! ^js (.-mapCanvas this) (createRef)))
+    :reagent-render
+    (fn [] (let [this (r/current-component)]
+             [:div#map
+              [:div#map-canvas {:style {:height "400px"}
+                                :ref ^js (.-mapCanvas this)}]]))
+    :component-did-mount
+    (fn [^js this]
+      (dispatch [:maps/set-current-center center])
+      (dispatch [:map/update-map (clj->js (.. this -mapCanvas -current)) (clj->js coords)]))}))
 
-(defn gmap-outer []
-  (let [pos {:lat 31.4
-             :lng 31.72}]
-    [gmap-inner pos]))
+(defn gmap-outer [center]
+  (let [coords @(subscribe [:config.maps/coords center])
+        center @(subscribe [:config.maps/current-center])] 
+    [gmap-inner center coords]))

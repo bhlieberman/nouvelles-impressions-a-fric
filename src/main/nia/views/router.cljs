@@ -7,8 +7,8 @@
             [nia.views.parens-scroll :refer [parens-scroll]]))
 
 (defn router []
-  (let [current-route @(subscribe [:app.routing/current-route])
-        parens-depth @(subscribe [:app.impl/parens-depth])]
+  (let [current-route @(subscribe [:routing/current-route])
+        parens-depth @(subscribe [:poem/parens-depth])]
     [navbar
     {:children 
      [h-box

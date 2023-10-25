@@ -1,5 +1,6 @@
 (ns nia.views.cantos.two.thesis
-  (:require [re-com.core :refer [hyperlink v-box p title]]
+  (:require [nia.views.maps :refer [gmap-outer]]
+            [re-com.core :refer [hyperlink v-box p title]]
             [re-frame.core :refer [dispatch]]))
 
 (defn thesis []
@@ -30,4 +31,5 @@
       [p "It no longer exaggerated his silhouette,"]
       [p "A fact which causes one to forget for a moment, lost in meditation,"]
       [p "Egypt, its sun, its evenings, its sky."]
-      [:hr]]]]])
+      [:hr]
+      [gmap-outer :pyramids]]]]])
