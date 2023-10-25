@@ -1,5 +1,5 @@
 (ns nia.views.cantos.two.thesis
-  (:require [nia.views.maps :refer [gmap-outer]]
+  (:require [nia.views.maps :refer [react-google-map]]
             [re-com.core :refer [hyperlink v-box p title]]
             [re-frame.core :refer [dispatch]]))
 
@@ -32,4 +32,4 @@
       [p "A fact which causes one to forget for a moment, lost in meditation,"]
       [p "Egypt, its sun, its evenings, its sky."]
       [:hr]
-      [gmap-outer :pyramids]]]]])
+      [react-google-map :pyramids]]]]])

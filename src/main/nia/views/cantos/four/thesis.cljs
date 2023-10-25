@@ -1,5 +1,5 @@
 (ns nia.views.cantos.four.thesis
-  (:require [nia.views.maps :refer [gmap-outer]]
+  (:require [nia.views.maps :refer [react-google-map]]
             [re-com.core :refer [hyperlink p title v-box]]
             [re-frame.core :refer [dispatch]]))
 
@@ -27,4 +27,4 @@
                    :on-click #(dispatch [:routing/push-state :nia.routing.canto.four/one {:id 4}])}]] 
       [p "With its opaque foliage, lightly coloured stripes and fruits."]
       [:hr]
-      [gmap-outer :rosetta]]]]])
+      [react-google-map :rosetta]]]]])
