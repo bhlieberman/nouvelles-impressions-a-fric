@@ -1,5 +1,6 @@
 (ns nia.events.routing
-  (:require [nia.routing :refer [router]]
+  (:require [goog.dom :as gdom]
+            [nia.routing :refer [router]]
             [re-frame.core :as rf :refer [reg-event-fx reg-event-db reg-fx]]
             [reitit.frontend :refer [match-by-name]]
             [reitit.frontend.easy :as rfe]
@@ -8,14 +9,18 @@
 (reg-event-db
  :routing/navigated
  (fn [db [_ new-match]]
-   (let [old-match (:current-route db)
+   (let [old-match (:app.routing/current-route db)
          controllers (rfc/apply-controllers (:controllers old-match) new-match)]
-     (assoc db :current-route (assoc new-match :controllers controllers)))))
+     (assoc db :app.routing/current-route (assoc new-match :controllers controllers)))))
 
 (reg-event-fx
  :routing/push-state
  (fn [_ [_ route params]]
-   {:push-state [route params]}))
+   (let [center (get {"nia.routing.canto.one" :damietta
+                      "nia.routing.canto.two" :pyramids
+                      "nia.routing.canto.four" :rosetta} (namespace route))] 
+     {:push-state [route params] 
+      #_:fx #_[[:dispatch [:maps/set-current-center nil center]]]})))
 
 (reg-fx
  :push-state
@@ -25,7 +30,7 @@
 (reg-event-fx
  :routing/parens-click
  (fn [{:keys [db]} [_ canto depth]]
-   (let [new-route (get-in db [:parens-routes canto depth])
+   (let [new-route (get-in db [:app.routing.impl/parens-routes canto depth])
          match (match-by-name router new-route)]
      {:fx [[:dispatch [:routing/navigated match]]
            [:dispatch [:routing/push-state new-route (:path-params match)]]]})))

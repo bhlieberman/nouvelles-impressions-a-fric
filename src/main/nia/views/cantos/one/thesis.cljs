@@ -1,5 +1,5 @@
 (ns nia.views.cantos.one.thesis
-  (:require [nia.views.maps :refer [gmap-outer]]
+  (:require [nia.views.maps :refer [react-google-map]]
             [re-com.core :refer [hyperlink p title v-box]]
             [re-frame.core :refer [dispatch]]))
 
@@ -37,4 +37,4 @@
       [p "Likewise the proud menhir, the first cromlech"]
       [p "The dolmen beneath which the soil is always dry."]
       [:hr]
-      [gmap-outer]]]]])
+      [react-google-map :damietta]]]]])

@@ -1,22 +1,12 @@
 (ns nia.views.maps
-  (:require [goog.dom :as gdom]
-            [reagent.core :as r] 
-            [re-frame.core :refer [dispatch]]))
+  (:require [re-frame.core :refer [subscribe]]
+            ["@react-google-maps/api" :refer [GoogleMap]]))
 
-(defn gmap-inner []
-  (let [{:keys [lat lng]} (r/props (r/current-component))]
-    (r/create-class {:reagent-render
-                     (fn [] [:div#map 
-                             [:div#map-canvas {:style {:height "400px"}}]])
-                     :component-did-mount
-                     (fn [_]
-                       (let [canvas (gdom/getElement "map-canvas")]
-                         (dispatch [:config/load-google-maps {:canvas canvas
-                                                              :lat lat
-                                                              :lng lng
-                                                              :zoom 13}])))})))
-
-(defn gmap-outer []
-  (let [pos {:lat 31.4
-             :lng 31.72}]
-    [gmap-inner pos]))
+(defn react-google-map [center]
+  (let [coords @(subscribe [:config.maps/coords center])]
+    [:> GoogleMap
+     {:mapContainerStyle {:height "400px"
+                          :width "400px"}
+      :center coords
+      :zoom 13
+      :onLoad (fn [^js map] (js/console.log (.-center map)))}]))
