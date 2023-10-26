@@ -1,5 +1,5 @@
 (ns nia.views.home
-  (:require [clojure.edn :as edn]
+  (:require [clojure.edn :as edn] 
             [re-com.core :refer [at hyperlink hyperlink-href p title v-box]] 
             ["react" :refer [createRef]]
             [shadow.resource :refer [inline]]))

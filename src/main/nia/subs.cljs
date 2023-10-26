@@ -24,3 +24,7 @@
 (reg-sub
  :poem/parens-depth
  :-> :app.impl/parens-depth)
+
+(reg-sub
+ :image/url
+ :-> :image/url)

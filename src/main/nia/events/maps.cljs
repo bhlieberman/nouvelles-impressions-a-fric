@@ -1,8 +1,7 @@
 (ns nia.events.maps
-  (:require [goog.dom :as gdom]
-            [goog.object :as gobj]
+  (:require [goog.object :as gobj]
             [nia.config.maps :refer [api-key]]
-            [re-frame.core :refer [debug dispatch reg-cofx reg-event-db reg-event-fx reg-fx]]
+            [re-frame.core :refer [debug dispatch reg-event-db reg-event-fx reg-fx]]
             [shadow.cljs.modern :refer [js-await]]
             ["@googlemaps/js-api-loader" :refer [Loader]]))
 
@@ -16,11 +15,11 @@
  [debug]
  (fn [{:keys [db]} [_ canvas lat-lng]]
    (let [Map (get db :config.geo/map)
-         current-view? (:map/current-view db)] 
+         current-view? (:map/current-view db)]
      (if current-view?
        {:set-center [current-view? lat-lng]}
        {:db (assoc db :map/current-view (Map. canvas (clj->js {:center lat-lng
-                                                       :zoom 13})))}))))
+                                                               :zoom 13})))}))))
 
 (reg-fx
  :set-center
@@ -28,8 +27,8 @@
    (.setCenter map lat-lng)))
 
 (reg-event-db
- :maps/set-current-center 
- (fn [db [_ new-center]] 
+ :maps/set-current-center
+ (fn [db [_ new-center]]
    (assoc db :config.maps/current-center new-center)))
 
 (reg-event-fx

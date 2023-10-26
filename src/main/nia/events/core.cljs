@@ -6,7 +6,8 @@
  :app/initialize
  (fn [_ _]
    {:db app-db
-    :fx [[:dispatch [:config/load-google-maps]]]}))
+    :fx [[:dispatch [:config/load-google-maps]]
+         [:dispatch [:config.storage/load-blob-client "snowman.jpeg"]]]}))
 
 (reg-event-db
  :poem/change-current-footnote
