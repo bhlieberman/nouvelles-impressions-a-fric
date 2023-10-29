@@ -43,11 +43,12 @@
   :blobs {:target :esm
           :output-dir "public/js/blobs"
           :asset-path "/js/blobs"
-          :modules {:core {:init-fn nia.app/init}
-                    :blobs {:entries [nia.config.storage]
-                            :depends-on #{:core}}}
-          :js-options {:js-provider :import
-                       :js-package-dirs ["public/node_modules"]}
+          :modules {:base {:entries []}
+                    :core {:init-fn nia.app/init
+                           :depends-on #{:base}}
+                    :blobs {:entries [nia.events.storage]
+                            :depends-on #{:base}}}
+          :js-options {:js-provider :import}
           :dev {:compiler-options {:warnings {:fn-deprecated false}}}
           :release
           {:compiler-options {:optimizations :advanced}
@@ -55,7 +56,7 @@
            {:ns-aliases
             {day8.re-frame.tracing day8.re-frame.tracing-stubs}}}
           :closure-defines {nia.config.storage/sas-url #shadow/env "AZURE_BLOB_NIA_URL"}
-          :build-hooks [(nia.build/run-vite)]}
+          :build-hooks [#_(nia.build/run-vite) (shadow.cljs.build-report/hook)]}
   :portfolio {:target :esm
         :output-dir "dev-resources/js"
         :asset-path "/js"

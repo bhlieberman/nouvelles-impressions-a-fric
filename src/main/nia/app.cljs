@@ -1,10 +1,9 @@
 (ns nia.app
   (:require [goog.dom :as gdom]
             [nia.config.maps] 
-            #_[nia.config.storage]
-            [nia.events.core] 
+            [nia.events.core]
             [nia.events.maps] 
-            [nia.events.routing] 
+            [nia.events.routing]  
             [nia.subs] 
             [nia.routing :refer [init-routes!]]
             [nia.views.router :refer [router]]
