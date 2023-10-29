@@ -1,8 +1,10 @@
 (ns nia.build
   (:require [clojure.java.shell :refer [sh]]))
 
-(defn run-vite
-  {:shadow.build/stage :compile-finish}
-  [build-state & args]
-  (sh "npx" "vite" "optimize" "--base" "public")
-  build-state)
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
+(defn run-vite 
+  {:shadow.build/stage :flush}
+  [build-state]
+  (let [vite (sh "npx" "vite" "build" "--base" "public" "--mode" "dev")]
+    (println (:out vite))
+    build-state))
