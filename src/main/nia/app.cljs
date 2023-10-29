@@ -1,7 +1,7 @@
 (ns nia.app
   (:require [goog.dom :as gdom]
             [nia.config.maps] 
-            [nia.config.storage]
+            #_[nia.config.storage]
             [nia.events.core] 
             [nia.events.maps] 
             [nia.events.routing] 
