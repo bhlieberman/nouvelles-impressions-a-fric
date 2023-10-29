@@ -1,6 +1,8 @@
 node_modules/
-public/js/blobs/cljs-runtime
+public/dist
 public/js/cljs-runtime
+public/js/blobs/
+public/js/main.js
 public/client
 dev-resources/js
 
