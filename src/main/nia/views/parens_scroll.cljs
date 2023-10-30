@@ -36,7 +36,7 @@
     [box
      :src (at)
      :attr {:on-click (fn []
-                        (when (<= 1 @depth 5)
+                        (when (<= 1 @depth 4)
                           (let [new-depth (swap! depth inc)]
                             (dispatch [:routing/parens-click canto new-depth]))))}
      :child
