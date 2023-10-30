@@ -5,6 +5,7 @@
 (defn run-vite 
   {:shadow.build/stage :flush}
   [build-state]
-  (let [vite (sh "npx" "vite" "build" "--base" "public" "--mode" "dev")]
+  (let [vite (sh "npx" "vite" "build" "public" "--mode" "development"
+                 "--config" "vite.config.js")]
     (println (:out vite))
     build-state))
