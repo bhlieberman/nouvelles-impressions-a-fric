@@ -1,5 +1,7 @@
 (ns nia.events.core
   (:require [nia.config.app-db :refer [app-db]]
+            [nia.events.maps]
+            [nia.events.routing] 
             [re-frame.core :as rf :refer [debug reg-event-db reg-event-fx]]))
 
 (reg-event-fx

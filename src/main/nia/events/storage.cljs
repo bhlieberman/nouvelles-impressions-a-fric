@@ -7,7 +7,7 @@
 (reg-cofx
  :blob-service-client
  (fn [cofx]
-   (assoc cofx :blob-service-client (BlobServiceClient. (str sas-url "?sp=r&st=2023-10-26T23:44:46Z&se=2023-10-27T07:44:46Z&spr=https&sv=2022-11-02&sr=c&sig=WfrPWmYY8cyra2TBvXRXVJlwJxKOtP4VtQfhmlZCtD4%3D")))))
+   (assoc cofx :blob-service-client (BlobServiceClient. sas-url))))
 
 (reg-event-db
  :images/create-url
