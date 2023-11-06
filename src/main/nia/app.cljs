@@ -1,11 +1,9 @@
 (ns nia.app
-  (:require [goog.dom :as gdom]
-            [nia.config.maps] 
+  (:require [goog.dom :as gdom] 
             [nia.subs] 
             [nia.views.router :refer [router]]
             [reagent.core :as r]
-            [reagent.dom.client :refer [create-root]]
-            [re-frame.core :refer [dispatch-sync]]))
+            [reagent.dom.client :refer [create-root]]))
 
 (defonce root (create-root (gdom/getElement "root")))
 
@@ -14,5 +12,5 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn init [] 
-  (dispatch-sync [:app/initialize])
+  
   (render!))
