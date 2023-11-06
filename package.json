@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "shadow:watch": "shadow-cljs watch blobs",
-    "shadow:release": "shadow-cljs release blobs",
+    "shadow:release": "shadow-cljs release app",
     "vite:watch": "vite build public --mode development --config ./vite.config.js",
     "vite:release": "vite build public --config ./vite.config.js",
     "dev": "run-s -l *:watch",

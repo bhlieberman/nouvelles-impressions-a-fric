@@ -23,7 +23,14 @@
  {:app {:target :esm
         :output-dir "public/js"
         :asset-path "/js"
-        :modules {:main {:init-fn nia.app/init}} 
+        :modules {:base {:entries []}
+                  :core {:init-fn nia.app/init
+                         :depends-on #{:base :views}}
+                  :views {:entries [nia.subs nia.events.core nia.routing]
+                          :init-fn nia.routing/init-routes!
+                          :depends-on #{:base :storage}}
+                  :storage {:entries [nia.events.storage]
+                            :depends-on #{:base}}} 
         :js-options {:js-provider :import}
         :devtools
         {:preloads [day8.re-frame-10x.preload]}

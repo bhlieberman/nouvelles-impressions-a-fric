@@ -4,10 +4,10 @@ export default {
         {
             output: {
                 manualChunks: {
-                    "base": ["public/js/blobs/base.js"],
-                    "storage": ["public/js/blobs/storage.js"],
-                    "views": ["public/js/blobs/views.js"],
-                    "core": ["public/js/blobs/core.js"],
+                    "base": ["public/js/base.js"],
+                    "storage": ["public/js/storage.js"],
+                    "views": ["public/js/views.js"],
+                    "core": ["public/js/core.js"],
                 }
             }
         },
