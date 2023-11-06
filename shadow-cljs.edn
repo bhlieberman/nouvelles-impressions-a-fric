@@ -13,7 +13,7 @@
  [[cljs-ajax "0.8.4"]
   [reagent "1.2.0"]
   [re-com "2.13.2"]
-  [re-frame "1.3.0"]
+  [re-frame "1.4.0"]
   [day8.re-frame/re-frame-10x "1.8.1"]
   [day8.re-frame/tracing "0.6.2"]
   [metosin/reitit-frontend "0.7.0-alpha7"]
@@ -38,15 +38,15 @@
          :build-options
          {:ns-aliases
           {day8.re-frame.tracing day8.re-frame.tracing-stubs}}}
-        :closure-defines {nia.config.maps/api-key #shadow/env "goog_maps_key"
-                          nia.config.storage/sas-url #shadow/env "AZURE_BLOB_NIA_URL"}}
+        :closure-defines {nia.config.storage/sas-url #shadow/env "AZURE_BLOB_NIA_URL"
+                          nia.config.storage/sas-token #shadow/env "AZURE_BLOB_SAS_TOKEN"}}
   :blobs {:target :esm
           :output-dir "public/js/blobs"
           :asset-path "/js/blobs"
           :modules {:base {:entries []}
                     :core {:init-fn nia.app/init
                            :depends-on #{:base :views}}
-                    :views {:entries [nia.events.core nia.routing]
+                    :views {:entries [nia.subs nia.events.core nia.routing]
                             :init-fn nia.routing/init-routes! 
                             :depends-on #{:base :storage}}
                     :storage {:entries [nia.events.storage]
@@ -58,8 +58,8 @@
            :build-options
            {:ns-aliases
             {day8.re-frame.tracing day8.re-frame.tracing-stubs}}}
-          :closure-defines {nia.config.storage/sas-url #shadow/env "AZURE_BLOB_NIA_URL"}
-          :build-hooks [(nia.build/run-vite) #_(shadow.cljs.build-report/hook)]} 
+          :closure-defines {nia.config.storage/sas-url #shadow/env "AZURE_BLOB_NIA_URL"
+                            nia.config.storage/sas-token #shadow/env "AZURE_BLOB_SAS_TOKEN"}} 
   :portfolio {:target :esm
               :output-dir "dev-resources/js"
               :asset-path "/js"
