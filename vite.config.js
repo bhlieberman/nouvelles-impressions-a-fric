@@ -5,9 +5,9 @@ export default {
             output: {
                 manualChunks: {
                     "base": ["public/js/blobs/base.js"],
-                    "core": ["public/js/blobs/core.js"],
+                    "storage": ["public/js/blobs/storage.js"],
                     "views": ["public/js/blobs/views.js"],
-                    "storage": ["public/js/blobs/storage.js"]
+                    "core": ["public/js/blobs/core.js"],
                 }
             }
         },
