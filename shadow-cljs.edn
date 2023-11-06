@@ -13,7 +13,7 @@
  [[cljs-ajax "0.8.4"]
   [reagent "1.2.0"]
   [re-com "2.13.2"]
-  [re-frame "1.3.0"]
+  [re-frame "1.4.0"]
   [day8.re-frame/re-frame-10x "1.8.1"]
   [day8.re-frame/tracing "0.6.2"]
   [metosin/reitit-frontend "0.7.0-alpha7"]
@@ -28,7 +28,8 @@
         :devtools
         {:preloads [day8.re-frame-10x.preload]}
         :dev
-        {:closure-defines
+        {:compiler-options {:warnings {:fn-deprecated false}}
+         :closure-defines
          {re-frame.trace.trace-enabled?        true
           day8.re-frame.tracing.trace-enabled? true
           re-com.config/root-url-for-compiler-output true}}
@@ -37,9 +38,29 @@
          :build-options
          {:ns-aliases
           {day8.re-frame.tracing day8.re-frame.tracing-stubs}}}
-        :closure-defines {nia.config.maps/api-key #shadow/env "goog_maps_key"
-                          nia.config.storage/sas-url #shadow/env "AZURE_BLOB_NIA_URL"}}
-  :dev {:target :esm
-        :output-dir "dev-resources/js"
-        :asset-path "/js"
-        :modules {:main {:init-fn nia.portfolio/init}}}}}
+        :closure-defines {nia.config.storage/sas-url #shadow/env "AZURE_BLOB_NIA_URL"
+                          nia.config.storage/sas-token #shadow/env "AZURE_BLOB_SAS_TOKEN"}}
+  :blobs {:target :esm
+          :output-dir "public/js/blobs"
+          :asset-path "/js/blobs"
+          :modules {:base {:entries []}
+                    :core {:init-fn nia.app/init
+                           :depends-on #{:base :views}}
+                    :views {:entries [nia.subs nia.events.core nia.routing]
+                            :init-fn nia.routing/init-routes! 
+                            :depends-on #{:base :storage}}
+                    :storage {:entries [nia.events.storage]
+                              :depends-on #{:base}}}
+          :js-options {:js-provider :import}
+          :dev {:compiler-options {:warnings {:fn-deprecated false}}}
+          :release
+          {:compiler-options {:optimizations :advanced}
+           :build-options
+           {:ns-aliases
+            {day8.re-frame.tracing day8.re-frame.tracing-stubs}}}
+          :closure-defines {nia.config.storage/sas-url #shadow/env "AZURE_BLOB_NIA_URL"
+                            nia.config.storage/sas-token #shadow/env "AZURE_BLOB_SAS_TOKEN"}} 
+  :portfolio {:target :esm
+              :output-dir "dev-resources/js"
+              :asset-path "/js"
+              :modules {:main {:init-fn nia.portfolio/init}}}}}

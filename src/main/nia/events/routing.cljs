@@ -1,6 +1,5 @@
 (ns nia.events.routing
-  (:require [goog.dom :as gdom]
-            [nia.routing :refer [router]]
+  (:require [nia.routing :refer [router]]
             [re-frame.core :as rf :refer [reg-event-fx reg-event-db reg-fx]]
             [reitit.frontend :refer [match-by-name]]
             [reitit.frontend.easy :as rfe]
@@ -16,11 +15,8 @@
 (reg-event-fx
  :routing/push-state
  (fn [_ [_ route params]]
-   (let [center (get {"nia.routing.canto.one" :damietta
-                      "nia.routing.canto.two" :pyramids
-                      "nia.routing.canto.four" :rosetta} (namespace route))] 
-     {:push-state [route params] 
-      #_:fx #_[[:dispatch [:maps/set-current-center nil center]]]})))
+   {:push-state [route params]
+    #_:fx #_[[:dispatch [:maps/set-current-center nil center]]]}))
 
 (reg-fx
  :push-state
