@@ -15,8 +15,7 @@
 (reg-event-fx
  :routing/push-state
  (fn [_ [_ route params]]
-   {:push-state [route params]
-    #_:fx #_[[:dispatch [:maps/set-current-center nil center]]]}))
+   {:push-state [route params]}))
 
 (reg-fx
  :push-state

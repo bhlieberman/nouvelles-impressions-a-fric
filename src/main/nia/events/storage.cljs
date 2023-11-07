@@ -1,58 +1,53 @@
 (ns nia.events.storage
-  (:require [nia.config.storage :refer [sas-url sas-token]]
-            [re-frame.alpha :refer [reg-flow]]
-            [re-frame.core :refer [dispatch inject-cofx reg-cofx reg-event-db reg-event-fx reg-fx]]
-            [shadow.cljs.modern :refer [js-await]]
-            ["@azure/storage-blob" :refer [BlobServiceClient]]))
-
-(reg-flow
- {:id ::blob-flow
-  :inputs {:image-url [:image/url]
-           :blob-client [:blob-client]}
-  :output (fn get-new-image [_ {:keys [image-url ^js blob-client]}]
-            (let [^js client (.getBlobClient blob-client image-url)
-                  url (atom nil)]
-              (js-await [^js blob (.download client)]
-                        (js-await [^js body (.-blobBody blob)]
-                                  (let [^js obj-url (js/URL.createObjectURL body)]
-                                    (reset! url obj-url))))
-              url))
-  :path [:canto :one :image]})
-
-(reg-cofx
- :blob-service-client
- (fn [cofx]
-   (assoc cofx :blob-service-client (BlobServiceClient. (str sas-url "?" sas-token)))))
-
-(reg-event-db
- :images/create-url
- (fn [db [_ url]]
-   (assoc db :image/url url)))
+  #_{:clj-kondo/ignore [:unused-namespace]}
+  (:require [ajax.core :as ajax]
+            [ajax.protocols :as p]
+            #_[nia.config.storage :refer [sas-url sas-token]] 
+            [re-frame.core :refer [path reg-event-fx reg-fx]]))
 
 (reg-event-fx
- :config.storage/load-blob-client
- [(inject-cofx :blob-service-client)]
- (fn [{:keys [^js blob-service-client db]} _]
-   (let [^js container-client (.getContainerClient blob-service-client "nia")
-         images (get db :images)]
-     {:db (assoc db :blob-client container-client)
-      :fx (into []
-            (for [image (keys images)]
-              [:dispatch [:image/get-blob image]]))})))
+ :azure/get-blob
+ (fn [_ [_ url]]
+   {:http-xhrio {:method :get
+                 :uri (str "https://roussel.blob.core.windows.net/nia/" url "?sp=racwdli&st=2023-11-07T15:23:34Z&se=2023-11-07T23:23:34Z&spr=https&sv=2022-11-02&sr=c&sig=NHSzLS%2FkfMAl%2BirtEJN0jmkGKTp5mUC8ZnNkL%2F%2BthFQ%3D")
+                 :timeout 8000
+                 :response-format {:content-type "image/jpeg"
+                                   :description "JPEG image"
+                                   :read p/-body
+                                   :type :blob}
+                 :on-success [:blob/create-obj-url]
+                 :on-failure [:report-azure-error]}}))
 
-(reg-event-db
- :image/get-blob
- (fn [db [_ image]]
-   (let [^js blob-client (get db :blob-client)]
-     (try (let [^js blob-client (.getBlobClient blob-client image)]
-            (js-await [^js blob (.download blob-client)]
-                      (js-await [^js body (.-blobBody blob)]
-                                (let [obj-url (js/URL.createObjectURL body)]
-                                  (dispatch [:image/set-url [image obj-url]])))))
-          (catch js/Error _))
-     db)))
+(reg-event-fx
+ :blob/create-obj-url
+ (fn [{:keys [db]} [_ response]]
+   {:db (update db :images/urls conj (js/URL.createObjectURL response))
+    :log response}))
 
-(reg-event-db
- :image/set-url
- (fn [db [_ [image-name url]]]
-   (update db :images assoc image-name url)))
+(reg-event-fx
+ :images/revoke-obj-urls
+ [(path :images/urls)]
+ (fn [urls _]
+   {:revoke-urls urls}))
+
+(reg-fx
+ :revoke-urls
+ (fn [urls]
+   (doseq [url urls]
+     (when goog.DEBUG (js/console.log "revoking object URL from resource: " url))
+     (js/URL.revokeObjectURL url))))
+
+(reg-fx
+ :log
+ (fn [resp]
+   (js/console.log resp)))
+
+(reg-event-fx
+ :report-azure-error
+ (fn [_ [_ error]]
+   {:azure error}))
+
+(reg-fx
+ :azure
+ (fn [err]
+   (js/console.error err)))

@@ -44,4 +44,5 @@
              :images {"snowman.jpeg" nil "man-w-book.jpeg" nil 
                       "shutter.jpeg" nil "soldier.jpeg" nil
                       "street.jpeg" nil "tree.jpeg" nil
-                      "astronomer.jpeg" nil "mountaineer.jpeg" nil}})
+                      "astronomer.jpeg" nil "mountaineer.jpeg" nil}
+             :images/urls []})

@@ -19,4 +19,4 @@
 
 (reg-sub
  :images
- :-> #(-> % :images vals))
+ :-> :images/urls)
