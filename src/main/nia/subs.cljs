@@ -16,3 +16,7 @@
 (reg-sub
  :image/url
  :-> :image/url)
+
+(reg-sub
+ :images
+ :-> #(-> % :images vals))

@@ -70,4 +70,5 @@
   :portfolio {:target :esm
               :output-dir "dev-resources/js"
               :asset-path "/js"
+              :compiler-options {:warnings {:fn-deprecated false}}
               :modules {:main {:init-fn nia.portfolio/init}}}}}

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "shadow:watch": "shadow-cljs watch blobs",
+    "shadow:watch": "shadow-cljs watch app",
     "shadow:release": "shadow-cljs release app",
     "vite:watch": "vite build public --mode development --config ./vite.config.js",
     "vite:release": "vite build public --config ./vite.config.js",
@@ -19,6 +19,7 @@
     "@azure/storage-blob": "^12.16.0",
     "axe-core": "4.7.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0"
   }
 }

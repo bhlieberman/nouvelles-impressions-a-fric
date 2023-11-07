@@ -33,23 +33,26 @@
  :config.storage/load-blob-client
  [(inject-cofx :blob-service-client)]
  (fn [{:keys [^js blob-service-client db]} _]
-   (let [^js container-client (.getContainerClient blob-service-client "nia")]
+   (let [^js container-client (.getContainerClient blob-service-client "nia")
+         images (get db :images)]
      {:db (assoc db :blob-client container-client)
-      :fx [[:dispatch [:storage/get-new-url "snowman.jpeg"]]]})))
+      :fx (into []
+            (for [image (keys images)]
+              [:dispatch [:image/get-blob image]]))})))
 
-(reg-event-fx
- :storage/get-new-url
- (fn [{:keys [db]} [_ url]]
-   (let [blob-client (:blob-client db)]
-     {:update-image-url [blob-client url]})))
+(reg-event-db
+ :image/get-blob
+ (fn [db [_ image]]
+   (let [^js blob-client (get db :blob-client)]
+     (try (let [^js blob-client (.getBlobClient blob-client image)]
+            (js-await [^js blob (.download blob-client)]
+                      (js-await [^js body (.-blobBody blob)]
+                                (let [obj-url (js/URL.createObjectURL body)]
+                                  (dispatch [:image/set-url [image obj-url]])))))
+          (catch js/Error _))
+     db)))
 
-(reg-fx
- :update-image-url
- (fn [[^js client img-name]]
-   (try (let [^js blob-client (.getBlobClient client img-name)]
-          (js-await [^js blob (.download blob-client)]
-                    (js-await [^js body (.-blobBody blob)]
-                              (let [^js obj-url (js/URL.createObjectURL body)]
-                                (dispatch [:images/create-url obj-url])))))
-        (catch js/Error e
-          (js/console.error e)))))
+(reg-event-db
+ :image/set-url
+ (fn [db [_ [image-name url]]]
+   (update db :images assoc image-name url)))

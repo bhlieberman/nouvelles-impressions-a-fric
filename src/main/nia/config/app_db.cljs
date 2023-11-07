@@ -41,10 +41,7 @@
                                                   :nia.routing.canto.three/one
                                                   :nia.routing.canto.four/one
                                                   :nia.routing.canto.five/one]}
-             :config.maps/coords {:damietta {:lat 31.4
-                                             :lng 31.72}
-                                  :pyramids {:lat 30.0131
-                                             :lng 31.2089}
-                                  :rosetta {:lat 31.404444
-                                            :lng 30.416389}}
-             :config.maps/current-center :damietta})
+             :images {"snowman.jpeg" nil "man-w-book.jpeg" nil 
+                      "shutter.jpeg" nil "soldier.jpeg" nil
+                      "street.jpeg" nil "tree.jpeg" nil
+                      "astronomer.jpeg" nil "mountaineer.jpeg" nil}})
