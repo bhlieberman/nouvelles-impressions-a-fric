@@ -14,7 +14,7 @@
                [[p "Just like the occupant, in a tall building,"]
                 [p "Of a bright apartment giving onto the top landing, knows"]
                 [p "- A humble photographer he, well-skilled in"
-                 [hyperlink {:on-click #(dispatch [:routing/push-state :nia.routing.canto.one/two {:path-params {:id 1}}])
+                 [hyperlink {:on-click #(dispatch [:routing/push-state :nia.routing.canto/one {:location :two}])
                              :class "block m-2"
                              :style {:display :inline-block}
                              :label " painting out"}]]

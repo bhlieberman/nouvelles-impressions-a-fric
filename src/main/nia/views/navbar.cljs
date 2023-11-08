@@ -30,17 +30,23 @@
                       :label "Canto I"
                       :on-click (fn []
                                   (reset! active-route? :canto-i)
-                                  (dispatch [:routing/push-state :nia.routing.canto.one/thesis {:path-params {:id 1}}]))}] 
+                                  (dispatch [:routing/push-state :nia.routing.canto/one {:location :thesis}]))}] 
           [hyperlink {:src (at)
                       :class (classname :canto-ii)
                       :label "Canto II"
                       :on-click (fn []
                                   (reset! active-route? :canto-ii)
-                                  (dispatch [:routing/push-state :nia.routing.canto.two/thesis {:path-params {:id 2}}]))}]
+                                  (dispatch [:routing/push-state :nia.routing.canto/two {:location :thesis}]))}]
           [hyperlink {:src (at)
                       :class (classname :canto-iv)  
                       :label "Canto IV"
                       :on-click (fn []
                                   (reset! active-route? :canto-iv)
-                                  (dispatch [:routing/push-state :nia.routing.canto.four/thesis {:path-params {:id 4}}]))}]]]]
+                                  (dispatch [:routing/push-state :nia.routing.canto/four {:location :thesis}]))}]
+          [hyperlink {:src (at)
+                      :class (str (classname :images) " disabled")
+                      :label "Images"
+                      :on-click (fn []
+                                  (reset! active-route? :images)
+                                  (dispatch [:routing/push-state :nia.routing.images/home nil]))}]]]]
        children])))

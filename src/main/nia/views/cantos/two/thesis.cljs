@@ -21,7 +21,7 @@
       [p "At the time of the overcoat - that full-length greatcoat -"]
       [hyperlink {:label "from which we can deduce"
                   :style {:margin "0px 0px 9.8px"}
-                  :on-click #(dispatch [:routing/push-state :nia.routing.canto.two/one {:path-params {:id 2}}])}]
+                  :on-click #(dispatch [:routing/push-state :nia.routing.canto/two {:location :one}])}]
       [p "And the little hat - "]
       [p "Intimidating rays of power emanating in all directions -"]
       [p "Grey overcoat, black hat (the image of which irresistibly evokes"]

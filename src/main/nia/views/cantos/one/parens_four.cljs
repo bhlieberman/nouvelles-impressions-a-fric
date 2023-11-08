@@ -30,7 +30,7 @@
 
            [p "That fop who with "]
            [hyperlink {:style {:margin "0px 0px 9.8px"}
-                       :on-click #(dispatch [:routing/push-state :nia.routing.canto.one/five {:path-params {:id 1}}])
+                       :on-click #(dispatch [:routing/push-state :nia.routing.canto/one {:location :five}])
                        :label "one snooty glance"}]
            [p "Enrages a poor uniformed"]
            [p "Hotel flunkey who has just,"]

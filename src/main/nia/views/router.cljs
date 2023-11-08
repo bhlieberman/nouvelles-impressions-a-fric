@@ -1,28 +1,26 @@
 (ns nia.views.router
-  (:require [clojure.string :as str]
-            [reagent.core :as r]
-            [re-frame.core :refer [subscribe]]
+  (:require [re-frame.core :refer [subscribe]]
             [re-com.core :refer [h-box]]
             [nia.views.navbar :refer [navbar]]
-            [nia.views.parens-scroll :refer [parens-scroll]]))
+            [nia.views.cantos.one.parent :as one]
+            [nia.views.cantos.two.parent :as two]
+            [nia.views.cantos.four.parent :as four]
+            [nia.views.images :as images]
+            [nia.views.home :refer [introduction]]))
 
 (defn router []
-  (let [current-route @(subscribe [:routing/current-route])
-        parens-depth @(subscribe [:poem/parens-depth])]
+  (let [route-name @(subscribe [:routing/route-name])
+        location @(subscribe [:routing/location]) ]
     [navbar
      {:children
       [h-box
        :align :center
        :justify :center
        :children
-       [(when current-route
-          (let [{view :view
-                 route-name :name} (:data current-route)
-                path (:path current-route)
-                canto (some-> path (str/split #"/") (nth 3 "") parse-long)]
-            (if-let [parens (some #{(name route-name)} #{"one" "two" "three" "four" "five"})]
-              (let [depth (get parens-depth parens)]
-                [parens-scroll {:children [view]
-                                :canto canto
-                                :depth (r/atom depth)}])
-              [view])))]]}]))
+       [(case route-name
+          :nia.routing/home [introduction]
+          :nia.routing.canto/one [one/parent location]
+          :nia.routing.canto/two [two/parent location]
+          :nia.routing.canto/four [four/parent location]
+          :nia.routing.images/home [images/show-image]
+          [introduction])]]}]))
