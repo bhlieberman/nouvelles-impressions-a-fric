@@ -16,7 +16,7 @@
                 [p "A law which will consecrate him to immortality;"]
                 [p "From a fable or tale, a moral;"]
                 [p "From a thin scarecrow,"]
-                [hyperlink {:on-click #(dispatch [:routing/push-state :nia.routing.canto.two/two {:id 2}])
+                [hyperlink {:on-click #(dispatch [:routing/push-state :nia.routing.canto/two {:location :two}])
                             :label " a simple cross"
                             :style {:display :inline-block}}]
                 [p "which stands"]

@@ -23,6 +23,6 @@
       [p "With flowers, birds' wings, flashes of light, lush green plants,"]
       [p "One of which would suffice for twenty of our "
        [hyperlink {:label "salons"
-                   :on-click #(dispatch [:routing/push-state :nia.routing.canto.four/one {:id 4}])}]]
+                   :on-click #(dispatch [:routing/push-state :nia.routing.canto/four {:location :one}])}]]
       [p "With its opaque foliage, lightly coloured stripes and fruits."]
       [:hr]]]]])

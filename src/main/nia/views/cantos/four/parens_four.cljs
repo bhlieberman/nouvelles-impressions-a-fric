@@ -82,7 +82,7 @@
         [p "Followed by fervent prayers to God to bless him,"]
         [p "The man with a cold; "
          [hyperlink {:label "the sacred flame of genius"
-                     :on-click #(dispatch [:routing/push-state :nia.routing.canto.four/five {:id 4}])}]]
+                     :on-click #(dispatch [:routing/push-state :nia.routing.canto/four {:location :five}])}]]
         [p "Dies when its possessor grows senile"]
         [p [:b.text-primary "((((("]
          "A flame which, however big this name or that pseudonym,"]

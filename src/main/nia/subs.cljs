@@ -6,12 +6,18 @@
  :-> :app.routing/current-route)
 
 (reg-sub
- :poem/display-current-footnote
- :-> :current-footnote)
+ :routing/route-name
+ :<- [:routing/current-route]
+ :-> #(-> % :data :name))
 
 (reg-sub
- :poem/parens-depth
- :-> :app.impl/parens-depth)
+ :routing/location
+ :<- [:routing/current-route]
+ :-> #(-> % :path-params :location))
+
+(reg-sub
+ :poem/display-current-footnote
+ :-> :current-footnote)
 
 (reg-sub
  :image/url

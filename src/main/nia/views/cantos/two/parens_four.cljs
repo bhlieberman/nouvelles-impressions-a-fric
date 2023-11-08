@@ -39,7 +39,7 @@
              [p "Sees his faults naked before him, his habits, his tastes,"]
              [p "When to his complacent eyes they seem "
               [hyperlink {:label "diminished,"
-                          :on-click #(dispatch [:routing/push-state :nia.routing.canto.two/five {:id 2}])}]]
+                          :on-click #(dispatch [:routing/push-state :nia.routing.canto/two {:location :five}])}]]
              [p "As though, choosing an opportune moment,"]
              [p "A spell had been cast to make him liable"]
              [p "To mistake:- the apparatus invented by Franklin"]

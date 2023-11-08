@@ -16,7 +16,7 @@
                            [[p "When any individual, obsessed with his own ego,"]
                             [p "Stiffens and strikes a conventionally aggressive pose,"]
                             [hyperlink {:style {:margin "0px 0px 9.8px"}
-                                        :on-click #(dispatch [:routing/push-state :nia.routing.canto.one/four {:path-params {:id 1}}])
+                                        :on-click #(dispatch [:routing/push-state :nia.routing.canto/one {:location :four}])
                                         :label "- Wondering,"}]
                             [p "for with every breath he moves slightly,"]
                             [p "If on the plate, beneath the red light,"]

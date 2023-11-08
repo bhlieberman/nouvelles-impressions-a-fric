@@ -22,7 +22,7 @@
     [p "Gets used to the idea that others are being preferred;"]
     [p 
      [hyperlink {:label "The astronomer"
-                 :on-click #(dispatch [:routing/push-state :nia.routing.canto.four/four {:id 4}])}]]
+                 :on-click #(dispatch [:routing/push-state :nia.routing.canto/four {:location :four}])}]]
     [p "Gets used to the vastness of space"]
     [p "Where light always runs in a straight line;"]
     [p "The dumb man to his slate, irritating to whiten;"]]])

@@ -8,7 +8,7 @@
 (reg-event-fx
  :app/initialize
  (fn [_ _]
-   {:db app-db
+   {:db app-db 
     :fx (into []
               (for [url (keys (get app-db :images))]
                 [:dispatch [:azure/get-blob url]]))}))
@@ -23,4 +23,6 @@
   (js/console.log "initializing events ns")
   (dispatch-sync [:app/initialize]))
 
-((fn/once init-module!))
+(def init! (fn/once init-module!))
+
+(init!)

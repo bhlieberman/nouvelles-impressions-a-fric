@@ -30,7 +30,7 @@
       [p "That name whose bearer, though crushed, is so proud of"]
       [hyperlink {:label "That he knows by heart, faultlessly,"
                   :style {:margin "0px 0px 9.8px"}
-                  :on-click #(dispatch [:routing/push-state :nia.routing.canto.one/one {:path-params {:id 1}}])}]
+                  :on-click #(dispatch [:routing/push-state :nia.routing.canto/one {:location :one}])}]
       [p "- Roots, trunks, boughs, connecting branches -"]
       [p "His family tree; the cathedrals eroded by time;"]
       [p "Likewise the proud menhir, the first cromlech"]
