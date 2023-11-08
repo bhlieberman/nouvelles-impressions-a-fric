@@ -1,6 +1,5 @@
 (ns nia.views.cantos.two.thesis
-  (:require [nia.views.images :refer [show-image]] 
-            [re-com.core :refer [hyperlink v-box p title]]
+  (:require [re-com.core :refer [hyperlink v-box p title]]
             [re-frame.core :refer [dispatch]]))
 
 (defn thesis []
@@ -31,5 +30,4 @@
       [p "It no longer exaggerated his silhouette,"]
       [p "A fact which causes one to forget for a moment, lost in meditation,"]
       [p "Egypt, its sun, its evenings, its sky."]
-      [:hr] 
-      [show-image]]]]])
+      [:hr]]]]])

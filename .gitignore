@@ -1,6 +1,5 @@
 node_modules/
 public/js/cljs-runtime
-public/js/
 public/dist
 public/js/main.js
 public/client
