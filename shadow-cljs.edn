@@ -10,7 +10,8 @@
             8082 "public/dist"}
 
  :dependencies
- [[cljs-ajax "0.8.4"]
+ [[akiroz.re-frame/storage "0.1.4"]
+  [cljs-ajax "0.8.4"]
   [reagent "1.2.0"]
   [re-com "2.13.2"]
   [re-frame "1.4.0"]

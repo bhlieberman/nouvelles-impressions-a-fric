@@ -2,6 +2,7 @@
   (:require [shadow.resource :as rs]))
 
 (def app-db {:app.routing/current-route nil
+             :app.user/history [] ;; perhaps every few clicks triggers a LocalStorage write?
              :cantos/footnotes {1 []
                                 2 []
                                 4 [(rs/inline "four_four_one.txt")
@@ -9,15 +10,7 @@
                                    (rs/inline "four_four_three.txt")
                                    (rs/inline "four_four_four.txt")
                                    (rs/inline "four_four_five.txt")]}
-             :poem/traversal-type :depth
-             :app.routing/breadth-first {:theses [:nia.routing.canto.one/thesis
-                                                  :nia.routing.canto.two/thesis
-                                                  :nia.routing.canto.four/thesis]
-                                         :parens [:nia.routing.canto.one/one
-                                                  :nia.routing.canto.two/one
-                                                  :nia.routing.canto.three/one
-                                                  :nia.routing.canto.four/one
-                                                  :nia.routing.canto.five/one]}
+             :poem/traversal-type :depth 
              :images {"snowman.jpeg" nil "man-w-book.jpeg" nil 
                       "shutter.jpeg" nil "soldier.jpeg" nil
                       "street.jpeg" nil "tree.jpeg" nil

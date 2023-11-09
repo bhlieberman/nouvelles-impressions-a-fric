@@ -9,7 +9,7 @@
  :azure/get-blob
  (fn [_ [_ resource-name]]
    {:http-xhrio {:method :get
-                 :uri (str sas-url "/" resource-name "?" sas-token)
+                 :uri (str sas-url "nia" "/" resource-name "?" sas-token)
                  :timeout 8000
                  :response-format {:content-type "image/jpeg"
                                    :description "JPEG image"

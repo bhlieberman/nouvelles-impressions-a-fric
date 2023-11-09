@@ -10,7 +10,7 @@
 
 (defn router []
   (let [route-name @(subscribe [:routing/route-name])
-        location @(subscribe [:routing/location]) ]
+        location @(subscribe [:routing/location])]
     [navbar
      {:children
       [h-box
