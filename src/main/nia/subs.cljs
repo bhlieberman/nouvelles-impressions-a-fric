@@ -12,8 +12,13 @@
 
 (reg-sub
  :routing/location
- :<- [:routing/current-route]
- :-> #(-> % :path-params :location))
+ #_#_:<- [:routing/current-route]
+ :-> :app.routing/location #_(-> % :path-params :location))
+
+(reg-sub
+ :get-loc
+ :<- [:routing/location]
+ :-> #(-> % :location))
 
 (reg-sub
  :poem/display-current-footnote

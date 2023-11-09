@@ -35,12 +35,12 @@ import "./cljs-runtime/reitit.frontend.controllers.js";
 SHADOW_ENV.setLoaded("reitit.frontend.controllers.js");
 import "./cljs-runtime/nia.events.routing.js";
 SHADOW_ENV.setLoaded("nia.events.routing.js");
-import "./cljs-runtime/nia.routing.js";
-SHADOW_ENV.setLoaded("nia.routing.js");
 import "./cljs-runtime/day8.re_frame.http_fx.js";
 SHADOW_ENV.setLoaded("day8.re_frame.http_fx.js");
 import "./cljs-runtime/nia.events.core.js";
 SHADOW_ENV.setLoaded("nia.events.core.js");
+import "./cljs-runtime/nia.routing.js";
+SHADOW_ENV.setLoaded("nia.routing.js");
 import "./cljs-runtime/shadow.module.views.append.js";
 SHADOW_ENV.setLoaded("shadow.module.views.append.js");
 

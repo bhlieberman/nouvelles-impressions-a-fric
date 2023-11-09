@@ -5,17 +5,24 @@
             [reitit.frontend.controllers :as rfc]))
 
 ;; not at all clear to me why this works??
-(reg-co-fx! "user.history" {:fx :local-storage
-                            :cofx :local-storage})
+(reg-co-fx! :user-history {:fx :local-storage
+                           :cofx :local-storage})
+
+(reg-co-fx! :history-loc {})
 
 (reg-event-fx
  :routing/navigated
  [(inject-cofx :local-storage)]
- (fn [{:keys [db local-storage]} [_ new-match]]
+ (fn [{:keys [db local-storage]} [_ {:keys [data path-params] :as new-match}]]
    (let [old-match (:app.routing/current-route db)
-         controllers (rfc/apply-controllers (:controllers old-match) new-match)] 
-     {:db (assoc db :app.routing/current-route (assoc new-match :controllers controllers))
-      :local-storage (assoc local-storage :user-history (-> new-match :data :name))})))
+         controllers (rfc/apply-controllers (:controllers old-match) new-match)
+         new-match-w-controllers (assoc new-match :controllers controllers)]
+     {:db (assoc db
+                 :app.routing/current-route new-match-w-controllers
+                 :app.routing/location path-params)
+      :local-storage (assoc local-storage
+                            :user-history (:name data)
+                            :history-loc path-params)})))
 
 (reg-event-fx
  :routing/push-state
