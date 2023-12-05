@@ -10,8 +10,8 @@
              5 :primary})
 
 (defn parens-scroll [{:keys [children canto]}]
-  (let [parens (subscribe [:poem/parens-loc])
-        depth @(subscribe [:poem/parens-depth])]
+  (let [depth @(subscribe [:poem/parens-depth])
+        parens {0 :thesis 1 :one 2 :two 3 :three 4 :four 5 :five}]
     [h-box
      :margin "25px 0px"
      :children
@@ -19,8 +19,8 @@
        :src (at)
        :attr {:on-click (fn []
                           (when (>= depth 1)
-                            (dispatch [:poem/update-parens-depth dec]) 
-                            (dispatch [:routing/push-state canto {:location @parens}])))}
+                            (let [new-depth (dec depth)]
+                              (dispatch [:poem/parens-routing canto {:location (get parens new-depth)} new-depth]))))}
        :child
        [h-box
         :align-self :center
@@ -40,8 +40,8 @@
        :src (at)
        :attr {:on-click (fn []
                           (when (<= 0 depth 4)
-                            (dispatch [:poem/update-parens-depth inc]) 
-                            (dispatch [:routing/push-state canto {:location @parens}])))}
+                            (let [new-depth (inc depth)]
+                              (dispatch [:poem/parens-routing canto {:location (get parens new-depth)} new-depth]))))}
        :child
        [h-box
         :align-self :center

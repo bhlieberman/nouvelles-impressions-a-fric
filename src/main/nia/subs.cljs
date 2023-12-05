@@ -1,7 +1,5 @@
 (ns nia.subs
-  (:require 
-   [reagent.core :as r]
-   [re-frame.core :refer [reg-sub reg-sub-raw subscribe]]))
+  (:require [re-frame.core :refer [reg-sub]]))
 
 (reg-sub
  :routing/current-route
@@ -29,12 +27,10 @@
  :poem/parens-depth
  :-> :poem/parens-depth)
 
-(reg-sub-raw
+(reg-sub
  :poem/parens-loc
- (fn [db _]
-   (r/reaction
-    (let [depth @(subscribe [:poem/parens-depth])]
-      (get-in @db [:poem/parens-loc depth])))))
+ (fn [db [_ depth]]
+   (get-in db [:poem/parens-loc depth])))
 
 (reg-sub
  :image/url

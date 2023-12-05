@@ -29,8 +29,9 @@
 (reg-event-fx
  :routing/push-state
  (fn [_ [_ route params]]
-   {:push-state [route params]
-    #_#_:fx [[:dispatch [:routing/update-parens-loc depth]]]}))
+   (if (= (:location params) :thesis) 
+     {:fx [[:dispatch [:poem/parens-routing route params 0]]]}
+     {:push-state [route params]})))
 
 (reg-fx
  :push-state

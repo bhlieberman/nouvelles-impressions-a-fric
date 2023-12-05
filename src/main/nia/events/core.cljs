@@ -29,6 +29,13 @@
  (fn [depth [_ f]]
    (f depth)))
 
+(reg-event-fx
+ :poem/parens-routing
+ #_[debug]
+ (fn [{:keys [db]} [_ route params new-depth]]
+   {:db (assoc db :poem/parens-depth new-depth)
+    :push-state [route params]}))
+
 (defn init-module! []
   (js/console.log "initializing events ns")
   (dispatch-sync [:app/initialize]))
