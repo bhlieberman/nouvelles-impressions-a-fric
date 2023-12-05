@@ -10,7 +10,7 @@
 
 
 (defn show-image []
-  (let [urls @(subscribe [:images])]
+  (let [urls @(subscribe [:images/names])]
     (r/create-class
     {:reagent-render
      (fn [_]

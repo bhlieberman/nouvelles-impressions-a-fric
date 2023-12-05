@@ -10,9 +10,16 @@
                                    (rs/inline "four_four_three.txt")
                                    (rs/inline "four_four_four.txt")
                                    (rs/inline "four_four_five.txt")]}
-             :poem/traversal-type :depth 
-             :images {"snowman.jpeg" nil "man-w-book.jpeg" nil 
-                      "shutter.jpeg" nil "soldier.jpeg" nil
-                      "street.jpeg" nil "tree.jpeg" nil
-                      "astronomer.jpeg" nil "mountaineer.jpeg" nil}
+             :poem/traversal-type :depth
+             :poem/parens-depth 0
+             :poem/parens-loc {0 :thesis
+                               1 :one
+                               2 :two
+                               3 :three
+                               4 :four
+                               5 :five}
+             :images/names {"snowman.jpeg" nil "man-w-book.jpeg" nil 
+                            "shutter.jpeg" nil "soldier.jpeg" nil
+                            "street.jpeg" nil "tree.jpeg" nil
+                            "astronomer.jpeg" nil "mountaineer.jpeg" nil}
              :images/urls []})

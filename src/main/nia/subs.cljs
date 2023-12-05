@@ -1,5 +1,7 @@
 (ns nia.subs
-  (:require [re-frame.core :refer [reg-sub]]))
+  (:require 
+   [reagent.core :as r]
+   [re-frame.core :refer [reg-sub reg-sub-raw subscribe]]))
 
 (reg-sub
  :routing/current-route
@@ -12,8 +14,7 @@
 
 (reg-sub
  :routing/location
- #_#_:<- [:routing/current-route]
- :-> :app.routing/location #_(-> % :path-params :location))
+ :-> :app.routing/location)
 
 (reg-sub
  :get-loc
@@ -23,6 +24,17 @@
 (reg-sub
  :poem/display-current-footnote
  :-> :current-footnote)
+
+(reg-sub
+ :poem/parens-depth
+ :-> :poem/parens-depth)
+
+(reg-sub-raw
+ :poem/parens-loc
+ (fn [db _]
+   (r/reaction
+    (let [depth @(subscribe [:poem/parens-depth])]
+      (get-in @db [:poem/parens-loc depth])))))
 
 (reg-sub
  :image/url

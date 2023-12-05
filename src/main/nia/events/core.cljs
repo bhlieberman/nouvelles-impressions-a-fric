@@ -2,7 +2,8 @@
   (:require [goog.functions :as gfn]
             [nia.config.app-db :refer [app-db]]
             [nia.events.routing] 
-            [re-frame.core :as rf :refer [debug dispatch-sync inject-cofx reg-event-db reg-event-fx]] 
+            [re-frame.core :as rf :refer [debug dispatch-sync inject-cofx
+                                          path reg-event-db reg-event-fx]] 
             [day8.re-frame.http-fx]))
 
 (reg-event-fx
@@ -21,6 +22,12 @@
  [debug]
  (fn [db [_ canto footnote]]
    (assoc db :current-footnote (get-in db [:cantos/footnotes canto footnote]))))
+
+(reg-event-db
+ :poem/update-parens-depth 
+ [(path :poem/parens-depth)]
+ (fn [depth [_ f]]
+   (f depth)))
 
 (defn init-module! []
   (js/console.log "initializing events ns")
