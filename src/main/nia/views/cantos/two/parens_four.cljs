@@ -215,7 +215,7 @@
              [p "With puddles of sealing-wax, a crusher at work;"]
              [p "- For the hole which a chick makes in emerging,"]
              [p "The one which the horseback acrobat leaves in the paper hoop;"]
-             [p "- In a sculptor's studio, for a"
+             [p "- In a sculptor's studio, for a "
               [popover-anchor-wrapper
                :showing? pouchet-showing?
                :position :below-center
@@ -230,7 +230,7 @@
                :anchor
                [hyperlink {:label "Pouchet"
                            :on-click #(swap! pouchet-showing? not)}]]
-              "on the heath"]
+              " on the heath"]
              [p "Sewing his pebbles in a line, an unhurt Deucalion"]
              [p "Throwing his " [popover-anchor-wrapper
                                  :showing? stones-showing?
@@ -249,7 +249,7 @@
                                  :anchor
                                  [hyperlink {:label "stones;"
                                              :on-click #(swap! stones-showing? not)}]]]
-             [p "- as whena lion roars, brushed"]
+             [p "- as when a lion roars, brushed"]
              [p "By the huntsman's rifle, for a simple revolver"]
              [p "Frightening an enraged wild brown dog; - for a bust"]
              [p "Without a pedestal, what an enveloping sand"]
@@ -298,7 +298,7 @@
              [p "A coffin; - the albumn of portraits, if it be opened only"]
              [p "By besting one or two clasps, for a  parish register;"]
              [p "- For a vulgar bell-pull, the hook on its rump which"]
-             [p "Nobly takes the place of five fingers for the"
+             [p "Nobly takes the place of five fingers for the "
               [popover-anchor-wrapper
                :showing? penguin-showing?
                :position :below-center
@@ -375,7 +375,7 @@
              [p "An aged parliamentarian; -in the market, when jovially"]
              [p "He roves around under its cover, for that of the Holy Father,"]
              [p "The white hat of a stall-owner; - assiduously toiling,"]
-             [p "For that which a lucky thrower gets into the mouth of a :"
+             [p "For that which a lucky thrower gets into the mouth of a "
               [popover-anchor-wrapper
                :showing? barrel-showing?
                :position :below-center

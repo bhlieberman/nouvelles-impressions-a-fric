@@ -10,7 +10,8 @@
 
 (defn router []
   (let [route-name @(subscribe [:routing/route-name])
-        location @(subscribe [:routing/location]) ]
+        location @(subscribe [:get-loc])
+        depth @(subscribe [:poem/parens-depth])]
     [navbar
      {:children
       [h-box
@@ -19,8 +20,8 @@
        :children
        [(case route-name
           :nia.routing/home [introduction]
-          :nia.routing.canto/one [one/parent location]
-          :nia.routing.canto/two [two/parent location]
-          :nia.routing.canto/four [four/parent location]
+          :nia.routing.canto/one [one/parent location depth]
+          :nia.routing.canto/two [two/parent location depth]
+          :nia.routing.canto/four [four/parent location depth]
           :nia.routing.images/home [images/show-image]
           [introduction])]]}]))
