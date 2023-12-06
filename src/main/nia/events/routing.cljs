@@ -29,9 +29,14 @@
 (reg-event-fx
  :routing/push-state
  (fn [_ [_ route params]]
-   (if (= (:location params) :thesis) 
-     {:fx [[:dispatch [:poem/parens-routing route params 0]]]}
-     {:push-state [route params]})))
+   {:fx [[:dispatch [:poem/parens-routing route params (condp = (:location params)
+                                                         :thesis 0
+                                                         :one 1
+                                                         :two 2
+                                                         :three 3
+                                                         :four 4
+                                                         :five 5
+                                                         0)]]]}))
 
 (reg-fx
  :push-state

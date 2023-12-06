@@ -23,12 +23,6 @@
  (fn [db [_ canto footnote]]
    (assoc db :current-footnote (get-in db [:cantos/footnotes canto footnote]))))
 
-(reg-event-db
- :poem/update-parens-depth 
- [(path :poem/parens-depth)]
- (fn [depth [_ f]]
-   (f depth)))
-
 (reg-event-fx
  :poem/parens-routing
  #_[debug]

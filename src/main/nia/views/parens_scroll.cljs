@@ -12,7 +12,7 @@
 (defn parens-scroll [{:keys [children canto]}]
   (let [depth @(subscribe [:poem/parens-depth])
         parens {0 :thesis 1 :one 2 :two 3 :three 4 :four 5 :five}]
-    [h-box
+    [h-box 
      :margin "25px 0px"
      :children
      [[box
