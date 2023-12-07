@@ -1,5 +1,5 @@
 (ns nia.events.routing
-  (:require [akiroz.re-frame.storage :refer [reg-co-fx!]] 
+  (:require [akiroz.re-frame.storage :refer [reg-co-fx!]]
             [re-frame.core :as rf :refer [debug inject-cofx path
                                           reg-event-fx reg-event-db reg-fx
                                           trim-v]]
@@ -29,14 +29,12 @@
 (reg-event-fx
  :routing/push-state
  (fn [_ [_ route params]]
-   {:fx [[:dispatch [:poem/parens-routing route params (condp = (:location params)
-                                                         :thesis 0
-                                                         :one 1
-                                                         :two 2
-                                                         :three 3
-                                                         :four 4
-                                                         :five 5
-                                                         0)]]]}))
+   (if params
+     (let [loc (get {:thesis 0 :one 1
+                     :two 2 :three 3
+                     :four 4 :five 5} (:location params))]
+       {:fx [[:dispatch [:poem/parens-routing route params loc]]]})
+     {:fx [[:dispatch [:poem/parens-routing route params]]]})))
 
 (reg-fx
  :push-state

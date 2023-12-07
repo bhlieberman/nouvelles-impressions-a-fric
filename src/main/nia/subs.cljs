@@ -39,3 +39,7 @@
 (reg-sub
  :images
  :-> :images/urls)
+
+(reg-sub
+ :builder
+ :-> :lunr/builder)
