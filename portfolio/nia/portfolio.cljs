@@ -2,6 +2,7 @@
   (:require [portfolio.ui :as ui]
             [nia.scenes.images-scenes]
             [nia.scenes.scroll-scene]
+            [nia.scenes.search-scenes]
             [nia.scenes.preface-scene]
             [nia.scenes.thesis-scene]
             [nia.scenes.thesis2-scene]
