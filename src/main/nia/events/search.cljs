@@ -17,16 +17,17 @@
  :search/add-documents
  [(path :lunr/builder)]
  (fn [builder [_ documents]]
-   (doseq [doc (zipmap (range 1 (count documents)) documents)
-           :let [k (key doc)
-                 v (val doc)
-                 title (str "four_four_" (cl-format nil "~R" k))
-                 body v
-                 id (str k)
-                 output #js {:title title
-                             :body body
-                             :id id}]]
-     (.add builder output))
+   (let [docs (zipmap (range 1 (count documents)) documents)]
+     (doseq [doc docs
+             :let [k (key doc)
+                   v (val doc)
+                   title (str "four_four_" (cl-format nil "~R" k))
+                   body v
+                   id (str k)
+                   output #js {:title title
+                               :body body
+                               :id id}]]
+       (.add builder output)))
    builder))
 
 (reg-event-fx
