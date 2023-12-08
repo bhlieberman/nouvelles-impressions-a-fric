@@ -1,49 +1,65 @@
 (ns nia.events.search
-  (:require [clojure.pprint :refer [cl-format]] 
+  (:require [clojure.pprint :refer [cl-format]]
+            [fork.re-frame :as fork]
             [goog.object :as gobj]
             ["lunr" :as lunr]
             [re-frame.core :refer [dispatch path reg-event-db reg-event-fx reg-fx]]))
 
-(reg-event-db
+(reg-event-fx
  :search/create-builder
- (fn [db _]
+ (fn [{:keys [db]} _]
    (let [builder (doto (lunr/Builder.)
                    (.field "title")
                    (.field "body")
                    (.ref "id"))]
      (set! (.-metadataWhitelist builder) #js ["position"])
-     (assoc db :lunr/builder builder))))
-
-(reg-event-db
- :search/add-documents
- [(path :lunr/builder)]
- (fn [builder [_ documents]]
-   (let [docs (zipmap (range 1 (inc (count documents))) documents)]
-     (doseq [doc docs
-             :let [k (key doc)
-                   v (val doc)
-                   title (str "four_four_" (cl-format nil "~R" k))
-                   body v
-                   id (str k)
-                   output #js {:title title
-                               :body body
-                               :id id}]]
-       (js/console.log output)
-       (.add builder output)))
-   builder))
+     {:db (assoc db :lunr/builder builder)
+      :fx [[:dispatch [:search/fetch-documents]]]})))
 
 (reg-event-fx
  :search/fetch-documents
  (fn [{:keys [db]} _]
-   (let [footnotes (get-in db [:cantos/footnotes 4])]
-     (js/console.log (count footnotes))
-     {:fx [[:dispatch [:search/add-documents footnotes]]]})))
+   (let [footnotes (get-in db [:cantos/footnotes 4])] 
+     {:fx [[:dispatch [:search/add-documents footnotes]]]
+      :db db})))
+
+(reg-event-fx
+ :search/add-documents 
+ (fn [{:keys [db]} [_ documents]]
+   (let [docs (zipmap (range 1 (inc (count documents))) documents)]
+     {:db (update db :lunr/builder 
+                  (fn [b]
+                    (doseq [doc docs
+                            :let [k (key doc) v (val doc)
+                                  title (str "four_four_" (cl-format nil "~R" k))
+                                  body v id (str k)
+                                  output #js {:title title
+                                              :body body
+                                              :id id}]]
+                      (.add b output))
+                    b))
+      :fx [[:dispatch [:search/build-index]]]})))
 
 (reg-event-db
  :search/build-index
  (fn [db _]
    (let [builder (:lunr/builder db)]
-     (assoc db :lunr/index (.build builder)))))
+     (-> db 
+         (assoc :lunr/index (.build builder))
+         (dissoc :lunr/builder)))))
+
+(reg-event-fx
+ :search/submit-input
+ (fn [{:keys [db]} [_ {:keys [values dirty path]}]]
+   {:db (fork/set-submitting db path true)
+    :fx [[:dispatch [:search/resolved-form path values]]]}))
+
+(reg-event-fx
+ :search/resolved-form
+ (fn [{:keys [db]} [_ path values]]
+   (js/console.log values)
+   {:db (fork/set-submitting db path false)
+    :fx [[:dispatch [:search/search-index (get values nil)]]]}))
 
 (reg-event-fx
  :search/search-index
@@ -67,10 +83,14 @@
 
 (reg-event-db
  :search/current-best-match
- (fn [db [_ [ref [pos len]]]]
-   (js/console.log ref)
+ (fn [db [_ [ref [pos len]]]] 
    (let [matching-footnote (get-in db [:cantos/footnotes 4 (dec (parse-long ref))])]
      (assoc db :lunr/current-match (subs matching-footnote pos)))))
+
+(reg-event-db
+ :search/clear-results
+ (fn [db _]
+   (dissoc db :lunr/current-match)))
 
 (comment
   (dispatch [:search/fetch-documents])

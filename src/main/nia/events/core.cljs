@@ -1,22 +1,23 @@
 (ns nia.events.core
   (:require [goog.functions :as gfn]
             [nia.config.app-db :refer [app-db]]
-            [nia.events.routing] 
+            [nia.events.routing]
             [nia.events.search]
             [re-frame.core :as rf :refer [debug dispatch-sync inject-cofx
-                                          path reg-event-db reg-event-fx]] 
+                                          path reg-event-db reg-event-fx]]
             [day8.re-frame.http-fx]))
 
 (reg-event-fx
  :app/initialize
  [(inject-cofx :local-storage)]
  (fn [{:keys [local-storage]} _]
-   (let [{:keys [user-history history-loc]} local-storage] 
+   (let [{:keys [user-history history-loc]} local-storage]
      {:db app-db
-      #_#_:fx [[:dispatch [:routing/push-state user-history history-loc]]] 
-      #_#_:fx (into []
-                    (for [url (keys (get app-db :images))]
-                      [:dispatch [:azure/get-blob url]]))})))
+      :fx [#_[:dispatch [:routing/push-state user-history history-loc]]
+           #_(into []
+                   (for [url (keys (get app-db :images))]
+                     [:dispatch [:azure/get-blob url]]))
+           [:dispatch [:search/create-builder]]]})))
 
 (reg-event-db
  :poem/change-current-footnote

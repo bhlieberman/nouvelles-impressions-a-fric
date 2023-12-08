@@ -43,3 +43,7 @@
 (reg-sub
  :builder
  :-> :lunr/builder)
+
+(reg-sub
+ :search/initial-results
+ :-> :lunr/current-match)
