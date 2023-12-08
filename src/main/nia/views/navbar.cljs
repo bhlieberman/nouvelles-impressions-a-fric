@@ -11,14 +11,15 @@
                       "nav-item nav-link"))]
     (fn [{:keys [children]}]
       [:div
-       [:nav {:class "navbar navbar-expand-lg navbar-light bg-light"}
+       [:nav
+        {:class "navbar navbar-expand-lg navbar-light bg-light"} 
         [hyperlink {:class "navbar-brand m-3 display-4"
                     :label "NIA"
                     :on-click #(dispatch [:routing/push-state :nia.routing/home])}]
         [:button {:class "navbar-toggler"
                   :type "button"
-                  :data-toggle "collapse"
-                  :data-target "#navbarNavAltMarkup"
+                  :data-bs-toggle "collapse"
+                  :data-bs-target "#navbarNavAltMarkup"
                   :aria-controls "navbarNavAltMarkup"
                   :aria-expanded "false"
                   :aria-label "Toggle navigation"}
