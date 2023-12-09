@@ -1,5 +1,6 @@
 (ns nia.portfolio
   (:require [portfolio.ui :as ui]
+            [nia.scenes.collapsible-scenes]
             [nia.scenes.images-scenes]
             [nia.scenes.scroll-scene]
             [nia.scenes.search-scenes]
