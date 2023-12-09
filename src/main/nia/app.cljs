@@ -8,7 +8,7 @@
 (defonce root (create-root (gdom/getElement "root")))
 
 (defn ^:dev/after-load render! []
-  (.render root (r/as-element [router])))
+  (.render root (r/as-element [(fn [] router)])))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn init [] 
