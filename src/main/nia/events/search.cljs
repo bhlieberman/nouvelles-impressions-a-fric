@@ -92,6 +92,11 @@
  (fn [db _]
    (dissoc db :lunr/current-match)))
 
+(reg-event-db
+ :search/show-results
+ (fn [db _]
+   (update db :search/results-showing? not)))
+
 (comment
   (dispatch [:search/fetch-documents])
   (dispatch [:search/create-builder])
