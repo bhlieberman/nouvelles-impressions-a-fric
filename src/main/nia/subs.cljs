@@ -1,5 +1,6 @@
 (ns nia.subs
-  (:require [re-frame.core :refer [reg-sub]]))
+  (:require [goog.string :as gstr]
+            [re-frame.core :refer [reg-sub]]))
 
 (reg-sub
  :routing/current-route
@@ -43,6 +44,16 @@
 (reg-sub
  :builder
  :-> :lunr/builder)
+
+(reg-sub
+ :search/all-matches
+ :-> :lunr/all-matches)
+
+(reg-sub
+ :search/show-shortened
+ :<- [:search/all-matches]
+ (fn [matches]
+   (map #(gstr/truncateMiddle % 50 false 25) matches)))
 
 (reg-sub
  :search/initial-results
