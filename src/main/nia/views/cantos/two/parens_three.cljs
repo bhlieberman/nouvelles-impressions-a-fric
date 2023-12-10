@@ -20,6 +20,7 @@
        :children
        [[h-box
          :align-self :center
+         :justify :start
          :children
          [[scroller
            :height "750px"
@@ -32,18 +33,18 @@
                     [p "Given to the kiss of a steel blade," [:b.text-success "))))"]]
                     [p "Knowing that all men carry, wisely hidden"]
                     [p "In a bulging sack which they would rather believe was flat,"]
-                    [hyperlink #_{:href "nia2par4i.html"} {:src (at)
-                                                           :label "Their personal faults upon their backs,"
-                                                           :on-click #(dispatch [:routing/push-state :nia.routing.canto/two {:location :four}])}]
+                    [hyperlink {:src (at)
+                                :label "Their personal faults upon their backs,"
+                                :on-click #(dispatch [:routing/push-state :nia.routing.canto/two {:location :four}])}]
                     [p "Seeking the swing of the thurible to secure their salvation,"]
-                    [hyperlink  {:src (at)
-                                 :label "So that fortune will favour them,"
-                                 :on-click #(swap! par-ii-modal not)}]
+                    [p [hyperlink  {:src (at)
+                                    :label "So that fortune will favour them,"
+                                    :on-click #(swap! par-ii-modal not)}]
+                     " she whose wheel's"]
                     (when @par-ii-modal
                       [modal-panel
                        :backdrop-on-click #(swap! par-ii-modal not)
                        :child [parens-four-ii]])
-                    [p "she whose wheel's"]
                     [p "Spokes move, turning without peace and without cease,"]
                     [p "- Like the hat of a simpleton before his superior -"]
                     [p "Like any host he flatters, pays heed, agrees with an important person,"]

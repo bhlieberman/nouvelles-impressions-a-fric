@@ -39,3 +39,15 @@
 (reg-sub
  :images
  :-> :images/urls)
+
+(reg-sub
+ :builder
+ :-> :lunr/builder)
+
+(reg-sub
+ :search/initial-results
+ :-> :lunr/current-match)
+
+(reg-sub
+ :search/results-showing?
+ :-> :search/results-showing?)

@@ -22,7 +22,7 @@
     (dispatch [:routing/navigated new-match])))
 
 (defn init-routes! []
-  (js/console.log "initializing routes")
+  (when goog.DEBUG (js/console.log "initializing routes"))
   (rfe/start! router on-navigate {:use-fragment false}))
 
 (comment

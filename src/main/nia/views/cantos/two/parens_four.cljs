@@ -19,8 +19,7 @@
     (fn []
       [v-box
        :children
-       [[h-box
-         :align-self :center
+       [[h-box 
          :children
          [[scroller
            :height "750px"

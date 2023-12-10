@@ -34,14 +34,12 @@
                        :label "one snooty glance"}]
            [p "Enrages a poor uniformed"]
            [p "Hotel flunkey who has just,"]
-           [p "Red-faced, brought his car to the main entrance;"]
-           [hyperlink #_{:name "fn1ret"} {:style {:margin "0px 0px 9.8px"}
-                                          :label "- The new arrival in Nice"}]
-           [p ", his eye on the thermometer,"]
-           [p "Whether he should wear"]
-           [hyperlink {:style {:margin "0px 0px 9.8px"}
-                       :label " a mackintosh"
-                       :on-click #(swap! footnote-one-showing? not)}]
+           [p "Red-faced, brought his car to the main entrance;"] 
+           [p "- The new arrival in Nice, his eye on the thermometer,"]
+           [p "Whether he should wear "
+            [hyperlink {:label " a mackintosh"
+                        :on-click #(swap! footnote-one-showing? not)}]
+            " to keep out the cold;"]
            (when @footnote-one-showing?
              [modal-panel
               :backdrop-on-click #(reset! footnote-one-showing? false)
@@ -97,8 +95,7 @@
                         [p "- A rest to a cock who, autumn going by apace, stamps frustratedly"]
                         [p "As dawn is delayed; - to the Wandering Jew, "
                          [hyperlink {:label "a desk-job"
-                                     :on-click #(reset! footnote-one-showing? false)}] "."]]]]])
-           [p "to keep out the cold;"]
+                                     :on-click #(reset! footnote-one-showing? false)}] "."]]]]]) 
            [p "Horace, alone, with what speed to make flight;"]
            [p "- The hare sauntering through the heather"]
            [p "If finding an old piece of gruyere is out of the question;"]

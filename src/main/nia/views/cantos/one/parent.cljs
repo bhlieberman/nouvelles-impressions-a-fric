@@ -5,9 +5,7 @@
             [nia.views.cantos.one.parens-three :as three]
             [nia.views.cantos.one.parens-four :as four]
             [nia.views.cantos.one.parens-five :as five]
-            [nia.views.parens-scroll :as p]
-            [reagent.core :as r]
-            [re-frame.core :refer [subscribe]]))
+            [nia.views.parens-scroll :as p]))
 
 (defn parent [which depth]
   [p/parens-scroll
