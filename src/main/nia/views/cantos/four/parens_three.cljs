@@ -1,6 +1,17 @@
 (ns nia.views.cantos.four.parens-three
-  (:require [re-com.core :refer [hyperlink p v-box]]
-            [re-frame.core :refer [dispatch]]))
+  (:require [nia.views.vutils :refer [collapsible]]
+            [re-com.core :refer [hyperlink p v-box]]
+            [re-frame.core :refer [dispatch]]
+            [reagent.core :as r]))
+
+(defn nested []
+  (r/with-let [show? (r/atom true)]
+    (collapsible p @show? [p [:b.text-success "(((("] "whose nights are restless"]
+                          "Ever since he saw a friend's name on the roll of honour,"
+                          "And who celebrated in fine style"
+                          "When, as famous abroad as he was in France,"
+                          "A comrade - apparently foolishly -"
+                          [p "Was seen to change his rosette for a tie" [:b.text-success "))))"]])))
 
 (defn parens-three []
   [v-box 
@@ -13,12 +24,14 @@
     [p "- Like an oak tree he knows how to survive to old age"]
     [p "Since he only gets to eat by drawing attention to himself -"]
     [p "Which holds him fast to his perch even until death;"]
-    [p "The jealous man " [:b.text-success "(((("] "whose nights are restless"]
-    [p "Ever since he saw a friend's name on the roll of honour,"]
-    [p "And who celebrated in fine style"]
-    [p "When, as famous abroad as he was in France,"]
-    [p "A comrade - apparently foolishly -"]
-    [p "Was seen to change his rosette for a tie" [:b.text-success "))))"]]
+    [p "The jealous man "]
+    [nested]
+    #_[p "The jealous man " [:b.text-success "(((("] "whose nights are restless"]
+    #_[p "Ever since he saw a friend's name on the roll of honour,"]
+    #_[p "And who celebrated in fine style"]
+    #_[p "When, as famous abroad as he was in France,"]
+    #_[p "A comrade - apparently foolishly -"]
+    #_[p "Was seen to change his rosette for a tie" [:b.text-success "))))"]]
     [p "Gets used to the idea that others are being preferred;"]
     [p 
      [hyperlink {:label "The astronomer"

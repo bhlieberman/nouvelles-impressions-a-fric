@@ -1,8 +1,9 @@
 (ns nia.views.vutils)
 
-(defn collapsible [show? & args]
-  (into [:div]
+(defn collapsible [el-type show? & args]
+  (into [el-type]
         (for [arg args]
           (if (sequential? arg)
             (into [(first arg) (if-not show? {:class "collapse"} {})] (rest arg))
-            [:span (if-not show? {:class "collapse"} {}) arg]))))
+            [el-type (if-not show? {:class "collapse"
+                                    :style {:display :block}} {:style {:display :block}}) arg]))))
