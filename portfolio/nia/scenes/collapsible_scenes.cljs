@@ -1,8 +1,18 @@
 (ns nia.scenes.collapsible-scenes
   (:require [nia.views.vutils :refer [collapsible]]
-            [portfolio.reagent-18 :refer-macros [defscene]]
+            [portfolio.reagent-18 :refer-macros [defscene]] 
             [reagent.core :as r]
             [re-com.core :refer [p]]))
+
+(defscene toggle []
+  (let [on-off (r/atom true)]
+    (fn []
+      [:div.w-25
+      [:input.btn.rounded.p-2.w-50
+       {:type :button
+        :class (if @on-off "bg-primary" "bg-muted border")
+        :default-value (if @on-off "On" "Off")
+        :on-click #(swap! on-off not)}]])))
 
 (defscene collapse-parens []
   (let [show? (r/atom true)]
