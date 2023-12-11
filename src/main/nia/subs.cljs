@@ -53,7 +53,8 @@
  :search/show-shortened
  :<- [:search/all-matches]
  (fn [matches]
-   (map #(gstr/truncateMiddle % 50 false 25) matches)))
+   (for [{:keys [text pos len]} matches]
+     (gstr/truncate text (+ pos len 5) false))))
 
 (reg-sub
  :search/initial-results

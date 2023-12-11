@@ -1,5 +1,6 @@
 (ns nia.events.search
   (:require [clojure.pprint :refer [cl-format]]
+            [clojure.string :as str]
             [fork.re-frame :as fork]
             [goog.object :as gobj]
             ["lunr" :as lunr]
@@ -74,18 +75,21 @@
                            #(gobj/getValueByKeys %
                                                  "matchData"
                                                  "metadata"
-                                                 term
+                                                 (str/lower-case term)
                                                  "body"
                                                  "position"
                                                  0))]
      (when (seq match)
-       (let [refs (map ref-and-pos match)]
+       (let [refs (map ref-and-pos match)] 
          (dispatch [:search/all-matches refs])
          (dispatch [:search/current-best-match (first refs)]))))))
 
 (defn get-lunr-matches [db [refs]]
-  (let [texts (for [[ref _] refs]
-                (get-in db [:cantos/footnotes 4 (dec (parse-long ref))]))]
+  (let [texts (for [ref refs
+                    :let [[pos len] (second ref)]]
+                (cond-> {:text (get-in db [:cantos/footnotes 4 (dec (parse-long (first ref)))])}
+                  (some? pos) (assoc :pos pos)
+                  (some? len) (assoc :len len)))] 
     (assoc db :lunr/all-matches texts)))
 
 (reg-event-db
@@ -96,7 +100,7 @@
 (reg-event-db
  :search/current-best-match
  (fn [db [_ [ref [pos _]]]]
-   (let [matching-footnote (get-in db [:cantos/footnotes 4 (dec (parse-long ref))])]
+   (let [matching-footnote (get-in db [:cantos/footnotes 4 (dec (parse-long ref))])] 
      (assoc db :lunr/current-match (subs matching-footnote pos)))))
 
 (reg-event-db
