@@ -4,7 +4,7 @@
             [fork.re-frame :as fork]
             [goog.object :as gobj]
             ["lunr" :as lunr]
-            [re-frame.core :refer [dispatch reg-event-db reg-event-fx reg-fx trim-v]]))
+            [re-frame.core :refer [debug dispatch reg-event-db reg-event-fx reg-fx trim-v]]))
 
 (reg-event-fx
  :search/create-builder
@@ -20,13 +20,42 @@
 (reg-event-fx
  :search/fetch-documents
  (fn [{:keys [db]} _]
-   (let [footnotes (get-in db [:cantos/footnotes 4])]
-     {:fx [[:dispatch [:search/add-documents footnotes]]]
+   (let [footnotes (get-in db [:cantos/footnotes 4])
+         all-footnotes (:cantos/footnotes db)]
+     {:fx [[:dispatch [:search/add-documents all-footnotes]]]
       :db db})))
+
+;; still WIP (I think it doesn't quite match footnote format)
+(defn add-all-docs [{:keys [db]} [_ docs]]
+  (let [one (get docs 1) ;; nil for now
+        two (get docs 2)
+        four (get docs 4)
+    ;; I can do this with update later
+        input (zipmap [2 4]
+                      (for [each [two four]
+                            :let [keyed (zipmap (range 1 (inc (count each))) each)]]
+                        keyed))
+        output (reduce-kv
+                (fn [v k ik]
+                  (let [keys (keys ik)]
+                    (conj v (for [key keys
+                                  :let [title (cl-format nil "~R_~R" k key)
+                                        body (get ik key)]]
+                              #js {:title title
+                                   :body body
+                                   :id (random-uuid)})))) [] input)]
+    {:db (update db :lunr/builder
+                 (fn [b]
+                   (doseq [section output]
+                     (doseq [footnote section]
+                       (.add b footnote)))
+                   b))
+     :fx [[:dispatch [:search/build-index]]]}))
 
 (reg-event-fx
  :search/add-documents
- (fn [{:keys [db]} [_ documents]]
+ add-all-docs
+ #_(fn [{:keys [db]} [_ documents]]
    (let [docs (zipmap (range 1 (inc (count documents))) documents)]
      {:db (update db :lunr/builder
                   (fn [b]
@@ -80,27 +109,28 @@
                                                  "position"
                                                  0))]
      (when (seq match)
-       (let [refs (map ref-and-pos match)] 
+       (let [refs (map ref-and-pos match)]
          (dispatch [:search/all-matches refs])
          (dispatch [:search/current-best-match (first refs)]))))))
 
 (defn get-lunr-matches [db [refs]]
   (let [texts (for [ref refs
                     :let [[pos len] (second ref)]]
-                (cond-> {:text (get-in db [:cantos/footnotes 4 (dec (parse-long (first ref)))])}
-                  (some? pos) (assoc :pos pos)
-                  (some? len) (assoc :len len)))] 
+                (for [i [1 2 4]] ;; this doesn't break old searches but it doesn't bring in new stuff either
+                  (cond-> {:text (get-in db [:cantos/footnotes i (dec (parse-long (first ref)))])}
+                    (some? pos) (assoc :pos pos)
+                    (some? len) (assoc :len len))))]
     (assoc db :lunr/all-matches texts)))
 
 (reg-event-db
  :search/all-matches
- [trim-v]
+ [trim-v debug]
  get-lunr-matches)
 
 (reg-event-db
  :search/current-best-match
  (fn [db [_ [ref [pos _]]]]
-   (let [matching-footnote (get-in db [:cantos/footnotes 4 (dec (parse-long ref))])] 
+   (let [matching-footnote (get-in db [:cantos/footnotes 4 (dec (parse-long ref))])]
      (assoc db :lunr/current-match (subs matching-footnote pos)))))
 
 (reg-event-db
@@ -118,4 +148,4 @@
   (dispatch [:search/fetch-documents])
   (dispatch [:search/create-builder])
   (dispatch [:search/build-index])
-  (dispatch [:search/search-index "bluebeard's"]))
+  (dispatch [:search/search-index "interlude"]))
