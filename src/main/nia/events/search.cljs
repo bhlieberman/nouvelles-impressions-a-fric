@@ -20,21 +20,19 @@
 (reg-event-fx
  :search/fetch-documents
  (fn [{:keys [db]} _]
-   (let [footnotes (get-in db [:cantos/footnotes 4])
-         all-footnotes (:cantos/footnotes db)]
+   (let [all-footnotes (:cantos/footnotes db)]
      {:fx [[:dispatch [:search/add-documents all-footnotes]]]
       :db db})))
 
 ;; still WIP (I think it doesn't quite match footnote format)
 (defn add-all-docs [{:keys [db]} [_ docs]]
-  (let [one (get docs 1) ;; nil for now
-        two (get docs 2)
-        four (get docs 4)
-    ;; I can do this with update later
-        input (zipmap [2 4]
-                      (for [each [two four]
-                            :let [keyed (zipmap (range 1 (inc (count each))) each)]]
-                        keyed))
+  ;; TODO: based on the format of the app-db,
+  ;; make the appropriate changes to accessing data here
+  ;; the problem of switching back and forth b/w numbers
+  ;; and letters has become untenable and annoying
+  (let [input (-> docs
+                  (update 2 (fn [d] (zipmap (range 200 (+ 200 (inc (count d)))) d)))
+                  (update 4 (fn [d] (zipmap (range 400 (+ 400 (inc (count d)))) d))))
         output (reduce-kv
                 (fn [v k ik]
                   (let [keys (keys ik)]
@@ -43,11 +41,15 @@
                                         body (get ik key)]]
                               #js {:title title
                                    :body body
-                                   :id (random-uuid)})))) [] input)]
+                                   :id key})))) [] input)]
+    (js/console.log input)
+    ;; this part here is extremely convoluted
+    ;; nested doseq is cursed!
     {:db (update db :lunr/builder
                  (fn [b]
                    (doseq [section output]
                      (doseq [footnote section]
+                       (js/console.log (.-id footnote))
                        (.add b footnote)))
                    b))
      :fx [[:dispatch [:search/build-index]]]}))
@@ -56,19 +58,19 @@
  :search/add-documents
  add-all-docs
  #_(fn [{:keys [db]} [_ documents]]
-   (let [docs (zipmap (range 1 (inc (count documents))) documents)]
-     {:db (update db :lunr/builder
-                  (fn [b]
-                    (doseq [doc docs
-                            :let [k (key doc) v (val doc)
-                                  title (str "four_four_" (cl-format nil "~R" k))
-                                  body v id (str k)
-                                  output #js {:title title
-                                              :body body
-                                              :id id}]]
-                      (.add b output))
-                    b))
-      :fx [[:dispatch [:search/build-index]]]})))
+     (let [docs (zipmap (range 1 (inc (count documents))) documents)]
+       {:db (update db :lunr/builder
+                    (fn [b]
+                      (doseq [doc docs
+                              :let [k (key doc) v (val doc)
+                                    title (str "four_four_" (cl-format nil "~R" k))
+                                    body v id (str k)
+                                    output #js {:title title
+                                                :body body
+                                                :id id}]]
+                        (.add b output))
+                      b))
+        :fx [[:dispatch [:search/build-index]]]})))
 
 (reg-event-db
  :search/build-index

@@ -4,8 +4,9 @@
 (def app-db {:app.routing/current-route nil
              :app.user/history [] ;; perhaps every few clicks triggers a LocalStorage write?
              :cantos/footnotes {1 []
-                                2 [(rs/inline "footnotes/two/two_one.txt")
-                                   (rs/inline "footnotes/two/three_one.txt")]
+                                ;; consider renovating the data repr. here
+                                2 {:c2-p2-fn1 (rs/inline "footnotes/two/two_one.txt")
+                                   :c2-p3-fn1 (rs/inline "footnotes/two/three_one.txt")}
                                 4 [(rs/inline "four_four_one.txt")
                                    (rs/inline "four_four_two.txt")
                                    (rs/inline "four_four_three.txt")
