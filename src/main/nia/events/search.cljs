@@ -26,51 +26,19 @@
 
 ;; still WIP (I think it doesn't quite match footnote format)
 (defn add-all-docs [{:keys [db]} [_ docs]]
-  ;; TODO: based on the format of the app-db,
-  ;; make the appropriate changes to accessing data here
-  ;; the problem of switching back and forth b/w numbers
-  ;; and letters has become untenable and annoying
-  (let [input (-> docs
-                  (update 2 (fn [d] (zipmap (range 200 (+ 200 (inc (count d)))) d)))
-                  (update 4 (fn [d] (zipmap (range 400 (+ 400 (inc (count d)))) d))))
-        output (reduce-kv
-                (fn [v k ik]
-                  (let [keys (keys ik)]
-                    (conj v (for [key keys
-                                  :let [title (cl-format nil "~R_~R" k key)
-                                        body (get ik key)]]
-                              #js {:title title
-                                   :body body
-                                   :id key})))) [] input)]
-    (js/console.log input)
-    ;; this part here is extremely convoluted
-    ;; nested doseq is cursed!
+  (let [canto-2-footnotes (get-in db [:cantos/footnotes :c2])
+        canto-4-footnotes (get-in db [:cantos/footnotes :c4])] 
     {:db (update db :lunr/builder
                  (fn [b]
-                   (doseq [section output]
-                     (doseq [footnote section]
-                       (js/console.log (.-id footnote))
-                       (.add b footnote)))
+                   (doseq [footnote (apply concat [(vals canto-4-footnotes) (vals canto-2-footnotes)])]
+                     (js/console.log (.-id footnote))
+                     (.add b footnote))
                    b))
      :fx [[:dispatch [:search/build-index]]]}))
 
 (reg-event-fx
  :search/add-documents
- add-all-docs
- #_(fn [{:keys [db]} [_ documents]]
-     (let [docs (zipmap (range 1 (inc (count documents))) documents)]
-       {:db (update db :lunr/builder
-                    (fn [b]
-                      (doseq [doc docs
-                              :let [k (key doc) v (val doc)
-                                    title (str "four_four_" (cl-format nil "~R" k))
-                                    body v id (str k)
-                                    output #js {:title title
-                                                :body body
-                                                :id id}]]
-                        (.add b output))
-                      b))
-        :fx [[:dispatch [:search/build-index]]]})))
+ add-all-docs)
 
 (reg-event-db
  :search/build-index
@@ -117,9 +85,16 @@
 
 (defn get-lunr-matches [db [refs]]
   (let [texts (for [ref refs
-                    :let [[pos len] (second ref)]]
-                (for [i [1 2 4]] ;; this doesn't break old searches but it doesn't bring in new stuff either
-                  (cond-> {:text (get-in db [:cantos/footnotes i (dec (parse-long (first ref)))])}
+                    :let [[pos len] (second ref)
+                          text (-> ref 
+                                   first
+                                   (str/split #"-")
+                                   rest
+                                   (->> (apply keyword)))]] 
+                (for [i [:c1 :c2 :c4]
+                      :let [obj (get-in db [:cantos/footnotes i text])]
+                      :when (some? obj)]
+                  (cond-> {:text (.-body obj)}
                     (some? pos) (assoc :pos pos)
                     (some? len) (assoc :len len))))]
     (assoc db :lunr/all-matches texts)))
