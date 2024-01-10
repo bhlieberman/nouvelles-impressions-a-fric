@@ -1,10 +1,10 @@
 (ns nia.events.search
-  (:require [clojure.pprint :refer [cl-format]]
-            [clojure.string :as str]
-            [fork.re-frame :as fork]
-            [goog.object :as gobj]
-            ["lunr" :as lunr]
-            [re-frame.core :refer [debug dispatch reg-event-db reg-event-fx reg-fx trim-v]]))
+  (:require
+   [clojure.string :as str]
+   [fork.re-frame :as fork]
+   [goog.object :as gobj]
+   ["lunr" :as lunr]
+   [re-frame.core :refer [debug dispatch reg-event-db reg-event-fx reg-fx trim-v]]))
 
 (reg-event-fx
  :search/create-builder
@@ -24,14 +24,13 @@
      {:fx [[:dispatch [:search/add-documents all-footnotes]]]
       :db db})))
 
-;; still WIP (I think it doesn't quite match footnote format)
 (defn add-all-docs [{:keys [db]} [_ docs]]
-  (let [canto-2-footnotes (get-in db [:cantos/footnotes :c2])
-        canto-4-footnotes (get-in db [:cantos/footnotes :c4])] 
+  (let [footnotes (into [] (mapcat vals)
+                        ((juxt :c1 :c2 :c4) docs))]
     {:db (update db :lunr/builder
                  (fn [b]
-                   (doseq [footnote (apply concat [(vals canto-4-footnotes) (vals canto-2-footnotes)])]
-                     (js/console.log (.-id footnote))
+                   (doseq [footnote footnotes]
+                     (when goog.DEBUG (js/console.log (.-id footnote)))
                      (.add b footnote))
                    b))
      :fx [[:dispatch [:search/build-index]]]}))
@@ -81,16 +80,18 @@
      (when (seq match)
        (let [refs (map ref-and-pos match)]
          (dispatch [:search/all-matches refs])
-         (dispatch [:search/current-best-match (first refs)]))))))
+         #_(dispatch [:search/current-best-match (first refs)]))))))
+
+(defn ref->keyword [ref]
+  (apply keyword (-> ref
+                     first
+                     (str/split #"-")
+                     rest)))
 
 (defn get-lunr-matches [db [refs]]
   (let [texts (for [ref refs
                     :let [[pos len] (second ref)
-                          text (-> ref 
-                                   first
-                                   (str/split #"-")
-                                   rest
-                                   (->> (apply keyword)))]] 
+                          text (ref->keyword ref)]]
                 (for [i [:c1 :c2 :c4]
                       :let [obj (get-in db [:cantos/footnotes i text])]
                       :when (some? obj)]
@@ -104,11 +105,12 @@
  [trim-v debug]
  get-lunr-matches)
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (reg-event-db
  :search/current-best-match
  (fn [db [_ [ref [pos _]]]]
    (let [matching-footnote (get-in db [:cantos/footnotes 4 (dec (parse-long ref))])]
-     (assoc db :lunr/current-match (subs matching-footnote pos)))))
+     (assoc db :lunr/current-match (some-> matching-footnote (subs pos))))))
 
 (reg-event-db
  :search/clear-results
