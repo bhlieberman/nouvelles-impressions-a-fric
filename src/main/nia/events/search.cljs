@@ -1,10 +1,10 @@
 (ns nia.events.search
-  (:require [clojure.pprint :refer [cl-format]]
-            [clojure.string :as str]
-            [fork.re-frame :as fork]
-            [goog.object :as gobj]
-            ["lunr" :as lunr]
-            [re-frame.core :refer [dispatch reg-event-db reg-event-fx reg-fx trim-v]]))
+  (:require
+   [clojure.string :as str]
+   [fork.re-frame :as fork]
+   [goog.object :as gobj]
+   ["lunr" :as lunr]
+   [re-frame.core :refer [debug dispatch reg-event-db reg-event-fx reg-fx trim-v]]))
 
 (reg-event-fx
  :search/create-builder
@@ -20,26 +20,24 @@
 (reg-event-fx
  :search/fetch-documents
  (fn [{:keys [db]} _]
-   (let [footnotes (get-in db [:cantos/footnotes 4])]
-     {:fx [[:dispatch [:search/add-documents footnotes]]]
+   (let [all-footnotes (:cantos/footnotes db)]
+     {:fx [[:dispatch [:search/add-documents all-footnotes]]]
       :db db})))
+
+(defn add-all-docs [{:keys [db]} [_ docs]]
+  (let [footnotes (into [] (mapcat vals)
+                        ((juxt :c1 :c2 :c4) docs))]
+    {:db (update db :lunr/builder
+                 (fn [b]
+                   (doseq [footnote footnotes]
+                     (when goog.DEBUG (js/console.log (.-id footnote)))
+                     (.add b footnote))
+                   b))
+     :fx [[:dispatch [:search/build-index]]]}))
 
 (reg-event-fx
  :search/add-documents
- (fn [{:keys [db]} [_ documents]]
-   (let [docs (zipmap (range 1 (inc (count documents))) documents)]
-     {:db (update db :lunr/builder
-                  (fn [b]
-                    (doseq [doc docs
-                            :let [k (key doc) v (val doc)
-                                  title (str "four_four_" (cl-format nil "~R" k))
-                                  body v id (str k)
-                                  output #js {:title title
-                                              :body body
-                                              :id id}]]
-                      (.add b output))
-                    b))
-      :fx [[:dispatch [:search/build-index]]]})))
+ add-all-docs)
 
 (reg-event-db
  :search/build-index
@@ -80,28 +78,39 @@
                                                  "position"
                                                  0))]
      (when (seq match)
-       (let [refs (map ref-and-pos match)] 
+       (let [refs (map ref-and-pos match)]
          (dispatch [:search/all-matches refs])
-         (dispatch [:search/current-best-match (first refs)]))))))
+         #_(dispatch [:search/current-best-match (first refs)]))))))
+
+(defn ref->keyword [ref]
+  (apply keyword (-> ref
+                     first
+                     (str/split #"-")
+                     rest)))
 
 (defn get-lunr-matches [db [refs]]
   (let [texts (for [ref refs
-                    :let [[pos len] (second ref)]]
-                (cond-> {:text (get-in db [:cantos/footnotes 4 (dec (parse-long (first ref)))])}
-                  (some? pos) (assoc :pos pos)
-                  (some? len) (assoc :len len)))] 
+                    :let [[pos len] (second ref)
+                          text (ref->keyword ref)]]
+                (for [i [:c1 :c2 :c4]
+                      :let [obj (get-in db [:cantos/footnotes i text])]
+                      :when (some? obj)]
+                  (cond-> {:text (.-body obj)}
+                    (some? pos) (assoc :pos pos)
+                    (some? len) (assoc :len len))))]
     (assoc db :lunr/all-matches texts)))
 
 (reg-event-db
  :search/all-matches
- [trim-v]
+ [trim-v debug]
  get-lunr-matches)
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (reg-event-db
  :search/current-best-match
  (fn [db [_ [ref [pos _]]]]
-   (let [matching-footnote (get-in db [:cantos/footnotes 4 (dec (parse-long ref))])] 
-     (assoc db :lunr/current-match (subs matching-footnote pos)))))
+   (let [matching-footnote (get-in db [:cantos/footnotes 4 (dec (parse-long ref))])]
+     (assoc db :lunr/current-match (some-> matching-footnote (subs pos))))))
 
 (reg-event-db
  :search/clear-results
@@ -118,4 +127,4 @@
   (dispatch [:search/fetch-documents])
   (dispatch [:search/create-builder])
   (dispatch [:search/build-index])
-  (dispatch [:search/search-index "bluebeard's"]))
+  (dispatch [:search/search-index "interlude"]))
