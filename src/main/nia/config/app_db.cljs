@@ -61,6 +61,7 @@
                                3 :three
                                4 :four
                                5 :five}
+             :show-collapsed? true
              :search/results-showing? false
              :images/names {"snowman.jpeg" nil "man-w-book.jpeg" nil
                             "shutter.jpeg" nil "soldier.jpeg" nil

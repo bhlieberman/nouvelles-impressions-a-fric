@@ -31,6 +31,11 @@
       :push-state [route params]}
      {:push-state [route params]})))
 
+(reg-event-db
+ :collapse/toggle
+ (fn [db _]
+   (update db :show-collapsed? not)))
+
 (defn init-module! []
   (dispatch-sync [:app/initialize]))
 

@@ -65,3 +65,7 @@
 (reg-sub
  :search/results-showing?
  :-> :search/results-showing?)
+
+(reg-sub
+ :show-collapsed?
+ :-> :show-collapsed?)
