@@ -1,5 +1,7 @@
 (ns nia.views.navbar
   (:require [nia.views.text-search :refer [text-search]]
+            [reagent-mui.material.switch :refer [switch]]
+            [reagent-mui.material.form-control-label :refer [form-control-label]]
             [reagent.core :as r]
             [re-com.core :refer [at hyperlink]]
             [re-frame.core :refer [dispatch]]))
@@ -52,5 +54,10 @@
                        :on-click (fn []
                                    (reset! active-route? :images)
                                    (dispatch [:routing/push-state :nia.routing.images/home nil]))}]]]]
+        [form-control-label
+         {:control (r/as-element [switch {:default-checked true
+                                          :on-click #(dispatch [:collapse/toggle])}])
+          :label "Collapse"
+          :disabled false}]
         [text-search]]
        children])))
