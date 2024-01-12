@@ -21,7 +21,7 @@
 (reg-event-db
  :poem/change-current-footnote 
  (fn [db [_ canto footnote]]
-   (assoc db :current-footnote (get-in db [:cantos/footnotes canto footnote]))))
+   (assoc db :current-footnote (.-body (get-in db [:cantos/footnotes canto footnote])))))
 
 (reg-event-fx
  :poem/parens-routing 
