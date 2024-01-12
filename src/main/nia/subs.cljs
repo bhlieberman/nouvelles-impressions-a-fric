@@ -41,6 +41,7 @@
  :images
  :-> :images/urls)
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (reg-sub
  :builder
  :-> :lunr/builder)
@@ -53,7 +54,8 @@
  :search/show-shortened
  :<- [:search/all-matches]
  (fn [matches]
-   (for [{:keys [text pos len]} matches]
+   (for [{:keys [text pos len] :as match} matches
+         :let [_ (js/console.log match)]]
      (gstr/truncate text (+ pos len 5) false))))
 
 (reg-sub

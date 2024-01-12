@@ -5,21 +5,17 @@
             [nia.views.cantos.two.parens-three :as three]
             [nia.views.cantos.two.parens-four :as four]
             [nia.views.cantos.two.parens-five :as five]
-            [nia.views.parens-scroll :as p]
-            [reagent.core :as r]
-            [re-frame.core :refer [subscribe]]))
+            [nia.views.parens-scroll :as p]))
 
 (defn parent [which depth]
-  (let [b @(subscribe [:builder])]
-    (js/console.dir b)
-    [p/parens-scroll
-    {:children (case which
-                 "thesis" [thesis/thesis]
-                 "one" [one/parens]
-                 "two" [two/parens-two]
-                 "three" [three/parens-three]
-                 "four" [four/parens-four]
-                 "five" [five/parens-five]
-                 [thesis/thesis])
-     #_#_:depth depth
-     :canto :nia.routing.canto/two}]))
+  [p/parens-scroll
+   {:children (case which
+                "thesis" [thesis/thesis]
+                "one" [one/parens]
+                "two" [two/parens-two]
+                "three" [three/parens-three]
+                "four" [four/parens-four]
+                "five" [five/parens-five]
+                [thesis/thesis])
+    #_#_:depth depth
+    :canto :nia.routing.canto/two}])
