@@ -1,11 +1,10 @@
 (ns nia.views.cantos.four.parens-three
-  (:require [nia.views.vutils :refer [collapsible toggle]]
+  (:require [nia.views.vutils :refer [collapsible]] 
             [re-com.core :refer [hyperlink p v-box]]
-            [re-frame.core :refer [dispatch]]
-            [reagent.core :as r]))
+            [re-frame.core :refer [dispatch subscribe]]))
 
 (defn nested [show?]
-  (collapsible p @show? [p [:b.text-success "(((("] "whose nights are restless"]
+  (collapsible :div show? [p [:b.text-success "(((("] "whose nights are restless"]
                "Ever since he saw a friend's name on the roll of honour,"
                "And who celebrated in fine style"
                "When, as famous abroad as he was in France,"
@@ -13,7 +12,7 @@
                [p "Was seen to change his rosette for a tie" [:b.text-success "))))"]]))
 
 (defn parens-three []
-  (let [show? (r/atom false)]
+  (let [show? @(subscribe [:show-collapsed?])]
     [v-box 
     :margin "10px 0px"
     :children 
@@ -31,5 +30,4 @@
                   :on-click #(dispatch [:routing/push-state :nia.routing.canto/four {:location :four}])}]]
      [p "Gets used to the vastness of space"]
      [p "Where light always runs in a straight line;"]
-     [p "The dumb man to his slate, irritating to whiten;"]
-     [toggle show?]]]))
+     [p "The dumb man to his slate, irritating to whiten;"]]]))

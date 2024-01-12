@@ -15,7 +15,7 @@
                 [p "Of a bright apartment giving onto the top landing, knows"]
                 [p "- A humble photographer he, well-skilled in"
                  [hyperlink {:on-click #(dispatch [:routing/push-state :nia.routing.canto/one {:location :two}])
-                             :class "block m-2"
+                             :class "block m-2 text-warning"
                              :style {:display :inline-block}
                              :label " painting out"}]]
                 [p "Spots and wrinkles by subtle means"]

@@ -29,6 +29,7 @@
       [p "That name whose bearer, though crushed, is so proud of"]
       [hyperlink {:label "That he knows by heart, faultlessly,"
                   :style {:margin "0px 0px 9.8px"}
+                  :class "text-danger"
                   :on-click #(dispatch [:routing/push-state :nia.routing.canto/one {:location :one}])}]
       [p "- Roots, trunks, boughs, connecting branches -"]
       [p "His family tree; the cathedrals eroded by time;"]
