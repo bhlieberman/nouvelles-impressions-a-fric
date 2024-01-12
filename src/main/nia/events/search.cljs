@@ -4,6 +4,7 @@
    [fork.re-frame :as fork]
    [goog.object :as gobj]
    ["lunr" :as lunr]
+   [nia.config.app-db :refer [check-db]]
    [re-frame.core :refer [debug dispatch reg-event-db reg-event-fx reg-fx trim-v]]))
 
 (reg-event-fx
@@ -89,26 +90,29 @@
                      rest)))
 
 (defn get-lunr-matches [db [refs]]
-  (let [texts (for [ref refs
-                    :let [[pos len] (second ref)
-                          text (ref->keyword ref)]]
-                (for [i [:c1 :c2 :c4]
-                      :let [obj (get-in db [:cantos/footnotes i text])]
-                      :when (some? obj)]
-                  (cond-> {:text (.-body obj)}
-                    (some? pos) (assoc :pos pos)
-                    (some? len) (assoc :len len))))]
+  (let [texts (apply concat
+                     (for [ref refs
+                           :let [[pos len] (second ref)
+                                 text (ref->keyword ref)]]
+                       (for [i [:c1 :c2 :c4]
+                             :let [obj (get-in db [:cantos/footnotes i text])]
+                             :when (some? obj)]
+                         (cond-> {:text (.-body obj)}
+                           (some? pos) (assoc :pos pos)
+                           (some? len) (assoc :len len)))))]
     (assoc db :lunr/all-matches texts)))
 
 (reg-event-db
  :search/all-matches
- [trim-v debug]
+ [trim-v debug check-db]
  get-lunr-matches)
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (reg-event-db
  :search/current-best-match
  (fn [db [_ [ref [pos _]]]]
+   ;; TODO: update this logic to reflect rest of footnotes
+   ;; see above code for use as model
    (let [matching-footnote (get-in db [:cantos/footnotes 4 (dec (parse-long ref))])]
      (assoc db :lunr/current-match (some-> matching-footnote (subs pos))))))
 

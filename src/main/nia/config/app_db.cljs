@@ -1,5 +1,31 @@
 (ns nia.config.app-db
-  (:require [shadow.resource :as rs]))
+  (:require
+   [cljs.spec.alpha :as s]
+   [shadow.resource :as rs]
+   [re-frame.core :refer [after]]))
+
+(s/def :app.routing/current-route (s/nilable record?))
+(s/def :app.user/history vector?)
+(s/def :cantos/footnotes (s/map-of keyword? map?))
+(s/def :poem/traversal-type keyword?)
+(s/def :poem/parens-depth int?)
+(s/def :poem/parens-loc (s/map-of int? keyword?))
+(s/def :search/results-showing? boolean?)
+(s/def :lunr/all-matches (s/coll-of map?))
+(s/def ::valid-db (s/keys :req [:app.routing/current-route
+                                :app.user/history
+                                :cantos/footnotes
+                                :poem/traversal-type
+                                :poem/parens-depth
+                                :poem/parens-loc
+                                :search/results-showing?]
+                          :opt [:lunr/all-matches]))
+
+(def check-db
+  (after (fn [db event] 
+           (when-not (s/valid? ::valid-db db)
+             (throw (ex-info "DB failed spec after event: " {:event event
+                                                             :why (s/explain ::valid-db db)}))))))
 
 (def app-db {:app.routing/current-route nil
              :app.user/history [] ;; perhaps every few clicks triggers a LocalStorage write?
@@ -41,3 +67,6 @@
                             "street.jpeg" nil "tree.jpeg" nil
                             "astronomer.jpeg" nil "mountaineer.jpeg" nil}
              :images/urls []})
+
+(comment
+  (println (s/explain ::valid-db app-db)))
