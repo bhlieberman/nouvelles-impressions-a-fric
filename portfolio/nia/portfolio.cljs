@@ -7,7 +7,8 @@
             [nia.scenes.preface-scene]
             [nia.scenes.thesis-scene]
             [nia.scenes.thesis2-scene]
-            [nia.scenes.canto4-scenes]))
+            [nia.scenes.canto4-scenes]
+            [nia.scenes.mui-scenes]))
 
 (defn init []
   (ui/start!
