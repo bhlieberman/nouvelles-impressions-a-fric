@@ -245,10 +245,10 @@
             [p "When classifying pleasures, would have placed injection;"]
             [p "- The mountaineer in ecstasy on the side of a peak,"]
             [p "How in the world enough to praise the Maker;"]
-            [p "- The bird, when "
-             [:b.text-primary "((((("]
+            [p {:class :text-primary} "- The bird, when "
+             #_[:b.text-primary "((((("]
              "the sun heating even marble"
-             [:b.text-primary ")))))"]]
+             #_[:b.text-primary ")))))"]]
             [p "In July one dines in the shade of a tree,"]
             [p "Into which which plate it will, without holding back,"]
             [p "Let drop a fresh little souvenir for examination;"]
