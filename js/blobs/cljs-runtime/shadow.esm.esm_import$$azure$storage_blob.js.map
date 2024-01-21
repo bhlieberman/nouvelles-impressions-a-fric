@@ -1,0 +1,9 @@
+{
+"version":3,
+"file":"shadow.esm.esm_import$$azure$storage_blob.js",
+"lineCount":3,
+"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,2CAAb,CAAA;AACAC,MAAOC,CAAAA,GAAIC,CAAAA,8BAAX,GAA4CA,8BAA5C;;",
+"sources":["shadow.esm.esm_import$$azure$storage_blob.js"],
+"sourcesContent":["goog.provide(\"shadow.esm.esm_import$$azure$storage_blob\");\nshadow.esm.esm_import$$azure$storage_blob = esm_import$$azure$storage_blob;\n"],
+"names":["goog","provide","shadow","esm","esm_import$$azure$storage_blob"]
+}

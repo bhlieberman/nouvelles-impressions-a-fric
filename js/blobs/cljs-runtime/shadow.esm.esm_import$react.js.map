@@ -1,0 +1,9 @@
+{
+"version":3,
+"file":"shadow.esm.esm_import$react.js",
+"lineCount":3,
+"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,6BAAb,CAAA;AACAC,MAAOC,CAAAA,GAAIC,CAAAA,gBAAX,GAA8BA,gBAA9B;;",
+"sources":["shadow.esm.esm_import$react.js"],
+"sourcesContent":["goog.provide(\"shadow.esm.esm_import$react\");\nshadow.esm.esm_import$react = esm_import$react;\n"],
+"names":["goog","provide","shadow","esm","esm_import$react"]
+}

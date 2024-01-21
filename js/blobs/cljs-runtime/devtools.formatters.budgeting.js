@@ -1,0 +1,182 @@
+import "./cljs_env.js";
+import "./cljs.core.js";
+import "./devtools.formatters.templating.js";
+import "./devtools.formatters.state.js";
+import "./devtools.formatters.helpers.js";
+import "./devtools.formatters.markup.js";
+goog.provide('devtools.formatters.budgeting');
+devtools.formatters.budgeting.header_expander_depth_cost = (2);
+devtools.formatters.budgeting.over_budget_values = (((typeof WeakSet !== 'undefined'))?(new WeakSet()):cljs.core.volatile_BANG_(cljs.core.PersistentHashSet.EMPTY));
+devtools.formatters.budgeting.add_over_budget_value_BANG_ = (function devtools$formatters$budgeting$add_over_budget_value_BANG_(value){
+if(cljs.core.volatile_QMARK_(devtools.formatters.budgeting.over_budget_values)){
+return cljs.core.vreset_BANG_(devtools.formatters.budgeting.over_budget_values,cljs.core.conj.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(devtools.formatters.budgeting.over_budget_values),value));
+} else {
+var o__13495__auto__ = devtools.formatters.budgeting.over_budget_values;
+return (o__13495__auto__["add"]).call(o__13495__auto__,value);
+}
+});
+devtools.formatters.budgeting.delete_over_budget_value_BANG_ = (function devtools$formatters$budgeting$delete_over_budget_value_BANG_(value){
+if(cljs.core.volatile_QMARK_(devtools.formatters.budgeting.over_budget_values)){
+return cljs.core.vreset_BANG_(devtools.formatters.budgeting.over_budget_values,cljs.core.disj.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(devtools.formatters.budgeting.over_budget_values),value));
+} else {
+var o__13495__auto__ = devtools.formatters.budgeting.over_budget_values;
+return (o__13495__auto__["delete"]).call(o__13495__auto__,value);
+}
+});
+devtools.formatters.budgeting.has_over_budget_value_QMARK_ = (function devtools$formatters$budgeting$has_over_budget_value_QMARK_(value){
+if(cljs.core.volatile_QMARK_(devtools.formatters.budgeting.over_budget_values)){
+return cljs.core.contains_QMARK_(cljs.core.deref(devtools.formatters.budgeting.over_budget_values),value);
+} else {
+var o__13495__auto__ = devtools.formatters.budgeting.over_budget_values;
+return (o__13495__auto__["has"]).call(o__13495__auto__,value);
+}
+});
+devtools.formatters.budgeting.object_reference_QMARK_ = (function devtools$formatters$budgeting$object_reference_QMARK_(json_ml){
+return cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(cljs.core.first(json_ml),"object");
+});
+devtools.formatters.budgeting.determine_depth = (function devtools$formatters$budgeting$determine_depth(json_ml){
+if(cljs.core.array_QMARK_(json_ml)){
+return (cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.max,cljs.core.map.cljs$core$IFn$_invoke$arity$2(devtools.formatters.budgeting.determine_depth,json_ml)) + (1));
+} else {
+return (0);
+}
+});
+devtools.formatters.budgeting.has_any_object_reference_QMARK_ = (function devtools$formatters$budgeting$has_any_object_reference_QMARK_(json_ml){
+if(cljs.core.array_QMARK_(json_ml)){
+if(devtools.formatters.budgeting.object_reference_QMARK_(json_ml)){
+return true;
+} else {
+return cljs.core.some(devtools.formatters.budgeting.has_any_object_reference_QMARK_,json_ml);
+}
+} else {
+return null;
+}
+});
+devtools.formatters.budgeting.transfer_remaining_depth_budget_BANG_ = (function devtools$formatters$budgeting$transfer_remaining_depth_budget_BANG_(object_reference,depth_budget){
+if((!((depth_budget < (0))))){
+} else {
+throw (new Error("Assert failed: (not (neg? depth-budget))"));
+}
+
+var data = cljs.core.second(object_reference);
+var _ = ((cljs.core.object_QMARK_(data))?null:(function(){throw (new Error("Assert failed: (object? data)"))})());
+var config = (data["config"]);
+var G__29720 = data;
+var target__13500__auto__ = G__29720;
+if(cljs.core.truth_(target__13500__auto__)){
+} else {
+throw (new Error(["Assert failed: ",["unable to locate object path ",null," in ",cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__29720)].join(''),"\n","target__13500__auto__"].join('')));
+}
+
+(target__13500__auto__["config"] = devtools.formatters.state.set_depth_budget(config,depth_budget));
+
+return G__29720;
+});
+devtools.formatters.budgeting.distribute_budget_BANG_ = (function devtools$formatters$budgeting$distribute_budget_BANG_(json_ml,depth_budget){
+if((!((depth_budget < (0))))){
+} else {
+throw (new Error("Assert failed: (not (neg? depth-budget))"));
+}
+
+if(cljs.core.array_QMARK_(json_ml)){
+var new_depth_budget_29768 = (depth_budget - (1));
+if(devtools.formatters.budgeting.object_reference_QMARK_(json_ml)){
+devtools.formatters.budgeting.transfer_remaining_depth_budget_BANG_(json_ml,new_depth_budget_29768);
+} else {
+var seq__29730_29770 = cljs.core.seq(json_ml);
+var chunk__29731_29771 = null;
+var count__29732_29772 = (0);
+var i__29733_29773 = (0);
+while(true){
+if((i__29733_29773 < count__29732_29772)){
+var item_29777 = chunk__29731_29771.cljs$core$IIndexed$_nth$arity$2(null,i__29733_29773);
+(devtools.formatters.budgeting.distribute_budget_BANG_.cljs$core$IFn$_invoke$arity$2 ? devtools.formatters.budgeting.distribute_budget_BANG_.cljs$core$IFn$_invoke$arity$2(item_29777,new_depth_budget_29768) : devtools.formatters.budgeting.distribute_budget_BANG_.call(null,item_29777,new_depth_budget_29768));
+
+
+var G__29779 = seq__29730_29770;
+var G__29780 = chunk__29731_29771;
+var G__29781 = count__29732_29772;
+var G__29782 = (i__29733_29773 + (1));
+seq__29730_29770 = G__29779;
+chunk__29731_29771 = G__29780;
+count__29732_29772 = G__29781;
+i__29733_29773 = G__29782;
+continue;
+} else {
+var temp__5804__auto___29783 = cljs.core.seq(seq__29730_29770);
+if(temp__5804__auto___29783){
+var seq__29730_29784__$1 = temp__5804__auto___29783;
+if(cljs.core.chunked_seq_QMARK_(seq__29730_29784__$1)){
+var c__5568__auto___29785 = cljs.core.chunk_first(seq__29730_29784__$1);
+var G__29786 = cljs.core.chunk_rest(seq__29730_29784__$1);
+var G__29787 = c__5568__auto___29785;
+var G__29788 = cljs.core.count(c__5568__auto___29785);
+var G__29789 = (0);
+seq__29730_29770 = G__29786;
+chunk__29731_29771 = G__29787;
+count__29732_29772 = G__29788;
+i__29733_29773 = G__29789;
+continue;
+} else {
+var item_29790 = cljs.core.first(seq__29730_29784__$1);
+(devtools.formatters.budgeting.distribute_budget_BANG_.cljs$core$IFn$_invoke$arity$2 ? devtools.formatters.budgeting.distribute_budget_BANG_.cljs$core$IFn$_invoke$arity$2(item_29790,new_depth_budget_29768) : devtools.formatters.budgeting.distribute_budget_BANG_.call(null,item_29790,new_depth_budget_29768));
+
+
+var G__29792 = cljs.core.next(seq__29730_29784__$1);
+var G__29793 = null;
+var G__29794 = (0);
+var G__29795 = (0);
+seq__29730_29770 = G__29792;
+chunk__29731_29771 = G__29793;
+count__29732_29772 = G__29794;
+i__29733_29773 = G__29795;
+continue;
+}
+} else {
+}
+}
+break;
+}
+}
+} else {
+}
+
+return json_ml;
+});
+devtools.formatters.budgeting.was_over_budget_QMARK__BANG_ = (function devtools$formatters$budgeting$was_over_budget_QMARK__BANG_(value){
+if(cljs.core.truth_(devtools.formatters.budgeting.has_over_budget_value_QMARK_(value))){
+devtools.formatters.budgeting.delete_over_budget_value_BANG_(value);
+
+return true;
+} else {
+return null;
+}
+});
+devtools.formatters.budgeting.alter_json_ml_to_fit_in_remaining_budget_BANG_ = (function devtools$formatters$budgeting$alter_json_ml_to_fit_in_remaining_budget_BANG_(value,json_ml){
+var temp__5802__auto__ = devtools.formatters.helpers.pref(new cljs.core.Keyword(null,"initial-hierarchy-depth-budget","initial-hierarchy-depth-budget",-482715807));
+if(cljs.core.truth_(temp__5802__auto__)){
+var initial_hierarchy_depth_budget = temp__5802__auto__;
+var remaining_depth_budget = (function (){var or__5045__auto__ = devtools.formatters.state.get_depth_budget();
+if(cljs.core.truth_(or__5045__auto__)){
+return or__5045__auto__;
+} else {
+return (initial_hierarchy_depth_budget - (1));
+}
+})();
+var depth = devtools.formatters.budgeting.determine_depth(json_ml);
+var final_QMARK_ = cljs.core.not(devtools.formatters.budgeting.has_any_object_reference_QMARK_(json_ml));
+var needed_depth = ((final_QMARK_)?depth:(depth + devtools.formatters.budgeting.header_expander_depth_cost));
+if((remaining_depth_budget >= needed_depth)){
+return devtools.formatters.budgeting.distribute_budget_BANG_(json_ml,remaining_depth_budget);
+} else {
+var expander_ml = devtools.formatters.templating.render_markup(devtools.formatters.markup._LT_header_expander_GT_(value));
+devtools.formatters.budgeting.add_over_budget_value_BANG_(value);
+
+return expander_ml;
+}
+} else {
+return json_ml;
+}
+});
+
+//# sourceMappingURL=devtools.formatters.budgeting.js.map
