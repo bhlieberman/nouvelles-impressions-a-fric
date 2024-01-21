@@ -31,7 +31,7 @@
       [p "One's shining eyes and "
        [hyperlink {:label "deep blisters"
                    :on-click (fn []
-                               (dispatch [:poem/change-current-footnote 4 0])
+                               (dispatch [:poem/change-current-footnote :c4 :p4/fn1])
                                (swap! footnote-modal-showing? not))}] ","] 
       [p "- Fever makes even adults grow, it's a well-known fact -"]
       [p "Gradually transform into blooming convalesence,"]
@@ -45,12 +45,12 @@
       [p [:a {:name "fn3ret"} "A fire "] "which the heir "
        [hyperlink {:label "who would benefit from his death"
                    :on-click (fn []
-                               (dispatch [:poem/change-current-footnote 4 1])
+                               (dispatch [:poem/change-current-footnote :c4 :p4/fn2])
                                (swap! footnote-modal-showing? not))}]]
       [p "Started secretly "
        [hyperlink  {:label " to see who was on his side;"
                     :on-click (fn []
-                                (dispatch [:poem/change-current-footnote 4 2])
+                                (dispatch [:poem/change-current-footnote :c4 :p4/fn3])
                                 (swap! footnote-modal-showing? not))}]]
       [p "- As when noisily leaving a distant pistol"]
       [p "Held by a champion whose shots are always accurate,"]
@@ -67,7 +67,7 @@
       [p "A young employee of whom, a year after "
        [hyperlink {:label "the sin was committed,"
                    :on-click (fn []
-                               (dispatch [:poem/change-current-footnote 4 3])
+                               (dispatch [:poem/change-current-footnote :c4 :p4/fn4])
                                (swap! footnote-modal-showing? not))}]]
       [p "Takes his child for a secret baptism,"]
       [p "Which will not allow him to sleep, is alas! frustrated"]
@@ -75,7 +75,7 @@
       [p "A trick candle invisibly rigged"]
       [p [hyperlink {:label "So as not to burn any more than its tip"
                      :on-click (fn []
-                                 (dispatch [:poem/change-current-footnote 4 4])
+                                 (dispatch [:poem/change-current-footnote :c4 :p4/fn5])
                                  (swap! footnote-modal-showing? not))}] ";"]
       [p "- As when he has let fly a quick sneeze"]
       [p "Followed by fervent prayers to God to bless him,"]

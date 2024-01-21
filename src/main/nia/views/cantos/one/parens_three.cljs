@@ -16,7 +16,8 @@
                           [p "Stiffens and strikes a conventionally aggressive pose,"]
                           [hyperlink {:style {:margin "0px 0px 9.8px"}
                                       :on-click #(dispatch [:routing/push-state :nia.routing.canto/one {:location :four}])
-                                      :label "- Wondering,"}]
+                                      :label "- Wondering,"
+                                      :class "text-success"}]
                           [p "for with every breath he moves slightly,"]
                           [p "If on the plate, beneath the red light,"]
                           [p "In the developing fluid, he will come out blurred -"]

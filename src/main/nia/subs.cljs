@@ -1,5 +1,6 @@
 (ns nia.subs
-  (:require [re-frame.core :refer [reg-sub]]))
+  (:require [goog.string :as gstr]
+            [re-frame.core :refer [reg-sub]]))
 
 (reg-sub
  :routing/current-route
@@ -40,9 +41,22 @@
  :images
  :-> :images/urls)
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (reg-sub
  :builder
  :-> :lunr/builder)
+
+(reg-sub
+ :search/all-matches
+ :-> :lunr/all-matches)
+
+(reg-sub
+ :search/show-shortened
+ :<- [:search/all-matches]
+ (fn [matches]
+   (for [{:keys [text pos len] :as match} matches
+         :let [_ (js/console.log match)]]
+     (gstr/truncate text (+ pos len 5) false))))
 
 (reg-sub
  :search/initial-results
@@ -51,3 +65,7 @@
 (reg-sub
  :search/results-showing?
  :-> :search/results-showing?)
+
+(reg-sub
+ :show-collapsed?
+ :-> :show-collapsed?)

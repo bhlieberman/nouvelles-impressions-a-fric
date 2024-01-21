@@ -1,5 +1,7 @@
 (ns nia.views.cantos.two.parens-three
   (:require [reagent.core :as r]
+            [reagent-mui.material.modal :refer [modal]]
+            [reagent-mui.material.tooltip :refer [tooltip]]
             [re-com.core :refer [at h-box hyperlink
                                  modal-panel p
                                  popover-anchor-wrapper
@@ -28,12 +30,13 @@
            :child [v-box
                    :children
                    [[p "while the " [:i "patron,"]]
-                    [p [:b.text-success "(((("] "Something of a specialist in the art of good living,"]
-                    [p "Who would shudder to see an expensive fruit"]
-                    [p "Given to the kiss of a steel blade," [:b.text-success "))))"]]
+                    [p {:class :text-success} #_[:b.text-success "(((("] "Something of a specialist in the art of good living,"]
+                    [p {:class :text-success} "Who would shudder to see an expensive fruit"]
+                    [p {:class :text-success} "Given to the kiss of a steel blade," #_[:b.text-success "))))"]]
                     [p "Knowing that all men carry, wisely hidden"]
                     [p "In a bulging sack which they would rather believe was flat,"]
                     [hyperlink {:src (at)
+                                :class "text-success"
                                 :label "Their personal faults upon their backs,"
                                 :on-click #(dispatch [:routing/push-state :nia.routing.canto/two {:location :four}])}]
                     [p "Seeking the swing of the thurible to secure their salvation,"]
@@ -80,7 +83,18 @@
                     [p "The Moon, the rounder and brighter she is;"]
                     [p "- That nobody was the equal of Napoleon 1st"]
                     [p "In the art of avoiding eating his bread first;"]
-                    [p
+                    [hyperlink {:label "- That with the art of exposing the shortcomings of the bluestocking"
+                                :on-click #(swap! popover-1-showing? not)}]
+                    (when @popover-1-showing?
+                      [modal-panel
+                       :backdrop-on-click #(reset! popover-1-showing? false)
+                       :child
+                       [v-box
+                        :children
+                        [[p "Bluestocking. i.e. femme savante, from Moliere's play of that title."]]]])
+                    #_[tooltip {:title "Bluestocking. i.e. femme savante, from Moliere's play of that title."}
+                     [:p {:style {:margin "9.8px 0px 9.8px"}} "- That with the art of exposing the shortcomings of the bluestocking"]]
+                    #_[p
                      [popover-anchor-wrapper
                       :showing? popover-1-showing?
                       :position :below-center
@@ -127,25 +141,17 @@
                     [p "- That Attila, more highly valued than his elder Rodrigo,"]
                     [p "Is more feted in famous Alexandrines;"]
                     [p "- That a curved route, when running towards a sudden noise,"]
-                    [p "Is more direct than a straight for connecting "
-                     [hyperlink {:src (at) :label "two points"
-                                 :attr {:ref return-ref}}] ";"]
+                    [p "Is more direct than a straight for connecting two points;"]
                     [p "- That the most noble weapon is the anonymous letter"]
-                    [p "Used for "
-                     [hyperlink
-                      {:src (at) :label "defaming one's rivals"
-                       :on-click #(.. footnote-1-ref -current scrollIntoView)}] " in the battle for honours;"]
+                    [p "Used for defaming one's rivalsin the battle for honours;"]
                     [p "- That there is a letter which, disgusted, the noble Calino"]
                     [p "Threw unopened into the waste-paper basket -"]
                     [p "Or that a law excluding females exists in the bee world;"]
-                    [p {:ref footnote-1-ref}
-                     "What prosperities, what fine fortunes,"]
+                    [p "What prosperities, what fine fortunes,"]
                     [p "To him who is not blind, clearly spring from an infamous source!"]
                     [p "The piano prize depends more for the woman"]
                     [p "Upon the number of admirers she has on the jury"]
                     [p "Than upon her playing and upon her developed talents"]
                     [p "Which she either reveals or not while playing her sonata;"]
                     [p "Many an X... Spa owes less to its bicarbonate"]
-                    [p "Than to the gamblers who frequent its casino "
-                     [hyperlink {:label "at night."
-                                 :on-click #(.. return-ref -current scrollIntoView)}]]]]]]]]])))
+                    [p "Than to the gamblers who frequent its casino at night."]]]]]]]])))

@@ -1,6 +1,5 @@
 (ns nia.views.text-search
-  (:require [clojure.string :as str]
-            [fork.re-frame :as fork] 
+  (:require [fork.re-frame :as fork]
             [re-com.core :refer [modal-panel p v-box]]
             [re-frame.core :refer [dispatch subscribe]]))
 
@@ -15,7 +14,7 @@
      "Keyword search"]]
    [:div.col-auto
     [:input.form-control.focus-ring.py-1.px-2.text-decoration-none.border-rounded-2
-     {:type :search 
+     {:type :search
       :id :text-search
       :placeholder "Shall I compare thee..."
       :on-change handle-change
@@ -23,9 +22,16 @@
    [:div.col-auto
     [:button.btn.btn-primary {:type :submit :disabled submitting?} "Search"]]])
 
+(defn search-results []
+  (let [results @(subscribe [:search/show-shortened])]
+    [v-box
+     :children
+     (into []
+           (for [result results]
+             [p result]))]))
+
 (defn text-search []
-  (let [results @(subscribe [:search/initial-results])
-        modal-showing? @(subscribe [:search/results-showing?])]
+  (let [modal-showing? @(subscribe [:search/results-showing?])]
     [:div.ms-auto.d-flex.align-self-center
      [fork/form {:path [:form]
                  :prevent-default? true
@@ -36,12 +42,8 @@
       search-form]
      (when modal-showing?
        [modal-panel
-        :backdrop-on-click (fn [] 
+        :backdrop-on-click (fn []
                              (dispatch [:search/clear-results])
                              (dispatch [:search/show-results]))
         :child
-        [v-box
-         :children
-         (into []
-               (for [line (str/split-lines results)]
-                 [p line]))]])]))
+        [search-results]])]))

@@ -3,8 +3,7 @@
             [nia.config.app-db :refer [app-db]]
             [nia.events.routing]
             [nia.events.search]
-            [re-frame.core :as rf :refer [debug dispatch-sync inject-cofx
-                                          path reg-event-db reg-event-fx]]
+            [re-frame.core :as rf :refer [dispatch-sync inject-cofx reg-event-db reg-event-fx]]
             [day8.re-frame.http-fx]))
 
 (reg-event-fx
@@ -20,19 +19,22 @@
            [:dispatch [:search/create-builder]]]})))
 
 (reg-event-db
- :poem/change-current-footnote
- [debug]
+ :poem/change-current-footnote 
  (fn [db [_ canto footnote]]
-   (assoc db :current-footnote (get-in db [:cantos/footnotes canto footnote]))))
+   (assoc db :current-footnote (.-body (get-in db [:cantos/footnotes canto footnote])))))
 
 (reg-event-fx
- :poem/parens-routing
- [debug]
+ :poem/parens-routing 
  (fn [{:keys [db]} [_ route params new-depth]]
    (if new-depth
      {:db (assoc db :poem/parens-depth new-depth)
       :push-state [route params]}
      {:push-state [route params]})))
+
+(reg-event-db
+ :collapse/toggle
+ (fn [db _]
+   (update db :show-collapsed? not)))
 
 (defn init-module! []
   (dispatch-sync [:app/initialize]))

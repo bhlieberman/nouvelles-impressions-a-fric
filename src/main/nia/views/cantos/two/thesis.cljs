@@ -22,9 +22,9 @@
        [hyperlink {:label "from which we can deduce" 
                    :on-click #(dispatch [:routing/push-state :nia.routing.canto/two {:location :one}])}]]
       [p "Intimidating rays of power emanating in all directions -"]
-      [p "Grey overcoat, black hat (the image of which irresistibly evokes"]
-      [p "The era when Kings were brought low"]
-      [p "And which historians cannot leave alone;)"]
+      [p {:class :text-danger} "Grey overcoat, black hat the image of which irresistibly evokes"]
+      [p {:class :text-danger} "The era when Kings were brought low"]
+      [p {:class :text-danger} "And which historians cannot leave alone;"]
       [p "Worn by him up to the point when, on his craggy rock,"]
       [p "It no longer exaggerated his silhouette,"]
       [p "A fact which causes one to forget for a moment, lost in meditation,"]

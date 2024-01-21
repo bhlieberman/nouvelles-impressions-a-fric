@@ -19,6 +19,7 @@
                   [p "From a fable or tale, a moral;"]
                   [p "From a thin scarecrow, "
                    [hyperlink {:on-click #(dispatch [:routing/push-state :nia.routing.canto/two {:location :two}])
+                               :class "text-warning"
                                :label " a simple cross"}]
                    " which stands"] 
                   [p "- Its posture suggesting terrible distress,"]
