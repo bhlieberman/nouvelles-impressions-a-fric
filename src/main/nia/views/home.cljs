@@ -1,6 +1,6 @@
 (ns nia.views.home
-  (:require [clojure.edn :as edn] 
-            [re-com.core :refer [at hyperlink hyperlink-href p title v-box]] 
+  (:require [clojure.edn :as edn]
+            [re-com.core :refer [at hyperlink hyperlink-href p title v-box]]
             ["react" :refer [createRef]]
             [shadow.resource :refer [inline]]))
 
@@ -40,7 +40,7 @@
        :label [:p "translated, "
                [hyperlink {:label "introduced"
                            :on-click #(.. intro-ref -current scrollIntoView)}]
-               ", and, prefaced" 
+               ", and, prefaced"
                " by " [hyperlink-href {:label "Andrew Hugill"
                                        :href "https://andrewhugill.com/"}]]]
       [preface]
@@ -63,11 +63,10 @@
       [p "The poem comprises four enormous Cantos, each of which contains a single sentence. Each sentence starts out as a simple poetic statement or description, but within a few lines Roussel opens the first of a series of parentheses which run to maximum of five brackets-within-brackets. These parenthetical interludes themselves contain sub-thoughts indicated by dashes or semicolons. And every so often, one comes across a footnote referring one to a further poem containing its own onion-like sets of brackets. All the cantos, and the footnotes, are written in rhyming Alexandrines (French heroic verse of six feet), an extraordinary poetic achievement in its own right, but made all the more so when one begins to appreciate the self- imposed constraints under which Roussel was working."]
       [p "In Canto IV, which contains a rare moment of direct autobiographical statement in the lines"]
       [:blockquote.blockquote.w-50
-       [p "...the sacred flame of genius "
-        [:b.text-primary "((((("]
-        "Which makes the one chosen by it so arrogant
-    That he finds the very stars in the sky pitiful
-    Compared with the new star that burns upon his forehead..." [:b.text-primary ")))))"]]]
+       [:p {:class [:text-primary :mt-2 :mb-2]} "...the sacred flame of genius"]
+       [:p {:class [:text-primary :mt-2 :mb-2]} "Which makes the one chosen by it so arrogant"]
+       [:p {:class [:text-primary :mt-2 :mb-2]} "That he finds the very stars in the sky pitiful"]
+       [:p {:class [:text-primary :mt-2 :mb-2]} "Compared with the new star that burns upon his forehead..."]]
       [p "(The image of the star on the forehead of the genius was one which Roussel associated with himself, even giving it as the title of a late play: L'Etoile au Front), in Canto IV there is another brief and incomplete moment of revelation. The fourth footnote lists a collection of words whose \"meanings change depending on their context.\" Here, the reader will recognise many of the tiny recurring ideas which crop up in various guises throughout all four Cantos. Evidently the procedure described in his Comment j'ai ecrit certains de mes livres (How I wrote certain of my books) is at work again here, in some new and rigorous form."]
       [p "The most extraordinary sections of the Nouvelles Impressions... however, are the lists growing from the seed of an idea. We read lists of people affected by fortune's wheel, lists of ways in which animals show greater forbearance than mankind, lists of things that diminish, and many others. Most extraordinary of all is the massive list in Canto II of things that might be mistaken for other things. Consideration of the latter will give an idea what makes these lists so remarkable. It grows from the image of a man listening at a wall and overhearing some other people discussing the faults in his character. Complacent, he had not noticed these faults, just as though he was under a spell which made him \"liable to mistake:- ...\""]
       [p "What follows is a list of visual correspondences, mistakes that one would never make unless bewitched. Page after page, the list goes on in a kind of delirium of mutability. Partly it resembles an extended session of \"word association\" in psychoanalysis, partly an example of Leonardo da Vinci's definition of genius as \"the ability to make connections.\" Some of the \" mistakes \" are strange and beautiful, such as:"]

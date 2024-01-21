@@ -37,6 +37,7 @@
                                    :on-click #(swap! footnote-one-showing? not)}]
                        " of the door, next to an oven,"]
                       [hyperlink {:on-click #(dispatch [:routing/push-state :nia.routing.canto/two {:location :three}])
+                                  :class "text-info"
                                   :label "One sees, forming the shape of a cross,"}]
                       [p "Two knives, clicking as they are sharpened by a carver;"]
                       [:hr]

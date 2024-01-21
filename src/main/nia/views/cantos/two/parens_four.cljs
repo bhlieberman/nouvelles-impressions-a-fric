@@ -28,13 +28,13 @@
            [v-box
             :children
             [[p "Moreover, when a man, with his ear pressed stethoscopically"]
-             [p [:b.text-primary "((((("] "As is done to a young person to whom the Faculty"]
-             [p "Has forbidden human contact and closed the window,"]
-             [p "Having found him to be infected with tuberculosis,"]
-             [p "Which, whilst hard on the young, respects the mature" [:b.text-primary ")))))"]]
+             [p {:class :text-primary} "As is done to a young person to whom the Faculty"]
+             [p {:class :text-primary} "Has forbidden human contact and closed the window,"]
+             [p {:class :text-primary} "Having found him to be infected with tuberculosis,"]
+             [p {:class :text-primary} "Which, whilst hard on the young, respects the mature"]
              [p "Against this door or that wall whilst others strip him bare,"]
-             [p [:b.text-primary "((((("] "Let us not forget that indeed a voice carries"]
-             [p "Through a thin wall, through a door;" [:b.text-primary ")))))"]]
+             [p {:class :text-primary} "Let us not forget that indeed a voice carries"]
+             [p {:class :text-primary} "Through a thin wall, through a door;"]
              [p "Sees his faults naked before him, his habits, his tastes,"]
              [p "When to his complacent eyes they seem "
               [hyperlink {:label "diminished,"

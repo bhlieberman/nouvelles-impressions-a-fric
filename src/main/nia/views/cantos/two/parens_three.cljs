@@ -36,6 +36,7 @@
                     [p "Knowing that all men carry, wisely hidden"]
                     [p "In a bulging sack which they would rather believe was flat,"]
                     [hyperlink {:src (at)
+                                :class "text-success"
                                 :label "Their personal faults upon their backs,"
                                 :on-click #(dispatch [:routing/push-state :nia.routing.canto/two {:location :four}])}]
                     [p "Seeking the swing of the thurible to secure their salvation,"]
@@ -140,25 +141,17 @@
                     [p "- That Attila, more highly valued than his elder Rodrigo,"]
                     [p "Is more feted in famous Alexandrines;"]
                     [p "- That a curved route, when running towards a sudden noise,"]
-                    [p "Is more direct than a straight for connecting "
-                     [hyperlink {:src (at) :label "two points"
-                                 :attr {:ref return-ref}}] ";"]
+                    [p "Is more direct than a straight for connecting two points;"]
                     [p "- That the most noble weapon is the anonymous letter"]
-                    [p "Used for defaming one's rivals"
-                     #_[hyperlink
-                      {:src (at) :label ""
-                       :on-click #(.. footnote-1-ref -current scrollIntoView)}] " in the battle for honours;"]
+                    [p "Used for defaming one's rivalsin the battle for honours;"]
                     [p "- That there is a letter which, disgusted, the noble Calino"]
                     [p "Threw unopened into the waste-paper basket -"]
                     [p "Or that a law excluding females exists in the bee world;"]
-                    [p #_{:ref footnote-1-ref}
-                     "What prosperities, what fine fortunes,"]
+                    [p "What prosperities, what fine fortunes,"]
                     [p "To him who is not blind, clearly spring from an infamous source!"]
                     [p "The piano prize depends more for the woman"]
                     [p "Upon the number of admirers she has on the jury"]
                     [p "Than upon her playing and upon her developed talents"]
                     [p "Which she either reveals or not while playing her sonata;"]
                     [p "Many an X... Spa owes less to its bicarbonate"]
-                    [p "Than to the gamblers who frequent its casino "
-                     [hyperlink {:label "at night."
-                                 :on-click #(.. return-ref -current scrollIntoView)}]]]]]]]]])))
+                    [p "Than to the gamblers who frequent its casino at night."]]]]]]]])))

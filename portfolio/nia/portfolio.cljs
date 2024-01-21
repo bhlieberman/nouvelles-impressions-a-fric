@@ -8,7 +8,8 @@
             [nia.scenes.thesis-scene]
             [nia.scenes.thesis2-scene]
             [nia.scenes.canto4-scenes]
-            [nia.scenes.mui-scenes]))
+            [nia.scenes.mui-scenes]
+            [nia.scenes.v2-scenes]))
 
 (defn init []
   (ui/start!

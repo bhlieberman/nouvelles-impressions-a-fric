@@ -4,8 +4,7 @@
             [nia.views.navbar :refer [navbar]]
             [nia.views.cantos.one.parent :as one]
             [nia.views.cantos.two.parent :as two]
-            [nia.views.cantos.four.parent :as four]
-            [nia.views.images :as images]
+            [nia.views.cantos.four.parent :as four] 
             [nia.views.home :refer [introduction]]))
 
 (defn router []
@@ -22,5 +21,5 @@
           :nia.routing.canto/one [one/parent location]
           :nia.routing.canto/two [two/parent location]
           :nia.routing.canto/four [four/parent location]
-          :nia.routing.images/home [images/show-image]
+          #_#_:nia.routing.images/home [images/show-image]
           [introduction])]]}]))

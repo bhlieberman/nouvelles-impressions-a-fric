@@ -46,6 +46,8 @@
                    :align-items "center"
                    :justify-content "center"})))
 
+;; TODO: integrate search functionality
+;; into MUI form
 (def styled-input-base
   (styled input-base (fn [{:keys [theme]}]
                        {:color "inherit"
@@ -63,37 +65,34 @@
   [search-comp
    [search-icon-wrapper
     [search]]
-   [styled-input-base {:placeholder "Search"}]])
+   [styled-input-base {:placeholder "Search"
+                       :disabled true}]])
 
 (defn list-component []
   [box {:width 250
         :role "presentation"}
    [list
     [search-component]
-    (for [canto ["Canto I" "Canto II" "Canto IV"]
-          :let [click-handler (case canto
+    (for [route-name ["Preface" "Canto I" "Canto II" "Canto IV"]
+          :let [click-handler (case route-name
+                                "Preface" #(dispatch [:routing/push-state :nia.routing/home])
                                 "Canto I" #(dispatch [:routing/push-state :nia.routing.canto/one {:location :thesis}])
                                 "Canto II" #(dispatch [:routing/push-state :nia.routing.canto/two {:location :thesis}])
                                 "Canto IV" #(dispatch [:routing/push-state :nia.routing.canto/four {:location :thesis}]))]]
-      [list-item {:key canto
+      [list-item {:key route-name
                   :disabled-padding true}
        [list-item-button
         [list-item-icon]
         [link {:color :primary
-               :on-click click-handler} canto]]])]
+               :on-click click-handler} route-name]]])]
    [styled-switch
     {:control (r/as-element [switch {:default-checked true
                                      :on-click #(js/console.log "collapsed")}])
      :label "Collapse"
-     :disabled false}]])
+     :disabled true}]])
 
 (defn navbar [{:keys [_children]}]
-  (let [active-route? (r/atom nil)
-        open? (r/atom false)
-        classname (fn [name]
-                    (if (= name @active-route?)
-                      "nav-item nav-link active"
-                      "nav-item nav-link"))]
+  (let [open? (r/atom false)]
     (fn [{:keys [children]}]
       [:div.container-fluid
        [:nav.d-flex
@@ -109,39 +108,7 @@
                    :aria-controls "navbarNavAltMarkup"
                    :aria-expanded "false"
                    :aria-label "Toggle navigation"}
-          [:span {:class "navbar-toggler-icon"}]]
-         #_[:div {:class "collapse navbar-collapse", :id "navbarNavAltMarkup"}
-          [:div {:class "navbar-nav"} 
-           [hyperlink {:src (at)
-                       :class (classname :canto-i)
-                       :label "Canto I"
-                       :on-click (fn []
-                                   (reset! active-route? :canto-i)
-                                   (dispatch [:routing/push-state :nia.routing.canto/one {:location :thesis}]))}] 
-           [hyperlink {:src (at)
-                       :class (classname :canto-ii)
-                       :label "Canto II"
-                       :on-click (fn []
-                                   (reset! active-route? :canto-ii)
-                                   (dispatch [:routing/push-state :nia.routing.canto/two {:location :thesis}]))}]
-           [hyperlink {:src (at)
-                       :class (classname :canto-iv)  
-                       :label "Canto IV"
-                       :on-click (fn []
-                                   (reset! active-route? :canto-iv)
-                                   (dispatch [:routing/push-state :nia.routing.canto/four {:location :thesis}]))}]
-           [hyperlink {:src (at)
-                       :class (str (classname :images) " disabled")
-                       :label "Images"
-                       :on-click (fn []
-                                   (reset! active-route? :images)
-                                   (dispatch [:routing/push-state :nia.routing.images/home nil]))}]]]]
-        #_[form-control-label
-         {:control (r/as-element [switch {:default-checked true
-                                          :on-click #(dispatch [:collapse/toggle])}])
-          :label "Collapse"
-          :disabled false}]
-        #_[text-search]]
+          [:span {:class "navbar-toggler-icon"}]]]]
        children
        [drawer
         {:anchor "left"
