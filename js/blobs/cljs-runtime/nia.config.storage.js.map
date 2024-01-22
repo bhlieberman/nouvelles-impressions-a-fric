@@ -1,1 +1,0 @@
-{"version":3,"sources":["nia/config/storage.cljs"],"mappings":";;;AAEA;;;6BAAA,AAAAA,YAAA,6BAAA,tEAAaC;AAEb;;;+BAAA,AAAAD,YAAA,+BAAA,1EAAaE","names":["js/goog.define","nia.config.storage/sas-url","nia.config.storage/sas-token"],"sourcesContent":["(ns nia.config.storage)\n\n(goog-define sas-url \"\")\n\n(goog-define sas-token \"\")"]}

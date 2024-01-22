@@ -1,9 +1,0 @@
-{
-"version":3,
-"file":"shadow.js.shim.module$react_bootstrap$Image$default.js",
-"lineCount":3,
-"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,qDAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,oCAAf,GAAsDH,MAAOC,CAAAA,EAAGG,CAAAA,OAAV,CAAkB,+CAAlB,EAAmE,EAAnE,CAAA,CAAuE,SAAvE,CAAtD;;",
-"sources":["shadow.js.shim.module$react_bootstrap$Image$default.js"],
-"sourcesContent":["goog.provide(\"shadow.js.shim.module$react_bootstrap$Image$default\");\nshadow.js.shim.module$react_bootstrap$Image$default = shadow.js.require(\"module$node_modules$react_bootstrap$cjs$Image\", {})[\"default\"];\n"],
-"names":["goog","provide","shadow","js","shim","module$react_bootstrap$Image$default","require"]
-}

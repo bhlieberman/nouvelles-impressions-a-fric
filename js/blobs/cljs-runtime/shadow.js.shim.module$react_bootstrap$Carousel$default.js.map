@@ -1,9 +1,0 @@
-{
-"version":3,
-"file":"shadow.js.shim.module$react_bootstrap$Carousel$default.js",
-"lineCount":3,
-"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,wDAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,uCAAf,GAAyDH,MAAOC,CAAAA,EAAGC,CAAAA,IAAKE,CAAAA,+BAAgCC,CAAAA,OAAxG;;",
-"sources":["shadow.js.shim.module$react_bootstrap$Carousel$default.js"],
-"sourcesContent":["goog.provide(\"shadow.js.shim.module$react_bootstrap$Carousel$default\");\nshadow.js.shim.module$react_bootstrap$Carousel$default = shadow.js.shim.module$react_bootstrap$Carousel.default;\n"],
-"names":["goog","provide","shadow","js","shim","module$react_bootstrap$Carousel$default","module$react_bootstrap$Carousel","default"]
-}

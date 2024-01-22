@@ -1,9 +1,0 @@
-{
-"version":3,
-"file":"shadow.js.shim.module$react_bootstrap$Image.js",
-"lineCount":5,
-"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,6CAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,oDAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,4BAAf,GAA8CH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,uBAAzB,CAA9C,GAAkGC,aAAA,CAAc,uBAAd,CAAlG;AACAC,kDAAmDC,CAAAA,OAAnD,GAA6DP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,4BAA5E;;",
-"sources":["shadow.js.shim.module$react_bootstrap$Image.js"],
-"sourcesContent":["goog.provide(\"shadow.js.shim.module$react_bootstrap$Image\");\ngoog.provide(\"module$shadow_js_shim_module$react_bootstrap$Image\");\nshadow.js.shim.module$react_bootstrap$Image = shadow.js.nativeProvides[\"react-bootstrap/Image\"] = shadow$bridge(\"react-bootstrap/Image\");\nmodule$shadow_js_shim_module$react_bootstrap$Image.default = shadow.js.shim.module$react_bootstrap$Image;\n"],
-"names":["goog","provide","shadow","js","shim","module$react_bootstrap$Image","nativeProvides","shadow$bridge","module$shadow_js_shim_module$react_bootstrap$Image","default"]
-}

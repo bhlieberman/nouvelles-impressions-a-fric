@@ -1,9 +1,0 @@
-{
-"version":3,
-"file":"shadow.js.shim.module$react_bootstrap$CarouselCaption.js",
-"lineCount":5,
-"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,uDAAb,CAAA;AACAD,IAAKC,CAAAA,OAAL,CAAa,8DAAb,CAAA;AACAC,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,sCAAf,GAAwDH,MAAOC,CAAAA,EAAGG,CAAAA,cAAV,CAAyB,iCAAzB,CAAxD,GAAsHC,aAAA,CAAc,iCAAd,CAAtH;AACAC,4DAA6DC,CAAAA,OAA7D,GAAuEP,MAAOC,CAAAA,EAAGC,CAAAA,IAAKC,CAAAA,sCAAtF;;",
-"sources":["shadow.js.shim.module$react_bootstrap$CarouselCaption.js"],
-"sourcesContent":["goog.provide(\"shadow.js.shim.module$react_bootstrap$CarouselCaption\");\ngoog.provide(\"module$shadow_js_shim_module$react_bootstrap$CarouselCaption\");\nshadow.js.shim.module$react_bootstrap$CarouselCaption = shadow.js.nativeProvides[\"react-bootstrap/CarouselCaption\"] = shadow$bridge(\"react-bootstrap/CarouselCaption\");\nmodule$shadow_js_shim_module$react_bootstrap$CarouselCaption.default = shadow.js.shim.module$react_bootstrap$CarouselCaption;\n"],
-"names":["goog","provide","shadow","js","shim","module$react_bootstrap$CarouselCaption","nativeProvides","shadow$bridge","module$shadow_js_shim_module$react_bootstrap$CarouselCaption","default"]
-}

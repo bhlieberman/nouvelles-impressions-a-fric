@@ -1,9 +1,0 @@
-{
-"version":3,
-"file":"shadow.esm.esm_import$react_dom.js",
-"lineCount":3,
-"mappings":"AAAAA,IAAKC,CAAAA,OAAL,CAAa,iCAAb,CAAA;AACAC,MAAOC,CAAAA,GAAIC,CAAAA,oBAAX,GAAkCA,oBAAlC;;",
-"sources":["shadow.esm.esm_import$react_dom.js"],
-"sourcesContent":["goog.provide(\"shadow.esm.esm_import$react_dom\");\nshadow.esm.esm_import$react_dom = esm_import$react_dom;\n"],
-"names":["goog","provide","shadow","esm","esm_import$react_dom"]
-}
