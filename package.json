@@ -4,10 +4,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "shadow:watch": "shadow-cljs watch app",
     "shadow:release": "shadow-cljs release app",
     "dev": "run-s -l *:watch",
-    "release": "run-s *:release"
+    "release": "run-s *:release",
+    "build": "npx vite build public --config vite.config.js"
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",

@@ -4,14 +4,15 @@ export default {
         {
             output: {
                 manualChunks: {
-                    "base": ["public/js/base.js"],
-                    "storage": ["public/js/storage.js"],
-                    "views": ["public/js/views.js"],
-                    "core": ["public/js/core.js"],
+                    "base": ["public/js/app/base.js"],
+                    "storage": ["public/js/app/storage.js"],
+                    "views": ["public/js/app/views.js"],
+                    "core": ["public/js/app/core.js"],
                 }
             }
         },
         chunkSizeWarningLimit: 600,
-        outDir: "dist"
-    }
+        outDir: "../build",
+    },
+    base: "/nouvelles-impressions-a-fric/"
 }
