@@ -3,13 +3,14 @@
             [re-frame.core :refer [dispatch]]))
 
 (defn parens-three []
-  [v-box 
+  [v-box
    :children
    [[h-box
      :align-self :center
      :children [[scroller
-                 :height "750px"
-                 :class "m-3"
+                 :height "500px"
+                 :class "m-3" 
+                 :margin "10px"
                  :child [v-box
                          :children
                          [[p "When any individual, obsessed with his own ego,"]

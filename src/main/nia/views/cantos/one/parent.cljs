@@ -7,7 +7,7 @@
             [nia.views.cantos.one.parens-five :as five]
             [nia.views.parens-scroll :as p]))
 
-(defn parent [which depth]
+(defn parent [which]
   [p/parens-scroll
    {:children (case which
                 "thesis" [thesis/thesis]
@@ -16,6 +16,5 @@
                 "three" [three/parens-three]
                 "four" [four/parens-four]
                 "five" [five/parens-five]
-                [thesis/thesis])
-    #_#_:depth depth
+                [thesis/thesis]) 
     :canto :nia.routing.canto/one}])

@@ -4,7 +4,7 @@
 
 (defn thesis []
   [v-box
-   :margin "25px 0px"
+   :margin "14px"
    :children
    [[v-box
      :align-self :center
@@ -18,11 +18,10 @@
               :style {:align-self :center
                       :margin "10px 0px 10px 0px"}
               :label [:i "Outskirts of Cairo"]}]
-
       [p "Skimming along the Nile I see two banks going past covered"]
       [p "With flowers, birds' wings, flashes of light, lush green plants,"]
       [p "One of which would suffice for twenty of our "
        [hyperlink {:label "salons"
+                   :class "text-danger"
                    :on-click #(dispatch [:routing/push-state :nia.routing.canto/four {:location :one}])}]]
-      [p "With its opaque foliage, lightly coloured stripes and fruits."]
-      [:hr]]]]])
+      [p "With its opaque foliage, lightly coloured stripes and fruits."]]]]])

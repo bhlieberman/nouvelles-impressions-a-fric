@@ -5,11 +5,12 @@
 (defn parens-two []
   [h-box
    :width "400px"
-   :align :center
+   :align-self :center
+   :justify :center
+   :margin "14px"
    :justify :start
    :children
-   [[v-box
-     :max-width "200px"
+   [[v-box 
      :children
      [[p "To be able to re-touch! as when, "
        [hyperlink {:label "wearing her jewellery"

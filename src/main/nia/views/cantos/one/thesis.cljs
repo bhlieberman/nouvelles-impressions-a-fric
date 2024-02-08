@@ -4,7 +4,7 @@
 
 (defn thesis []
   [v-box
-   :margin "25px 0px"
+   :margin "14px"
    :children
    [[v-box
      :align-self :center
@@ -34,5 +34,4 @@
       [p "- Roots, trunks, boughs, connecting branches -"]
       [p "His family tree; the cathedrals eroded by time;"]
       [p "Likewise the proud menhir, the first cromlech"]
-      [p "The dolmen beneath which the soil is always dry."]
-      [:hr]]]]])
+      [p "The dolmen beneath which the soil is always dry."]]]]])

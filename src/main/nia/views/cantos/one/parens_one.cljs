@@ -5,6 +5,7 @@
 (defn parens []
   [h-box
    :src (at)
+   :margin "14px"
    :width "400px"
    :align-self :center
    :justify :start

@@ -15,7 +15,7 @@
             [reagent-mui.material.list-item-icon :refer [list-item-icon]] 
             [reagent-mui.styles :refer [styled]] 
             [reagent.core :as r]
-            [re-com.core :refer [at hyperlink]]
+            [re-com.core :refer [hyperlink]]
             [re-frame.core :refer [dispatch]]
             [shadow.cljs.modern :refer [js-template]]))
 
@@ -57,7 +57,7 @@
                                                  :transition ((-> theme :transitions :create) "width")}})))
 
 (def styled-switch
-  (styled form-control-label (fn [{:keys [theme]}]
+  (styled form-control-label (fn [{:keys [_]}]
                                {:display :flex
                                 :justify-content :center})))
 
@@ -86,10 +86,10 @@
         [link {:color :primary
                :on-click click-handler} route-name]]])]
    [styled-switch
-    {:control (r/as-element [switch {:default-checked true
-                                     :on-click #(js/console.log "collapsed")}])
+    {:control (r/as-element [switch {:default-checked false
+                                     :on-click #(dispatch [:collapse/toggle])}])
      :label "Collapse"
-     :disabled true}]])
+     :disabled false}]])
 
 (defn navbar [{:keys [_children]}]
   (let [open? (r/atom false)]

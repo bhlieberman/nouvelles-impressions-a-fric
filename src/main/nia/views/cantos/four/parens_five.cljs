@@ -7,7 +7,7 @@
   (let [footnote-modal-showing? (r/atom false)]
     (fn []
       [v-box
-       :margin "10px 0px"
+       :margin "14px"
        :children
        [[v-box
          :align-self :center
@@ -24,8 +24,7 @@
           [p "He who often went to bed hungry,"]
           [p "No less than the young faithful taking "
            [hyperlink {:label "the Sacred Host"
-                       :on-click #(reset! footnote-modal-showing? true)}]]
-          [:hr]
+                       :on-click #(reset! footnote-modal-showing? true)}]] 
           (when @footnote-modal-showing?
             [modal-panel
              :backdrop-on-click #(reset! footnote-modal-showing? false)
@@ -36,15 +35,16 @@
                      [v-box
                       :children [[p "Although forbearance may be driven out from human virtues"]
                                  [p "To the same degree that Monday morning drives out the ardour of workers"]
-                                 [p [:b.text-danger "("] "Having enjoyed leisure; heart and soul are elsewhere,"]
-                                 [p "And gloomy is the student when he returns in October;" [:b.text-danger ")"]]
+                                 [p {:class :text-danger} "(Having enjoyed leisure; heart and soul are elsewhere,"]
+                                 [p {:class :text-danger} "And gloomy is the student when he returns in October;)"]
                                  [p "And the criminal is depressed by dementia,"]
                                  [p "As a light winter by the price of rock salt,"]
                                  [p "Nevertheless anger is not a universal vice;"]
                                  [p "When shunned, the peacock respects other animals;"]
                                  [p "Also the swallow, despite his skill in riding thermals;"]
                                  [p "The ram, even though he is legendary"]
-                                 [p [:b.text-danger "("] "Everybody has heard of the Golden Fleece" [:b.text-danger ")"] "; the cat,"]
+                                 [p [:span {:class :text-danger}
+                                     "(Everybody has heard of the Golden Fleece)"] "; the cat,"]
                                  [p "Even though he can see at night without a lantern,"]
                                  [p "Even though he can make prophecies - as can the swallow,"]
                                  [p "But with less accuracy and less famously -"]

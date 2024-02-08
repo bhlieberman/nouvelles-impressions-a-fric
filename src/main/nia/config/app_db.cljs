@@ -1,8 +1,7 @@
 (ns nia.config.app-db
-  (:require
-   [cljs.spec.alpha :as s]
-   [shadow.resource :as rs]
-   [re-frame.core :refer [after]]))
+  (:require [cljs.spec.alpha :as s]
+            [shadow.resource :as rs]
+            [re-frame.core :refer [after]]))
 
 (s/def :app.routing/current-route (s/nilable record?))
 (s/def :app.user/history vector?)
@@ -22,7 +21,7 @@
                           :opt [:lunr/all-matches]))
 
 (def check-db
-  (after (fn [db event] 
+  (after (fn [db event]
            (when-not (s/valid? ::valid-db db)
              (throw (ex-info "DB failed spec after event: " {:event event
                                                              :why (s/explain ::valid-db db)}))))))
@@ -40,19 +39,19 @@
                                                   :body (rs/inline "footnotes/two/three_one.txt")}}
                                 :c4 {:p4/fn1 #js {:title "c4-p4-fn1"
                                                   :id "c4-p4-fn1"
-                                                  :body (rs/inline "footnotes/four/four_one.txt")}
+                                                  :body (rs/inline "footnotes/four/four_one.edn")}
                                      :p4/fn2 #js {:title "c4-p4-fn2"
                                                   :id "c4-p4-fn2"
-                                                  :body (rs/inline "footnotes/four/four_two.txt")}
+                                                  :body (rs/inline "footnotes/four/four_two.edn")}
                                      :p4/fn3 #js {:title "c4-p4-fn3"
                                                   :id "c4-p4-fn3"
-                                                  :body (rs/inline "footnotes/four/four_three.txt")}
+                                                  :body (rs/inline "footnotes/four/four_three.edn")}
                                      :p4/fn4 #js {:title "c4-p4-fn4"
                                                   :id "c4-p4-fn4"
-                                                  :body (rs/inline "footnotes/four/four_four.txt")}
+                                                  :body (rs/inline "footnotes/four/four_four.edn")}
                                      :p4/fn5 #js {:title "c4-p4-fn5"
                                                   :id "c4-p4-fn5"
-                                                  :body (rs/inline "footnotes/four/four_five.txt")}}}
+                                                  :body (rs/inline "footnotes/four/four_five.edn")}}}
              :poem/traversal-type :depth
              :poem/parens-depth 0
              :poem/parens-loc {0 :thesis

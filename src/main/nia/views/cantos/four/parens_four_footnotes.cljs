@@ -1,16 +1,19 @@
 (ns nia.views.cantos.four.parens-four-footnotes
-  (:require [clojure.string :as str] 
-            [re-com.core :refer [modal-panel p v-box]]
+  (:require [clojure.edn :as edn] 
+            [re-com.core :refer [modal-panel scroller v-box]]
             [re-frame.core :refer [subscribe]]))
 
 (defn modal [props]
-  ;; later I will use markdown? 
   (let [footnote @(subscribe [:poem/display-current-footnote])]
     [modal-panel
-     :backdrop-on-click #(reset! (:showing? props) false)
+     :backdrop-on-click #(reset! (:showing? props) false) 
      :child
-     [v-box
+     [v-box 
       :children
-      (into []
-            (for [line (str/split-lines footnote)]
-              [p line]))]]))
+      [[scroller
+        :class "m-3"
+        :height "300px" 
+        :child
+        [v-box
+         :children
+         (edn/read-string footnote)]]]]]))

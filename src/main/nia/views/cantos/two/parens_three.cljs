@@ -1,22 +1,14 @@
 (ns nia.views.cantos.two.parens-three
-  (:require [reagent.core :as r]
-            [reagent-mui.material.modal :refer [modal]]
-            [reagent-mui.material.tooltip :refer [tooltip]]
+  (:require [nia.views.vutils :refer [footnote-tooltip]]
+            [reagent.core :as r] 
             [re-com.core :refer [at h-box hyperlink
                                  modal-panel p
-                                 popover-anchor-wrapper
-                                 popover-content-wrapper
                                  scroller v-box]]
             [re-frame.core :refer [dispatch]]
-            [nia.views.cantos.two.parens-four-ii :refer [parens-four-ii]]
-            ["react" :refer [createRef]]))
+            [nia.views.cantos.two.parens-four-ii :refer [parens-four-ii]]))
 
 (defn parens-three []
-  (let [popover-1-showing? (r/atom false)
-        popover-2-showing? (r/atom false)
-        par-ii-modal (r/atom false)
-        footnote-1-ref (createRef)
-        return-ref (createRef)]
+  (let [par-ii-modal (r/atom false)]
     (fn []
       [v-box
        :children
@@ -25,14 +17,15 @@
          :justify :start
          :children
          [[scroller
-           :height "750px"
+           :height "500px"
            :class "m-3"
+           :margin "10px"
            :child [v-box
                    :children
                    [[p "while the " [:i "patron,"]]
-                    [p {:class :text-success} #_[:b.text-success "(((("] "Something of a specialist in the art of good living,"]
+                    [p {:class :text-success} "((((Something of a specialist in the art of good living,"]
                     [p {:class :text-success} "Who would shudder to see an expensive fruit"]
-                    [p {:class :text-success} "Given to the kiss of a steel blade," #_[:b.text-success "))))"]]
+                    [p {:class :text-success} "Given to the kiss of a steel blade,))))"]
                     [p "Knowing that all men carry, wisely hidden"]
                     [p "In a bulging sack which they would rather believe was flat,"]
                     [hyperlink {:src (at)
@@ -82,33 +75,10 @@
                     [p "- That the sum of stars is increased around"]
                     [p "The Moon, the rounder and brighter she is;"]
                     [p "- That nobody was the equal of Napoleon 1st"]
-                    [p "In the art of avoiding eating his bread first;"]
-                    [hyperlink {:label "- That with the art of exposing the shortcomings of the bluestocking"
-                                :on-click #(swap! popover-1-showing? not)}]
-                    (when @popover-1-showing?
-                      [modal-panel
-                       :backdrop-on-click #(reset! popover-1-showing? false)
-                       :child
-                       [v-box
-                        :children
-                        [[p "Bluestocking. i.e. femme savante, from Moliere's play of that title."]]]])
-                    #_[tooltip {:title "Bluestocking. i.e. femme savante, from Moliere's play of that title."}
-                     [:p {:style {:margin "9.8px 0px 9.8px"}} "- That with the art of exposing the shortcomings of the bluestocking"]]
-                    #_[p
-                     [popover-anchor-wrapper
-                      :showing? popover-1-showing?
-                      :position :below-center
-                      :popover [popover-content-wrapper
-                                :width "750px"
-                                :no-clip? true
-                                :backdrop-opacity 0.5
-                                :close-button? false
-                                :tooltip-style? true
-                                :arrow-gap 20
-                                :body "Bluestocking. i.e. femme savante, from Moliere's play of that title."]
-                      :anchor
-                      [hyperlink {:on-click (fn [] (swap! popover-1-showing? not))
-                                  :label "- That with the art of exposing the shortcomings of the bluestocking*"}]]]
+                    [p "In the art of avoiding eating his bread first;"] 
+                    [p
+                     [footnote-tooltip {:children (r/as-element [:a "- That with the art of exposing the shortcomings of the bluestocking"])
+                                        :title "Bluestocking. i.e. femme savante, from Moliere's play of that title."}]] 
                     [p "Moliere has never gifted the servant;"]
                     [p "- That everybody would refuse he who politely"]
                     [p "Asks permission before opening an envelope in company;"]
@@ -116,20 +86,8 @@
                     [p "As opposed to white, then the same is the case with swifts;"]
                     [p "- That he who has been dealt a good hand in a game of Nain"]
                     [p
-                     [popover-anchor-wrapper
-                      :showing? popover-2-showing?
-                      :position :below-center
-                      :popover [popover-content-wrapper
-                                :width "750px"
-                                :no-clip? true
-                                :backdrop-opacity 0.5
-                                :close-button? false
-                                :tooltip-style? true
-                                :arrow-gap 20
-                                :body "Nain Jaune. A card game called Pope Joan."]
-                      :anchor
-                      [hyperlink {:label "Jaune* would much rather finish without having had the hand;"
-                                  :on-click #(swap! popover-2-showing? not)}]]]
+                     [footnote-tooltip {:children (r/as-element [:a "Jaune would much rather finish without having had the hand;"])
+                                        :title "Nain Jaune. A card game called Pope Joan."}]]
                     [p "- That it was far from his Spring when, moved by an alder tree,"]
                     [p "The human St. Martin gave his cloak to the poor;"]
                     [p "- That in love nothing could be the equal of Onan"]
