@@ -1,8 +1,6 @@
 (ns nia.views.navbar
-  (:require ["@mui/material/styles" :refer [alpha]]
-            [nia.views.text-search :refer [text-search]]
-            [reagent-mui.material.drawer :refer [drawer]]
-            [reagent-mui.material.button :refer [button]]
+  (:require ["@mui/material/styles" :refer [alpha]] 
+            [reagent-mui.material.drawer :refer [drawer]] 
             [reagent-mui.material.box :refer [box]]
             [reagent-mui.material.link :refer [link]]
             [reagent-mui.icons.search :refer [search]] 
@@ -100,15 +98,7 @@
         [:div.d-flex.align-items-center
          [hyperlink {:class "navbar-brand m-3 display-4"
                      :label "NIA"
-                     :on-click (toggle-drawer open?)}]
-         [:button {:class "navbar-toggler"
-                   :type "button"
-                   :data-bs-toggle "collapse"
-                   :data-bs-target "#navbarNavAltMarkup"
-                   :aria-controls "navbarNavAltMarkup"
-                   :aria-expanded "false"
-                   :aria-label "Toggle navigation"}
-          [:span {:class "navbar-toggler-icon"}]]]]
+                     :on-click (toggle-drawer open?)}]]]
        children
        [drawer
         {:anchor "left"
