@@ -1,6 +1,6 @@
 (ns nia.views.cantos.four.parens-four
   (:require [nia.views.cantos.four.parens-four-footnotes :refer [modal]]
-            [nia.views.vutils :refer [collapsed]]
+            [nia.views.vutils :refer [collapsed nested]]
             [reagent.core :as r]
             [re-com.core :refer [hyperlink p scroller v-box]]
             [re-frame.core :refer [dispatch subscribe]]))
@@ -9,7 +9,8 @@
   (let [footnote-modal-showing? (r/atom false)]
     (fn []
       (let [show? @(subscribe [:show-collapsed?])
-            collapse? (partial collapsed show?)]
+            collapse? (partial collapsed show?)
+            nested? (partial nested show?)]
         [scroller
          :height "500px"
          :class "m-3"
@@ -73,9 +74,7 @@
              [:span {:class :text-primary} "(((((who everybody thinks is well-behaved"])]
            (collapse?
             [p {:class :text-primary} "As long as her affair remains a secret)))))"])
-           [p [:a {:name "fn4ret"} "Who "]
-            (collapse?
-             [:span {:class :text-primary} "(((((ready to join with hers his plenteous destiny)))))"])]
+           (nested p "Who " [:span {:class :text-primary} "(((((ready to join with hers his plenteous destiny)))))"])
            [p "Is loved by a high-level financier,"]
            [p "A young employee of whom, a year after "
             [hyperlink {:label "the sin was committed,"
@@ -84,7 +83,7 @@
                                     (swap! footnote-modal-showing? not))}]]
            [p "Takes his child for a secret baptism,"]
            [p "Which will not allow him to sleep, is alas! frustrated"]
-           [p [:a {:name "fn5ret"} "Because"] ", for a laugh, someone has planted in the candlestick"]
+           [p "Because, for a laugh, someone has planted in the candlestick"]
            [p "A trick candle invisibly rigged"]
            [p [hyperlink {:label "So as not to burn any more than its tip"
                           :on-click (fn []
