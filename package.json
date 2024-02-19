@@ -7,6 +7,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "shadow:watch": "shadow-cljs watch app",
+    "watch": "shadow-cljs watch server",
     "shadow:release": "shadow-cljs release app",
     "dev": "run-s -l *:watch",
     "release": "run-s *:release",
@@ -15,16 +16,34 @@
   "devDependencies": {
     "gh-pages": "^6.1.1",
     "npm-run-all": "^4.1.5",
-    "shadow-cljs": "2.25.8"
+    "shadow-cljs": "^2.25.8"
   },
   "dependencies": {
     "@emotion/react": "11.11.3",
     "@emotion/styled": "11.11.0",
+    "@keyv/sqlite": "3.6.5",
     "@mui/material": "5.11.12",
     "axe-core": "4.7.0",
+    "cookie-parser": "1.4.5",
+    "csurf": "1.11.0",
+    "express": "4.17.1",
+    "express-session": "1.17.2",
     "framer-motion": "^10.18.0",
+    "html-to-text": "8.1.0",
+    "json-stringify-safe": "5.0.1",
+    "keyv": "4.5.2",
     "lunr": "^2.3.9",
+    "morgan": "1.10.0",
+    "node-html-parser": "4.1.5",
+    "node-input-validator": "4.5.0",
+    "nodemailer": "6.6.5",
+    "passport": "0.6.0",
+    "passport-local": "1.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "rotating-file-stream": "3.0.4",
+    "sitefox": "github:chr15m/sitefox",
+    "source-map-support": "0.5.21",
+    "tmp": "0.2.1"
   }
 }

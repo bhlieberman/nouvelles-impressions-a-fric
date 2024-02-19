@@ -1,7 +1,7 @@
 (ns nia.app
   (:require [goog.dom :as gdom] 
             [nia.subs] 
-            [nia.views.router :refer [router]]
+            [nia.views.router :refer [router]] 
             [reagent.core :as r]
             [reagent.dom.client :refer [create-root]]))
 
@@ -12,5 +12,4 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn init [] 
-  
   (render!))
