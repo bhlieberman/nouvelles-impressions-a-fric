@@ -2,13 +2,12 @@
 {:source-paths
  ["src/main"
   "node_modules/sitefox/src"
-  "public/assets"
+  "public"
   "dev-resources"
   "portfolio"]
 
  :dev-http {8080 ["public" "classpath:public"]
-            8081 ["dev-resources" "classpath:public"]
-            8082 "public/dist"}
+            8081 ["dev-resources" "classpath:public"]}
 
  :dependencies
  [[akiroz.re-frame/storage "0.1.4"]
@@ -30,16 +29,8 @@
  {:app {:target :browser
         :output-dir "public/js/app"
         :asset-path "/js/app"
-        :modules {:base {:entries []}
-                  :core {:init-fn nia.app/init
-                         :depends-on #{:base :views}}
-                  :views {:entries [nia.subs nia.events.core nia.routing]
-                          :init-fn nia.routing/init-routes!
-                          :depends-on #{:base :storage}}
-                  :storage {:entries [nia.events.storage]
-                            :depends-on #{:base}}
-                  :client {:entries [nia.client]
-                           :depends-on #{:base :views}}} 
+        :modules {:core {:init-fn nia.app/init
+                         :entries [nia.events.core nia.routing]}} 
         :devtools
         {:preloads [day8.re-frame-10x.preload.react-18]}
         :dev
@@ -50,12 +41,13 @@
           re-com.config/root-url-for-compiler-output true}}
         :release
         {:compiler-options {:optimizations :advanced}
+         :output-dir "build/js/app"
          :build-options
          {:ns-aliases
           {day8.re-frame.tracing day8.re-frame.tracing-stubs}}}
         :closure-defines {nia.config.storage/sas-url #shadow/env "AZURE_BLOB_NIA_URL"
                           nia.config.storage/sas-token #shadow/env "AZURE_BLOB_SAS_TOKEN"}} 
-  :portfolio {:target :esm
+  :portfolio {:target :browser
               :output-dir "dev-resources/js"
               :asset-path "/js"
               :compiler-options {:warnings {:fn-deprecated false}}
@@ -63,7 +55,7 @@
   :server {:target :node-script
            :output-to "public/js/server.js"
            :modules {:server {:init-fn nia.server/main!}}
-           :release {:output-to "server.js"
-                     :output-dir "build"}
+           :release {:compiler-options {:optimizations :advanced}
+                     :output-to "build/js/server.js"}
            :devtools {:after-load nia.server/reload!}
            :main nia.server/main!}}}
