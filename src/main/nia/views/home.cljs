@@ -5,7 +5,7 @@
             [shadow.resource :refer [inline]]))
 
 (defn preface []
-  (let [preface (edn/read-string (inline "preface.edn"))]
+  (let [preface (edn/read-string (inline "assets/preface.edn"))]
     [v-box
      :src (at)
      :justify :center

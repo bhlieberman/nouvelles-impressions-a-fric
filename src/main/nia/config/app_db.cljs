@@ -30,28 +30,28 @@
              :app.user/history [] ;; perhaps every few clicks triggers a LocalStorage write?
              :cantos/footnotes {:c1 {:p4/fn1 #js {:title "c1-p4-fn1"
                                                   :id "c1-p4-fn1"
-                                                  :body (rs/inline "footnotes/one/four_one.txt")}}
+                                                  :body (rs/inline "assets/footnotes/one/four_one.txt")}}
                                 :c2 {:p2/fn1 #js {:title "c2-p2-fn1"
                                                   :id "c2-p2-fn1"
-                                                  :body (rs/inline "footnotes/two/two_one.txt")}
+                                                  :body (rs/inline "assets/footnotes/two/two_one.txt")}
                                      :p3/fn1 #js {:title "c2-p3-fn1"
                                                   :id "c2-p3-fn1"
-                                                  :body (rs/inline "footnotes/two/three_one.txt")}}
+                                                  :body (rs/inline "assets/footnotes/two/three_one.txt")}}
                                 :c4 {:p4/fn1 #js {:title "c4-p4-fn1"
                                                   :id "c4-p4-fn1"
-                                                  :body (rs/inline "footnotes/four/four_one.edn")}
+                                                  :body (rs/inline "assets/footnotes/four/four_one.edn")}
                                      :p4/fn2 #js {:title "c4-p4-fn2"
                                                   :id "c4-p4-fn2"
-                                                  :body (rs/inline "footnotes/four/four_two.edn")}
+                                                  :body (rs/inline "assets/footnotes/four/four_two.edn")}
                                      :p4/fn3 #js {:title "c4-p4-fn3"
                                                   :id "c4-p4-fn3"
-                                                  :body (rs/inline "footnotes/four/four_three.edn")}
+                                                  :body (rs/inline "assets/footnotes/four/four_three.edn")}
                                      :p4/fn4 #js {:title "c4-p4-fn4"
                                                   :id "c4-p4-fn4"
-                                                  :body (rs/inline "footnotes/four/four_four.edn")}
+                                                  :body (rs/inline "assets/footnotes/four/four_four.edn")}
                                      :p4/fn5 #js {:title "c4-p4-fn5"
                                                   :id "c4-p4-fn5"
-                                                  :body (rs/inline "footnotes/four/four_five.edn")}}}
+                                                  :body (rs/inline "assets/footnotes/four/four_five.edn")}}}
              :poem/traversal-type :depth
              :poem/parens-depth 0
              :poem/parens-loc {0 :thesis
