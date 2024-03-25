@@ -43,7 +43,7 @@
 (reg-event-db
  :search/build-index
  (fn [db _]
-   (let [builder (:lunr/builder db)]
+   (let [^js builder (:lunr/builder db)]
      (-> db
          (assoc :lunr/index (.build builder))
          (dissoc :lunr/builder)))))
@@ -70,7 +70,7 @@
  :search-index
  (fn [[idx term]]
    (let [match (.search idx term)
-         ref-and-pos (juxt #(.. % -ref)
+         ref-and-pos (juxt #(.. ^js % -ref)
                            #(gobj/getValueByKeys %
                                                  "matchData"
                                                  "metadata"
