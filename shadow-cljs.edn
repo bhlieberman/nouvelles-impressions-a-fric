@@ -1,40 +1,19 @@
 ;; shadow-cljs configuration
-{:source-paths
- ["src/main"
-  "node_modules/sitefox/src"
-  "public"
-  "dev-resources"
-  "portfolio"]
-
- :dev-http {8080 ["public" "classpath:public"]
+{:dev-http {8080 ["public" "classpath:public"]
             8081 ["dev-resources" "classpath:public"]}
 
- :dependencies
- [[akiroz.re-frame/storage "0.1.4"]
-  [arttuka/reagent-material-ui "5.11.12-0"]
-  [applied-science/js-interop "0.4.2"]
-  [cljs-ajax "0.8.4"] 
-  [fork "2.4.3"]
-  [funcool/promesa "11.0.678"]
-  [reagent "1.2.0"]
-  [re-com "2.13.2"]
-  [re-frame "1.4.0"]
-  [day8.re-frame/http-fx "0.2.4"]
-  [day8.re-frame/re-frame-10x "1.9.3"]
-  [day8.re-frame/tracing "0.6.2"]
-  [metosin/reitit-frontend "0.7.0-alpha7"]
-  [no.cjohansen/portfolio "2023.07.15"]]
-
+ :deps {:aliases [:cljs-dev]}
+ 
  :builds
- {:app {:target :browser
-        :output-dir "public/js/app"
-        :asset-path "/js/app"
+ {:app {:target :browser 
         :modules {:core {:init-fn nia.app/init
                          :entries [nia.events.core nia.routing]}} 
         :devtools
         {:preloads [day8.re-frame-10x.preload.react-18]}
+        :compiler-options {:warnings {:fn-deprecated false}}
         :dev
-        {:compiler-options {:warnings {:fn-deprecated false}}
+        {:output-dir "public/js/app"
+         :asset-path "/js/app" 
          :closure-defines
          {re-frame.trace.trace-enabled?        true
           day8.re-frame.tracing.trace-enabled? true
@@ -52,10 +31,12 @@
               :asset-path "/js"
               :compiler-options {:warnings {:fn-deprecated false}}
               :modules {:main {:init-fn nia.portfolio/init}}}
-  :server {:target :node-script
-           :output-to "public/js/server.js"
-           :modules {:server {:init-fn nia.server/main!}}
-           :release {:compiler-options {:optimizations :advanced}
-                     :output-to "build/js/server.js"}
-           :devtools {:after-load nia.server/reload!}
-           :main nia.server/main!}}}
+  :node-ssr {:target :node-script
+             :output-dir "public/js/node"
+             :output-to "public/js/node/ssr.js"
+             :entries [nia.events.core nia.routing]
+             :release {:compiler-options {:optimizations :advanced}
+                       :output-to "build/js/server.js"}
+             :main nia.node-ssr/main
+             :devtools {:before-load-async nia.node-ssr/stop
+                        :after-load nia.node-ssr/start}}}}
