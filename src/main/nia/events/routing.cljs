@@ -1,16 +1,8 @@
 (ns nia.events.routing
-  (:require [akiroz.re-frame.storage :refer [reg-co-fx!]]
-            [re-frame.core :as rf :refer [debug inject-cofx path
-                                          reg-event-fx reg-event-db reg-fx
-                                          trim-v]]
-            [reitit.frontend.easy :as rfe]
-            [reitit.frontend.controllers :as rfc]))
-
-;; not at all clear to me why this works??
-(reg-co-fx! :user-history {:fx :local-storage
-                           :cofx :local-storage})
-
-(reg-co-fx! :history-loc {})
+  (:require 
+   [re-frame.core :as rf :refer [inject-cofx reg-event-fx reg-event-db reg-fx]]
+   [reitit.frontend.easy :as rfe]
+   [reitit.frontend.controllers :as rfc]))
 
 (reg-event-fx
  :routing/navigated
