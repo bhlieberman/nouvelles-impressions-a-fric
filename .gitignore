@@ -25,6 +25,7 @@ pom.xml.asc
 .hg/
 .calva
 .clj-kondo
+.cpcache
 .lsp
 .portal
 public/js/main.js
